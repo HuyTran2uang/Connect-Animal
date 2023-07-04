@@ -182,9 +182,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 564
-        y: 976
+        y: 985
         width: 194
-        height: 98
+        height: 88
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -223,10 +223,10 @@ TextureImporter:
       name: game-assets-3_4
       rect:
         serializedVersion: 2
-        x: 966
-        y: 1062
-        width: 6
-        height: 6
+        x: 655
+        y: 583
+        width: 120
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,10 +244,10 @@ TextureImporter:
       name: game-assets-3_5
       rect:
         serializedVersion: 2
-        x: 756
-        y: 987
-        width: 18
-        height: 9
+        x: 659
+        y: 526
+        width: 67
+        height: 55
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -265,10 +265,10 @@ TextureImporter:
       name: game-assets-3_6
       rect:
         serializedVersion: 2
-        x: 954
-        y: 990
-        width: 6
-        height: 6
+        x: 421
+        y: 734
+        width: 137
+        height: 143
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -304,34 +304,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_8
-      rect:
-        serializedVersion: 2
-        x: 594
-        y: 972
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ea908b245b806734bbd0d2b865ec9e71
-      internalID: -2087996070
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_9
       rect:
         serializedVersion: 2
         x: 664
-        y: 908
-        width: 254
-        height: 76
+        y: 911
+        width: 98
+        height: 72
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -391,9 +370,9 @@ TextureImporter:
       name: game-assets-3_12
       rect:
         serializedVersion: 2
-        x: 565
+        x: 564
         y: 924
-        width: 40
+        width: 81
         height: 45
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -409,55 +388,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_13
-      rect:
-        serializedVersion: 2
-        x: 608
-        y: 926
-        width: 36
-        height: 42
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e5f57f6e9b6bc0f47beba15d51e2543f
-      internalID: -1659480223
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: game-assets-3_14
-      rect:
-        serializedVersion: 2
-        x: 918
-        y: 918
-        width: 6
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f62c809e5e10e1547b1dbced4a1b41d8
-      internalID: 1008910401
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_15
       rect:
         serializedVersion: 2
-        x: 510
-        y: 793
-        width: 192
-        height: 128
+        x: 564
+        y: 802
+        width: 119
+        height: 109
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -472,34 +409,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_16
-      rect:
-        serializedVersion: 2
-        x: 635
-        y: 918
-        width: 17
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bc242306fdc90a14981bcf529ef95f79
-      internalID: 669522156
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_17
       rect:
         serializedVersion: 2
         x: 684
         y: 801
-        width: 120
-        height: 111
+        width: 118
+        height: 108
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -517,10 +433,10 @@ TextureImporter:
       name: game-assets-3_18
       rect:
         serializedVersion: 2
-        x: 764
-        y: 906
-        width: 13
-        height: 8
+        x: 763
+        y: 909
+        width: 156
+        height: 73
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -538,10 +454,10 @@ TextureImporter:
       name: game-assets-3_19
       rect:
         serializedVersion: 2
-        x: 780
-        y: 768
-        width: 138
-        height: 146
+        x: 804
+        y: 800
+        width: 109
+        height: 109
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -556,34 +472,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_20
-      rect:
-        serializedVersion: 2
-        x: 907
-        y: 894
-        width: 11
-        height: 22
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0cf5c87d7b7f685479c2148b88fdc4d2
-      internalID: 2120074724
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_21
       rect:
         serializedVersion: 2
-        x: 492
-        y: 888
-        width: 17
-        height: 6
+        x: 295
+        y: 876
+        width: 192
+        height: 89
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -604,7 +499,7 @@ TextureImporter:
         x: 0
         y: 759
         width: 270
-        height: 112
+        height: 111
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -623,9 +518,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 273
-        y: 724
-        width: 290
-        height: 153
+        y: 723
+        width: 144
+        height: 144
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -661,34 +556,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_25
-      rect:
-        serializedVersion: 2
-        x: 631
-        y: 784
-        width: 11
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 704829c4bc2d8244d82f0fb76d486eab
-      internalID: 1387346671
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_26
       rect:
         serializedVersion: 2
-        x: 653
-        y: 517
-        width: 121
-        height: 281
+        x: 655
+        y: 692
+        width: 115
+        height: 106
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -728,7 +602,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 915
-        y: 776
+        y: 777
         width: 109
         height: 90
       alignment: 0
@@ -749,9 +623,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 648
+        y: 650
         width: 268
-        height: 110
+        height: 108
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -766,34 +640,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_30
-      rect:
-        serializedVersion: 2
-        x: 642
-        y: 750
-        width: 6
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a508f39027fb28a4985606d4527bfb42
-      internalID: -1459221392
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_31
       rect:
         serializedVersion: 2
         x: 894
-        y: 576
-        width: 130
-        height: 200
+        y: 673
+        width: 120
+        height: 103
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -811,10 +664,10 @@ TextureImporter:
       name: game-assets-3_32
       rect:
         serializedVersion: 2
-        x: 271
-        y: 582
+        x: 273
+        y: 595
         width: 141
-        height: 140
+        height: 127
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -832,10 +685,10 @@ TextureImporter:
       name: game-assets-3_33
       rect:
         serializedVersion: 2
-        x: 414
+        x: 417
         y: 623
-        width: 122
-        height: 110
+        width: 119
+        height: 111
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -853,10 +706,10 @@ TextureImporter:
       name: game-assets-3_34
       rect:
         serializedVersion: 2
-        x: 540
+        x: 538
         y: 623
-        width: 114
-        height: 126
+        width: 116
+        height: 110
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -895,10 +748,10 @@ TextureImporter:
       name: game-assets-3_36
       rect:
         serializedVersion: 2
-        x: 991
-        y: 655
-        width: 33
-        height: 11
+        x: 896
+        y: 593
+        width: 104
+        height: 79
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -916,10 +769,10 @@ TextureImporter:
       name: game-assets-3_37
       rect:
         serializedVersion: 2
-        x: 0
-        y: 534
-        width: 276
-        height: 112
+        x: 1
+        y: 538
+        width: 271
+        height: 110
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -934,34 +787,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_38
-      rect:
-        serializedVersion: 2
-        x: 888
-        y: 632
-        width: 11
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6baf9cce02a468348967e64a5c9dd9ed
-      internalID: 298838339
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_39
       rect:
         serializedVersion: 2
-        x: 2
-        y: 428
-        width: 269
-        height: 105
+        x: 10
+        y: 443
+        width: 261
+        height: 89
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -976,34 +808,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_40
-      rect:
-        serializedVersion: 2
-        x: 264
-        y: 528
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: da525563e53dbf644a28e36f8226793d
-      internalID: 657130603
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_41
       rect:
         serializedVersion: 2
-        x: 270
-        y: 436
+        x: 271
+        y: 445
         width: 144
-        height: 144
+        height: 136
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1021,10 +832,10 @@ TextureImporter:
       name: game-assets-3_42
       rect:
         serializedVersion: 2
-        x: 414
-        y: 438
-        width: 118
-        height: 179
+        x: 416
+        y: 503
+        width: 117
+        height: 120
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1042,10 +853,10 @@ TextureImporter:
       name: game-assets-3_43
       rect:
         serializedVersion: 2
-        x: 492
-        y: 498
-        width: 159
-        height: 120
+        x: 532
+        y: 503
+        width: 119
+        height: 115
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1084,10 +895,10 @@ TextureImporter:
       name: game-assets-3_45
       rect:
         serializedVersion: 2
-        x: 854
-        y: 468
-        width: 112
-        height: 103
+        x: 853
+        y: 473
+        width: 113
+        height: 98
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1105,10 +916,10 @@ TextureImporter:
       name: game-assets-3_46
       rect:
         serializedVersion: 2
-        x: 650
-        y: 510
-        width: 16
-        height: 12
+        x: 435
+        y: 121
+        width: 80
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1126,10 +937,10 @@ TextureImporter:
       name: game-assets-3_47
       rect:
         serializedVersion: 2
-        x: 526
-        y: 439
-        width: 73
-        height: 65
+        x: 505
+        y: 438
+        width: 87
+        height: 63
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1147,9 +958,9 @@ TextureImporter:
       name: game-assets-3_48
       rect:
         serializedVersion: 2
-        x: 614
+        x: 592
         y: 438
-        width: 43
+        width: 90
         height: 65
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1168,10 +979,10 @@ TextureImporter:
       name: game-assets-3_49
       rect:
         serializedVersion: 2
-        x: 667
-        y: 498
-        width: 17
-        height: 12
+        x: 583
+        y: 322
+        width: 111
+        height: 114
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1189,10 +1000,10 @@ TextureImporter:
       name: game-assets-3_50
       rect:
         serializedVersion: 2
-        x: 570
-        y: 447
-        width: 41
-        height: 48
+        x: 415
+        y: 438
+        width: 90
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1207,34 +1018,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_51
-      rect:
-        serializedVersion: 2
-        x: 660
-        y: 447
-        width: 24
-        height: 47
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 521d204f5458e6b40b4cace2639ec2db
-      internalID: -204614622
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_52
       rect:
         serializedVersion: 2
-        x: 685
-        y: 462
-        width: 17
-        height: 36
+        x: 515
+        y: 122
+        width: 78
+        height: 77
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1254,7 +1044,7 @@ TextureImporter:
         serializedVersion: 2
         x: 699
         y: 366
-        width: 99
+        width: 100
         height: 108
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1270,34 +1060,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_54
-      rect:
-        serializedVersion: 2
-        x: 972
-        y: 472
-        width: 42
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 595cf4e56ede7a24f92639732191e00b
-      internalID: 370149014
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_55
       rect:
         serializedVersion: 2
-        x: 324
-        y: 294
-        width: 139
-        height: 140
+        x: 327
+        y: 306
+        width: 131
+        height: 128
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1312,34 +1081,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_56
-      rect:
-        serializedVersion: 2
-        x: 432
-        y: 432
-        width: 5
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3c47aecb8925218419bbcc687a4d35b7
-      internalID: -2049451299
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_57
       rect:
         serializedVersion: 2
-        x: 444
+        x: 464
         y: 320
-        width: 250
-        height: 140
+        width: 115
+        height: 118
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1357,10 +1105,10 @@ TextureImporter:
       name: game-assets-3_58
       rect:
         serializedVersion: 2
-        x: 804
-        y: 370
-        width: 101
-        height: 98
+        x: 820
+        y: 383
+        width: 66
+        height: 68
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1379,9 +1127,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 906
-        y: 366
+        y: 372
         width: 118
-        height: 105
+        height: 101
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1420,10 +1168,10 @@ TextureImporter:
       name: game-assets-3_61
       rect:
         serializedVersion: 2
-        x: 180
-        y: 277
-        width: 139
-        height: 149
+        x: 183
+        y: 301
+        width: 131
+        height: 125
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1483,7 +1231,7 @@ TextureImporter:
       name: game-assets-3_64
       rect:
         serializedVersion: 2
-        x: 585
+        x: 587
         y: 207
         width: 111
         height: 111
@@ -1505,9 +1253,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 695
-        y: 258
-        width: 111
-        height: 111
+        y: 263
+        width: 103
+        height: 100
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1568,9 +1316,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 1
-        y: 96
+        y: 106
         width: 155
-        height: 154
+        height: 144
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1588,10 +1336,10 @@ TextureImporter:
       name: game-assets-3_69
       rect:
         serializedVersion: 2
-        x: 176
-        y: 138
-        width: 133
-        height: 134
+        x: 182
+        y: 151
+        width: 122
+        height: 121
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1631,9 +1379,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 811
-        y: 168
-        width: 89
-        height: 101
+        y: 174
+        width: 88
+        height: 95
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1651,10 +1399,10 @@ TextureImporter:
       name: game-assets-3_73
       rect:
         serializedVersion: 2
-        x: 902
-        y: 186
-        width: 82
-        height: 94
+        x: 903
+        y: 204
+        width: 72
+        height: 76
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1669,34 +1417,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-3_74
-      rect:
-        serializedVersion: 2
-        x: 978
-        y: 211
-        width: 11
-        height: 5
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7bd030b27480c024c8f8c71e05269c60
-      internalID: 224768768
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-3_75
       rect:
         serializedVersion: 2
-        x: 996
-        y: 191
-        width: 28
-        height: 31
+        x: 938
+        y: 128
+        width: 70
+        height: 68
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1715,9 +1442,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 167
-        y: 0
-        width: 133
-        height: 138
+        y: 12
+        width: 125
+        height: 126
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1757,9 +1484,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 749
-        y: 63
-        width: 90
-        height: 99
+        y: 82
+        width: 87
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1778,9 +1505,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 841
-        y: 76
-        width: 167
-        height: 120
+        y: 96
+        width: 89
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1840,9 +1567,9 @@ TextureImporter:
       name: game-assets-3_82
       rect:
         serializedVersion: 2
-        x: 292
+        x: 293
         y: 7
-        width: 119
+        width: 118
         height: 113
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1861,10 +1588,10 @@ TextureImporter:
       name: game-assets-3_83
       rect:
         serializedVersion: 2
-        x: 834
-        y: 68
-        width: 16
-        height: 16
+        x: 412
+        y: 2
+        width: 116
+        height: 118
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1882,10 +1609,10 @@ TextureImporter:
       name: game-assets-3_84
       rect:
         serializedVersion: 2
-        x: 841
-        y: 12
-        width: 74
-        height: 66
+        x: 838
+        y: 11
+        width: 75
+        height: 69
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1903,10 +1630,10 @@ TextureImporter:
       name: game-assets-3_85
       rect:
         serializedVersion: 2
-        x: 738
+        x: 528
         y: 0
-        width: 4
-        height: 24
+        width: 108
+        height: 122
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1924,10 +1651,10 @@ TextureImporter:
       name: game-assets-3_86
       rect:
         serializedVersion: 2
-        x: 749
-        y: 4
-        width: 49
-        height: 63
+        x: 747
+        y: 3
+        width: 83
+        height: 64
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1945,10 +1672,10 @@ TextureImporter:
       name: game-assets-3_87
       rect:
         serializedVersion: 2
-        x: 800
-        y: 21
-        width: 12
-        height: 29
+        x: 593
+        y: 126
+        width: 114
+        height: 78
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1966,10 +1693,10 @@ TextureImporter:
       name: game-assets-3_88
       rect:
         serializedVersion: 2
-        x: 811
-        y: 9
-        width: 15
-        height: 52
+        x: 638
+        y: 8
+        width: 107
+        height: 113
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1979,27 +1706,6 @@ TextureImporter:
       bones: []
       spriteID: 002be0c0c22bf604784e6557471eedab
       internalID: 43899019
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: game-assets-3_89
-      rect:
-        serializedVersion: 2
-        x: 923
-        y: 0
-        width: 101
-        height: 43
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 03c4cf34494b55a4c891556680aad8f6
-      internalID: 896099632
       vertices: []
       indices: 
       edges: []
