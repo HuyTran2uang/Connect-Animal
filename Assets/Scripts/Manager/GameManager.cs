@@ -7,6 +7,9 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     private GameState _gameState;
     private BattleState _battleState;
 
+    public GameState GameState => _gameState;
+    public BattleState BattleState => _battleState;
+
     public void Play()
     {
         _gameState = GameState.OnBattle;

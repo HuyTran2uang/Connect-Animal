@@ -6,14 +6,19 @@ public class InputManager : MonoBehaviour
 {
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             GameManager.Instance.Play();
         }
 
         if (Input.GetKeyDown(KeyCode.Delete))
         {
-            GameManager.Instance.Play();
+            GameManager.Instance.GoToMenuFromBattle();
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            BoardManager.Instance.Detect();
         }
     }
 }

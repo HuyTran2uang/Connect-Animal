@@ -13,4 +13,9 @@ public class Item : MonoBehaviour
         _col = column;
         _iconSR.sprite = icon;
     }
+
+    public void Select()
+    {
+        BoardManager.Instance.SelectNode(_row, _col);
+    }
 }

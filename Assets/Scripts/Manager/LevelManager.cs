@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviourSingleton<LevelManager>
 {
-    private int _level = 1;
+    private int _level = 2;
 
     public int Level => _level;
 
