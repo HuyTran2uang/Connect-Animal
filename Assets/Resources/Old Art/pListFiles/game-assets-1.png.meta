@@ -556,34 +556,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: game-assets-1_32
-      rect:
-        serializedVersion: 2
-        x: 1825
-        y: 651
-        width: 214
-        height: 89
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0c759ea3683b2954984e9e68f3bcca5b
-      internalID: -1304233244
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: game-assets-1_33
       rect:
         serializedVersion: 2
-        x: 1522
-        y: 630
-        width: 253
-        height: 120
+        x: 1510
+        y: 639
+        width: 537
+        height: 111
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
