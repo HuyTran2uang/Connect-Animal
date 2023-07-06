@@ -51,6 +51,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         _battleState = BattleState.None;
     }
+
+    public void Remap()
+    {
+        _battleState = BattleState.Remap;
+    }
+
+    public void CompletedRemap()
+    {
+        _battleState = BattleState.None;
+    }
 }
 
 public enum GameState
@@ -65,4 +75,5 @@ public enum BattleState
     Pausing,
     Replaying,
     CheckingConnection,
+    Remap,
 }

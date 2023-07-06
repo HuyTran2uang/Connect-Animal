@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class TimerManager : MonoBehaviour
 {
-    private int _duration;
+    private int _battleTime, _15Second;
 
     public void SetTimer(int seconds)
     {
-        _duration = seconds;
+        _battleTime = seconds;
     }
+
+
 }

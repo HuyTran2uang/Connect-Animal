@@ -18,7 +18,17 @@ public class InputManager : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            BoardManager.Instance.Detect();
+            ItemSpawner.Instance.DetectDown();
+        }
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            ItemSpawner.Instance.DetectUp();
+        }
+
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            BoardManager.Instance.Remap();
         }
     }
 }

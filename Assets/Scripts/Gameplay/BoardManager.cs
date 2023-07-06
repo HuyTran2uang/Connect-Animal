@@ -1,20 +1,21 @@
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+using System.Linq;
+using Unity.VisualScripting;
 
 public class BoardManager : MonoBehaviourSingleton<BoardManager>
 {
     [SerializeField] private ItemSpriteStorage _itemSpriteStorage;
-    [SerializeField] private Item _itemPrefab;
     [SerializeField] private Transform _container;
-    [SerializeField] private GameObject _linePrefab;
     private Node[,] _board;
-    [SerializeField] private List<int> _values;
+    private List<int> _values;
     private int _totalRows = 10, _totalCols = 7;
     private float _startX = 0, _startY = 0;
     private Item[,] _boardUI;
     private Node _startNode, _endNode;
-    [SerializeField] Matrix _matrix;
-    [SerializeField] List<Graph> _graphes = new List<Graph>();
+    Matrix _matrix;
+    List<Graph> _graphes = new List<Graph>();
 
     public int TotalItems => (_totalRows - 2) * (_totalCols - 2);
 
@@ -26,34 +27,30 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
             for (int col = 0; col < _totalCols; col++)
             {
                 if (_board[row, col] == null) continue;
-                if (_board[row, col].Val == id) continue;
+                if (_board[row, col].Val != id) continue;
                 nodes.Add(_board[row, col]);
             }
         }
         return nodes;
     }
 
-    public string GetPathFrom(Node nodeA, Node nodeB)
+    public List<Vector2> GetPathFrom(Node nodeA, Node nodeB)
     {
         return _matrix.GetPath(new Point(nodeA.X, nodeA.Y), new Point(nodeB.X, nodeB.Y));
     }
 
     public void CreateBoard(LevelConfig config)
     {
+        Clear();
         _totalRows = config.Row + 2;//border null
         _totalCols = config.Col + 2;//border null
         SetListValues();
         _values.Shuffle();
         SpawnItems(_values);
-        //
-        int[,] matrix = new int[_totalRows, _totalCols];
-        for (int i = 0; i < _totalRows; i++)
-            for (int j = 0; j < _totalCols; j++)
-                matrix[i, j] = _board[i, j] == null ? -1 : _board[i, j].Val;
-        _matrix = new Matrix(matrix);
-        //
-        foreach (var id in _values)
-            _graphes.Add(new Graph(id));
+        this.SetMatrix();
+        this.SetGraphs();
+        if (CheckExistCouple()) return;
+        CreateBoard(config);
     }
 
     private void SetListValues()
@@ -85,11 +82,9 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
                 {
                     int val = values[id];
                     Vector3 position = new Vector3(_startX + col, _startY - row, 0.0f);
-                    Item item = Instantiate(_itemPrefab, position, Quaternion.identity, _container);
-                    item.name = $"Item[{row}_{col}_{val}]";
-                    item.Init(row, col, _itemSpriteStorage.Sprites[val]);
-                    item.transform.localScale = Vector3.one * .7f;
-                    _board[row, col] = new Node(row, col, val);
+                    Item item = ItemSpawner.Instance.GetItemSpawned(position);
+                    item.Init(row, col, _itemSpriteStorage.Sprites[val], val);
+                    _board[row, col] = new Node(row, col, val, position);
                     _boardUI[row, col] = item;
                     id += 1;
                 }
@@ -100,75 +95,198 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     public void Clear()
     {
         if (_boardUI != null)
-            for (int i = _container.childCount - 1; i >= 0; i--) Destroy(_container.GetChild(i).gameObject);
+            ItemSpawner.Instance.ClearItems();
         _boardUI = null;
         _board = null;
         _values = null;
+        _graphes = null;
+        _matrix = null;
+        _startNode = null;
+        _endNode = null;
+    }
+
+    private void SetStartNode(int row, int col)
+    {
+        _startNode = _board[row, col];
+    }
+
+    private void SetEndNode(int row, int col)
+    {
+        _endNode = _board[row, col];
+    }
+
+    private void EndNodeEqualStartNode()
+    {
+        _boardUI[_startNode.X, _startNode.Y]?.UnSelect();
+        _boardUI[_endNode.X, _endNode.Y]?.UnSelect();
+        _startNode = null;
+        _endNode = null;
+    }
+
+    private Graph GetGraphById(int id)
+    {
+        foreach (var graph in _graphes)
+            if (graph.Id == id)
+                return graph;
+        return null;
+    }
+
+    private void SetMatrix()
+    {
+        int[,] matrix = new int[_totalRows, _totalCols];
+        for (int i = 0; i < _totalRows; i++)
+            for (int j = 0; j < _totalCols; j++)
+                matrix[i, j] = _board[i, j] == null ? -1 : _board[i, j].Val;
+        _matrix = new Matrix(matrix, _totalRows, _totalCols);
+    }
+
+    private void SetGraphs()
+    {
+        _graphes = new List<Graph>();
+        foreach (var id in _values)
+            _graphes.Add(new Graph(id));
+    }
+
+    private void CoupleSuccess()
+    {
+        _board[_startNode.X, _startNode.Y] = null;
+        _board[_endNode.X, _endNode.Y] = null;
+        _boardUI[_startNode.X, _startNode.Y].gameObject.SetActive(false);
+        _boardUI[_endNode.X, _endNode.Y].gameObject.SetActive(false);
+        _boardUI[_startNode.X, _startNode.Y] = null;
+        _boardUI[_endNode.X, _endNode.Y] = null;
+        _matrix.CheckSuccess(
+            new Point(_startNode.X, _startNode.Y),
+            new Point(_endNode.X, _endNode.Y)
+        );
+        _values.Remove(_startNode.Val);
+        _values.Remove(_endNode.Val);
+    }
+
+    private void CoupleFail()
+    {
+        _boardUI[_startNode.X, _startNode.Y]?.UnSelect();
+        _boardUI[_endNode.X, _endNode.Y]?.UnSelect();
+    }
+
+    private void UnSelectUIAll()
+    {
+        for (int row = 0; row < _totalRows; row++)
+            for (int col = 0; col < _totalCols; col++)
+                _boardUI[row, col]?.UnSelect();
+    }
+
+    private void CompletedConnection()
+    {
+        _startNode = null;
+        _endNode = null;
+        DOVirtual.DelayedCall(.1f, LineSpawner.Instance.ClearLines);
+        GameManager.Instance.CompletedCheckConnection();
+        if (_values.Count > 0) return;
+        CompletedLevel();
+    }
+
+    private void EndNodeDifStartNode()
+    {
+        GameManager.Instance.CheckingConnection();
+        Graph graph = GetGraphById(_startNode.Val);
+        var points = GetPathFrom(_startNode, _endNode);
+        if (points != null)
+        {
+            LineSpawner.Instance.Concatenate(points);
+            CoupleSuccess();
+            graph.RemovePathFrom(_startNode, _endNode);
+            if (!this.CheckExistCouple())
+                this.Remap();
+            else
+            {
+                this.SetMatrix();
+                this.SetGraphs();
+                GameManager.Instance.CompletedRemap();
+            }
+        }
+        else
+            this.CoupleFail();
+        this.CompletedConnection();
+    }
+
+    private void CompletedLevel()
+    {
+        Debug.Log("Completed Level");
     }
 
     public void SelectNode(int row, int col)
     {
         if (_startNode == null)
         {
-            _startNode = _board[row, col];
+            SetStartNode(row, col);
+            return;
         }
         else
-        {
-            _endNode = _board[row, col];
-            if (_endNode == _startNode)
-            {
-                _startNode = null;
-                _endNode = null;
-                return;
-            }
-            GameManager.Instance.CheckingConnection();
-            var dir = _matrix.GetPath(new Point(_startNode.X, _startNode.Y), new Point(_endNode.X, _endNode.Y));
-            //
-            if(dir != null)
-            {
-                _board[_startNode.X, _startNode.Y] = null;
-                _board[_endNode.X, _endNode.Y] = null;
-                Destroy(_boardUI[_startNode.X, _startNode.Y].gameObject);
-                Destroy(_boardUI[_endNode.X, _endNode.Y].gameObject);
-                _boardUI[_startNode.X, _startNode.Y] = null;
-                _boardUI[_endNode.X, _endNode.Y] = null;
-                _matrix.CheckSuccess(
-                    new Point(_startNode.X, _startNode.Y),    
-                    new Point(_endNode.X, _endNode.Y)
-                );
-                _values.Remove(_startNode.Val);
-                _values.Remove(_startNode.Val);
-                if(CheckHasCouple())
-                    Remap();
-            }
-            else
-            {
-                Debug.Log("Fail");
-            }
-            //
-            GameManager.Instance.CompletedCheckConnection();
-            _startNode = null;
-            _endNode = null;
-        }
+            SetEndNode(row, col);
+        if (_endNode == _startNode)
+            EndNodeEqualStartNode();
+        else
+            EndNodeDifStartNode();
     }
 
-    private bool CheckHasCouple()
+    private bool CheckExistCouple()
     {
         foreach (var graph in _graphes)
-            if (!graph.IsUnCouple()) return false;
-        return true;
+            if (graph.IsExistCouple()) return true;
+        return false;
     }
 
-    private void Remap()
+    private void SetNodeSwap()
     {
-
+        List<Node> nodes = new List<Node>();
+        for (int row = 0; row < _totalRows; row++)
+            for (int col = 0; col < _totalCols; col++)
+                if(_board[row, col] != null)
+                    nodes.Add(_board[row, col]);
+        Swap(nodes);
     }
 
-    public void Detect()
+    private void Swap(List<Node> nodes)
     {
-        if (GameManager.Instance.GameState != GameState.OnBattle) return;
-        if (GameManager.Instance.BattleState != BattleState.None) return;
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), -Vector2.up);
-        hit.collider?.GetComponent<Item>()?.Select();
+        if(nodes.Count == 0)
+        {
+            return;
+        }
+        Node node = nodes[0];
+        Node nodeSwap = nodes[UnityEngine.Random.Range(0, nodes.Count)];
+        nodes.Remove(nodeSwap);
+        node.SetNodeSwap(nodeSwap);
+        nodeSwap.SetNodeSwap(node);
+        //swap val
+        int t = node.Val;
+        node.ChangeVal(nodeSwap.Val);
+        nodeSwap.ChangeVal(t);
+        //
+        nodes.RemoveAt(0);
+        _boardUI[node.X, node.Y].transform.position = nodeSwap.Pos;
+        _boardUI[nodeSwap.X, nodeSwap.Y].transform.position = node.Pos;
+        Item item = _boardUI[node.X, node.Y];
+        _boardUI[node.X, node.Y] = _boardUI[nodeSwap.X, nodeSwap.Y];
+        _boardUI[nodeSwap.X, nodeSwap.Y] = item;
+        _boardUI[node.X, node.Y].SetCoordinate(node.X, node.Y);
+        _boardUI[nodeSwap.X, nodeSwap.Y].SetCoordinate(nodeSwap.X, nodeSwap.Y);
+        Swap(nodes);
+    }
+
+    public void Remap()
+    {
+        UnSelectUIAll();
+        CompletedConnection();
+        GameManager.Instance.Remap();
+        this.SetNodeSwap();
+        this.SetMatrix();
+        this.SetGraphs();
+        if (this.CheckExistCouple())
+        {
+            GameManager.Instance.CompletedRemap();
+            return;
+        }
+        Remap();
     }
 }
