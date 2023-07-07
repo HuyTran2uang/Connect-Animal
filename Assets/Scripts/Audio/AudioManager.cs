@@ -69,14 +69,29 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>, IReadData
     }
 
     #region public function audio
-    public void PlayMusic()
-    {
-        PlayAudio(AudioName.Music, .5f);
-    }
-
     public void PlaySoundClickButton()
     {
         PlayAudioOnceShot(AudioName.Click);
+    }
+    public void PlaySoundConnectButton()
+    {
+        PlayAudioOnceShot(AudioName.Connect);
+    }
+    public void PlaySoundConnectFailButton()
+    {
+        PlayAudioOnceShot(AudioName.ConnectFail);
+    }
+    public void PlaySoundHintButton()
+    {
+        PlayAudioOnceShot(AudioName.Hint);
+    }
+    public void PlaySoundWinButton()
+    {
+        PlayAudioOnceShot(AudioName.Win);
+    }
+    public void PlaySoundLoseButton()
+    {
+        PlayAudioOnceShot(AudioName.Lose);
     }
     #endregion
 }

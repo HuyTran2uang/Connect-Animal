@@ -9,7 +9,7 @@ public class LineSpawner : MonoBehaviourSingleton<LineSpawner>
     [SerializeField] GameObject _linePrefab;
     private List<GameObject> _lines = new List<GameObject>();
 
-    public GameObject LineSpawned(Vector3 pos, char dir)
+    private GameObject LineSpawned(Vector3 pos, char dir)
     {
         GameObject line = Instantiate(_linePrefab, pos, Quaternion.identity, transform);
         switch (dir)
@@ -35,14 +35,6 @@ public class LineSpawner : MonoBehaviourSingleton<LineSpawner>
         for (int i = _lines.Count - 1; i >= 0; i--)
             Destroy(_lines[i]);
         _lines.Clear();
-    }
-
-    private void DeviceStep(int step, Vector3 pos, char dir)
-    {
-        for (int j = 0; j < step; j++)
-        {
-            LineSpawned(pos += Vector3.right, dir);
-        }
     }
 
     private string StepA2B(Vector2 p1, Vector2 p2)
@@ -89,25 +81,32 @@ public class LineSpawner : MonoBehaviourSingleton<LineSpawner>
 
     public void Concatenate(List<Vector2> points)
     {
+        StarSpawner.Instance.TakeStar();
         Vector3 curPos = BoardManager.Instance.Board[(int)points[0].x, (int)points[0].y].Pos;
-        foreach (char dir in ConvertToStringPath(points))
+        string path = ConvertToStringPath(points);
+        foreach (char dir in path)
         {
             LineSpawned(curPos, dir);
             switch (dir)
             {
                 case 'R':
+                    StarSpawner.Instance.StarSpawned(curPos);
                     curPos += Vector3.right;
                     break;
                 case 'L':
+                    StarSpawner.Instance.StarSpawned(curPos);
                     curPos += Vector3.left;
                     break;
                 case 'D':
+                    StarSpawner.Instance.StarSpawned(curPos);
                     curPos += Vector3.down;
                     break;
                 case 'U':
+                    StarSpawner.Instance.StarSpawned(curPos);
                     curPos += Vector3.up;
                     break;
             }
+            StarSpawner.Instance.StarSpawned(curPos);
         }
     }
 }

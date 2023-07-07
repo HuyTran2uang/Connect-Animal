@@ -2,16 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BombManager : MonoBehaviour
+public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrepareGame
 {
     [SerializeField] Bomb _bomPrefab;
     private bool _isThrowBomb;
-    private int _numBomb = 2, _countBomb;
+    private int _numBomb = 2, _countBomb, _totalThrowBombTimes;
+
+    public void LoadData()
+    {
+        _totalThrowBombTimes = Data.ReadData.LoadData(GlobalKey.TOTAL_BOMB_TIMES, 0);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+    }
+
+    public void Prepare()
+    {
+        BombUI.Instance.ChangeQuantity(_totalThrowBombTimes);
+    }
 
     public void Throw()
     {
         if (_isThrowBomb) return;
         _isThrowBomb = true;
+        _totalThrowBombTimes--;
+        Data.WriteData.Save(GlobalKey.TOTAL_BOMB_TIMES, _totalThrowBombTimes);
+        BombUI.Instance.ChangeQuantity(_totalThrowBombTimes);
         _countBomb = _numBomb;
         Couple couple = BoardManager.Instance.GetRandomCouple();
         Bomb bomb1 = Instantiate(_bomPrefab, transform);
@@ -32,5 +45,12 @@ public class BombManager : MonoBehaviour
         {
             CompletedThrowBomb();
         }
+    }
+
+    public void AddThrowTimes(int quantity)
+    {
+        _totalThrowBombTimes += quantity;
+        Data.WriteData.Save(GlobalKey.TOTAL_BOMB_TIMES, _totalThrowBombTimes);
+        BombUI.Instance.ChangeQuantity(_totalThrowBombTimes);
     }
 }

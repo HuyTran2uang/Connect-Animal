@@ -1,13 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using System.Linq;
-using Unity.VisualScripting;
 
 public class BoardManager : MonoBehaviourSingleton<BoardManager>
 {
     [SerializeField] private ItemSpriteStorage _itemSpriteStorage;
-    [SerializeField] private Transform _container;
     private Node[,] _board;
     private List<int> _values;
     private int _totalRows = 10, _totalCols = 7;
@@ -20,6 +17,24 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     public int TotalItems => (_totalRows - 2) * (_totalCols - 2);
     public Node[,] Board => _board;
     public Item[,] BoardUI => _boardUI;
+
+    private void SetPosCam()
+    {
+        float minX = 9, maxX = 0, minY = 9, maxY = 0;
+        float offsetY = -1;
+        for (int row = 0; row < _totalRows; row++)
+        {
+            for (int col = 0; col < _totalCols; col++)
+            {
+                if (_board[row, col] == null) continue;
+                if (minX > _board[row, col].Pos.x) minX = _board[row, col].Pos.x;
+                if(maxX < _board[row, col].Pos.x) maxX = _board[row, col].Pos.x;
+                if(minY > _board[row, col].Pos.y) minY = _board[row, col].Pos.y;
+                if(maxY < _board[row, col].Pos.y) maxY = _board[row, col].Pos.y;
+            }
+        }
+        Camera.main.transform.position = new Vector3((minX + maxX) / 2, (minY + maxY) / 2 + offsetY, -10);
+    }
 
     public List<Node> GetNodesById(int id)
     {
@@ -51,6 +66,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         SpawnItems(_values);
         this.SetMatrix();
         this.SetGraphs();
+        SetPosCam();
         if (CheckExistCouple()) return;
         CreateBoard(config);
     }
@@ -151,6 +167,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 
     private void CoupleSuccess()
     {
+        AudioManager.Instance.PlaySoundConnectButton();
         _board[_startNode.X, _startNode.Y] = null;
         _board[_endNode.X, _endNode.Y] = null;
         _boardUI[_startNode.X, _startNode.Y].gameObject.SetActive(false);
@@ -167,6 +184,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 
     private void CoupleFail()
     {
+        AudioManager.Instance.PlaySoundConnectFailButton();
         _boardUI[_startNode.X, _startNode.Y]?.UnSelect();
         _boardUI[_endNode.X, _endNode.Y]?.UnSelect();
     }
@@ -183,15 +201,16 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         _startNode = null;
         _endNode = null;
         DOVirtual.DelayedCall(.1f, LineSpawner.Instance.ClearLines);
+        StarSpawner.Instance.TakeStar();
         HintManager.Instance.UnHint();
-        GameManager.Instance.CompletedCheckConnection();
+        GameManager.Instance.Wait();
         if (_values.Count > 0) return;
         CompletedLevel();
     }
 
     private void EndNodeDifStartNode()
     {
-        GameManager.Instance.CheckingConnection();
+        GameManager.Instance.Wait();
         Graph graph = GetGraphById(_startNode.Val);
         var points = GetPathFrom(_startNode, _endNode);
         if (points != null)
@@ -205,17 +224,17 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
             {
                 this.SetMatrix();
                 this.SetGraphs();
-                GameManager.Instance.CompletedRemap();
             }
         }
         else
             this.CoupleFail();
         this.CompletedConnection();
+        GameManager.Instance.ResumeGame();
     }
 
     private void CompletedLevel()
     {
-        Debug.Log("Completed Level");
+        GameManager.Instance.Win();
     }
 
     public void SelectNode(int row, int col)
@@ -281,13 +300,13 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     {
         UnSelectUIAll();
         CompletedConnection();
-        GameManager.Instance.Remap();
+        GameManager.Instance.Wait();
         this.SetNodeSwap();
         this.SetMatrix();
         this.SetGraphs();
         if (this.CheckExistCouple())
         {
-            GameManager.Instance.CompletedRemap();
+            GameManager.Instance.ResumeGame();
             return;
         }
         Remap();

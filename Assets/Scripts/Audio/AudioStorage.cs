@@ -14,7 +14,7 @@ public class AudioStorage : ScriptableObject
         get
         {
             if (_instance == null)
-                _instance = Resources.Load<AudioStorage>("Data/AudioStorage");
+                _instance = Resources.Load<AudioStorage>("Data/Audio Storage");
             return _instance;
         }
     }

@@ -22,6 +22,6 @@ public class Bomb : MonoBehaviour
 
     private void MoveCompleted()
     {
-        
+        BombManager.Instance.OnBombExplode(this);
     }
 }

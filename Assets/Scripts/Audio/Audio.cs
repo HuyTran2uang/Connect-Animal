@@ -20,6 +20,10 @@ public enum AudioType
 
 public enum AudioName
 {
-    Music,
     Click,
+    Connect,
+    ConnectFail,
+    Hint,
+    Lose,
+    Win,
 }

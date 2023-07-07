@@ -9,4 +9,9 @@ public class GlobalKey
         Music,
         Sound
     }
+    public static string LEVEL = "Level";
+    public static string TOTAL_HINT_TIMES = "TotalHintTimes";
+    public static string TOTAL_BOMB_TIMES = "TotalBombTimes";
+    public static string TOTAL_REMAP_TIMES = "TotalRemapTimes";
+    public static string STAR = "Star";
 }

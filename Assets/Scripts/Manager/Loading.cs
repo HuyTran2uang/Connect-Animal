@@ -9,7 +9,7 @@ public class Loading : MonoBehaviourSingletonPersistent<Loading>
     protected override void Awake()
     {
         base.Awake();
-
+        StartCoroutine(LoadAllData());
     }
 
     private IEnumerator LoadAllData()

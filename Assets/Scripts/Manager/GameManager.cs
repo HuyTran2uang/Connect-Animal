@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         _gameState = GameState.OnBattle;
         _battleState = BattleState.None;
+        TimerManager.Instance.SetTimer(180);
         BoardManager.Instance.CreateBoard(LevelConfigStorage.LevelConfigs[LevelManager.Instance.Level]);
     }
 
@@ -24,43 +25,38 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         HintManager.Instance.UnHint();
     }
 
-    public void PauseGame()
+    public void Wait()
     {
-        _battleState = BattleState.Pausing;
-        //pause timer
+        _battleState = BattleState.Wait;
     }
 
     public void ResumeGame()
     {
         _battleState = BattleState.None;
-        //resume timer
     }
 
     public void Replay()
     {
-        _battleState = BattleState.Replaying;
+        Wait();
         //completed re ren board
-        _battleState = BattleState.None;
+        ResumeGame();
     }
 
-    public void CheckingConnection()
+    public void Win()
     {
-        _battleState = BattleState.CheckingConnection;
+        _gameState = GameState.None;
+        Wait();
+        AudioManager.Instance.PlaySoundWinButton();
+        LevelManager.Instance.LevelUp();
+        Debug.Log("Win");
     }
 
-    public void CompletedCheckConnection()
+    public void Lose()
     {
-        _battleState = BattleState.None;
-    }
-
-    public void Remap()
-    {
-        _battleState = BattleState.Remap;
-    }
-
-    public void CompletedRemap()
-    {
-        _battleState = BattleState.None;
+        _gameState = GameState.None;
+        Wait();
+        AudioManager.Instance.PlaySoundLoseButton();
+        Debug.Log("Lose");
     }
 }
 
@@ -73,8 +69,5 @@ public enum GameState
 public enum BattleState
 {
     None,
-    Pausing,
-    Replaying,
-    CheckingConnection,
-    Remap,
+    Wait,
 }
