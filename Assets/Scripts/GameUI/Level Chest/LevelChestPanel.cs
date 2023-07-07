@@ -34,7 +34,12 @@ public class LevelChestPanel : MonoBehaviour
                 }
                 else
                 {
-                    keys[keys.Count - countKey].UnKey();
+                    int index = keys.Count - countKey;
+                    if (index < 0)
+                    {
+                        index = 0;
+                    }
+                    keys[index].UnKey();
                 }
             }
         }
@@ -45,6 +50,8 @@ public class LevelChestPanel : MonoBehaviour
         boardKey.SetActive(false);
         watchAdsButton.gameObject.SetActive(true);
     }
+
+
 
     public void Update()
     {

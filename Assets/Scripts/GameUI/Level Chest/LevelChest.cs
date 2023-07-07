@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class LevelChest : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class LevelChest : MonoBehaviour
     [SerializeField] Button buttonChest;
     [SerializeField] TMP_Text coinReward;
 
+    Tweener animChest;
     int coinRewardNumber;
 
     public bool isOpened { get; private set; }
@@ -40,5 +42,10 @@ public class LevelChest : MonoBehaviour
     public void SetDeActive()
     {
         buttonChest.interactable = false;
+    }
+
+    public void SetAnimChest()
+    {
+        iconOpenChest.transform.DOScale(1.3f, 1).SetLoops(-1, LoopType.Yoyo);
     }
 }
