@@ -51,6 +51,8 @@ public class LevelChestPanel : MonoBehaviour
         watchAdsButton.gameObject.SetActive(true);
     }
 
+
+
     public void Update()
     {
         CheckOpenedChest();

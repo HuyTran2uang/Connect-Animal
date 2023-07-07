@@ -11,6 +11,7 @@ public class LevelChest : MonoBehaviour
     [SerializeField] Button buttonChest;
     [SerializeField] TMP_Text coinReward;
 
+    Tweener animChest;
     int coinRewardNumber;
 
     public bool isOpened { get; private set; }
@@ -43,10 +44,8 @@ public class LevelChest : MonoBehaviour
         buttonChest.interactable = false;
     }
 
-    public void AnimChest()
+    public void SetAnimChest()
     {
-        iconOpenChest.transform.DOScale(1, 1).OnComplete(delegate{
-            
-        });
+        iconOpenChest.transform.DOScale(1.3f, 1).SetLoops(-1, LoopType.Yoyo);
     }
 }
