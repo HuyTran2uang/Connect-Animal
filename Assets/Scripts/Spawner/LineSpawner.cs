@@ -89,7 +89,7 @@ public class LineSpawner : MonoBehaviourSingleton<LineSpawner>
 
     public void Concatenate(List<Vector2> points)
     {
-        Vector3 curPos = points[0];
+        Vector3 curPos = BoardManager.Instance.Board[(int)points[0].x, (int)points[0].y].Pos;
         foreach (char dir in ConvertToStringPath(points))
         {
             LineSpawned(curPos, dir);

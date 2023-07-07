@@ -12,8 +12,9 @@ public class Item : MonoBehaviour
 #if UNITY_EDITOR
     [SerializeField] TMPro.TMP_Text _text;
 #endif
-    Tweener _highLight;
-    float _originalScale = .7f, _hintScale = .4f, _highLightScale = .8f;
+    Tweener _highLight, _hint;
+    float _originalScale = .7f, _hintScale = .4f, _highLightScale = .8f, _bombTargetScale = .6f;
+    bool _isHint, _isBombTarget;
 
     private void Awake()
     {
@@ -65,11 +66,31 @@ public class Item : MonoBehaviour
 
     public void Hint()
     {
-        transform.localScale = Vector3.one * _hintScale;
+        if (_isHint) return;
+        _isHint = true;
+        _hint = transform.DOScale(Vector3.one * _hintScale, 1f).SetLoops(-1, LoopType.Yoyo);
     }
 
     public void UnHint()
     {
+        _isHint = false;
+        _hint.Kill();
         transform.localScale = Vector3.one * _originalScale;
+    }
+
+    public void BombTarget()
+    {
+        if(_isBombTarget) return;
+        _isBombTarget = true;
+        var sr = GetComponent<SpriteRenderer>();
+        sr.DOColor(new Color(1, 90f / 255, 90f / 255), .5f);
+        transform.DOScale(Vector3.one * _bombTargetScale, .5f);
+    }
+
+    public void BombExplode()
+    {
+        _isBombTarget = false;
+        BoardManager.Instance.ReceiveItem(_row, _col);
+        gameObject.SetActive(false);
     }
 }

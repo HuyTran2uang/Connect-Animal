@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     {
         _gameState = GameState.None;
         BoardManager.Instance.Clear();
+        HintManager.Instance.UnHint();
     }
 
     public void PauseGame()

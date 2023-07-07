@@ -30,5 +30,10 @@ public class InputManager : MonoBehaviour
         {
             BoardManager.Instance.Remap();
         }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            HintManager.Instance.Hint();
+        }
     }
 }

@@ -18,6 +18,8 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     List<Graph> _graphes = new List<Graph>();
 
     public int TotalItems => (_totalRows - 2) * (_totalCols - 2);
+    public Node[,] Board => _board;
+    public Item[,] BoardUI => _boardUI;
 
     public List<Node> GetNodesById(int id)
     {
@@ -181,6 +183,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         _startNode = null;
         _endNode = null;
         DOVirtual.DelayedCall(.1f, LineSpawner.Instance.ClearLines);
+        HintManager.Instance.UnHint();
         GameManager.Instance.CompletedCheckConnection();
         if (_values.Count > 0) return;
         CompletedLevel();
@@ -288,5 +291,38 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
             return;
         }
         Remap();
+    }
+
+    public Graph GetGraphFirst()
+    {
+        return _graphes[0];
+    }
+
+    public Couple GetRandomCouple()
+    {
+        int id = _values[UnityEngine.Random.Range(0, _values.Count)];
+        List<Node> _sameNodes = new List<Node>();
+        for (int row = 0; row < _totalRows; row++)
+        {
+            for (int col = 0; col < _totalCols; col++)
+            {
+                if (_board[row, col] != null && _board[row, col].Val == id)
+                _sameNodes.Add(_board[row, col]);
+            }
+        }
+        Node node1 = _sameNodes[UnityEngine.Random.Range(0, _sameNodes.Count)];
+        _sameNodes.Remove(node1);
+        Node node2 = _sameNodes[UnityEngine.Random.Range(0, _sameNodes.Count)];
+        Couple couple = new Couple(
+            new Vector2Int(node1.X, node1.Y),
+            new Vector2Int(node2.X, node2.Y)
+        );
+        return couple;
+    }
+
+    public void ReceiveItem(int row, int col)
+    {
+        _boardUI[row, col] = null;
+        _board[row, col] = null;
     }
 }
