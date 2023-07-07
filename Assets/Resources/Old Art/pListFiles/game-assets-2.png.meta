@@ -1803,7 +1803,7 @@ TextureImporter:
         width: 808
         height: 182
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1811,6 +1811,27 @@ TextureImporter:
       bones: []
       spriteID: 4fcaec39bad6f774e8f84a8156a480a8
       internalID: -1590318735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: game-assets-2_47
+      rect:
+        serializedVersion: 2
+        x: 1796
+        y: 975
+        width: 158
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b53840775ba86474893ec79aafda44c2
+      internalID: 234055906
       vertices: []
       indices: 
       edges: []
