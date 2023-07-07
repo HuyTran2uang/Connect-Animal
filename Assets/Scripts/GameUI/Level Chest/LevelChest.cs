@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class LevelChest : MonoBehaviour
 {
@@ -40,5 +41,12 @@ public class LevelChest : MonoBehaviour
     public void SetDeActive()
     {
         buttonChest.interactable = false;
+    }
+
+    public void AnimChest()
+    {
+        iconOpenChest.transform.DOScale(1, 1).OnComplete(delegate{
+            
+        });
     }
 }

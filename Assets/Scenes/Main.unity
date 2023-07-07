@@ -6061,7 +6061,7 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_PressedColor: {r: 0.773, g: 0.773, b: 0.773, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -12303,8 +12303,10 @@ MonoBehaviour:
   - {fileID: 67809186}
   - {fileID: 894771240}
   - {fileID: 1898608062}
+  boardKey: {fileID: 1417538145}
   backButton: {fileID: 1281156405}
   watchAdsButton: {fileID: 154926281}
+  coinText: {fileID: 941241120}
 --- !u!1 &1737584916
 GameObject:
   m_ObjectHideFlags: 0
