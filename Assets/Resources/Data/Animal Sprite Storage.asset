@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Animal Sprite Storage
   m_EditorClassIdentifier: Assembly-CSharp::AnimalSpriteStorage
   _sprites:
+  - {fileID: 0}
   - {fileID: 1473546297, guid: 899bac9e73c80804199e81ba89b9bfb5, type: 3}
   - {fileID: -697289540, guid: 899bac9e73c80804199e81ba89b9bfb5, type: 3}
   - {fileID: 2019153203, guid: 899bac9e73c80804199e81ba89b9bfb5, type: 3}

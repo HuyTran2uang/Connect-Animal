@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
 {
     [SerializeField] Item _itemPrefab;
+    [SerializeField] SpecialItem _specialItemPrefab;
+    [SerializeField] List<GameObject> _specialIconPrefabs; 
     List<Item> _items = new List<Item>();
     Item _highLightItem;
 
@@ -14,6 +17,15 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
         _items.Add(item);
         return item;
     }
+
+    public SpecialItem GetSpecialItemSpawned(Vector3 pos, SpecialType specialType)
+    {
+        SpecialItem item = Instantiate(_specialItemPrefab, pos, Quaternion.identity, transform);
+        Instantiate(_specialIconPrefabs[(int)specialType], item.transform);
+        _items.Add(item);
+        return item;
+    }
+
 
     public void ClearItems()
     {

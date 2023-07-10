@@ -26,4 +26,5 @@ public enum AudioName
     Hint,
     Lose,
     Win,
+    Explosion
 }

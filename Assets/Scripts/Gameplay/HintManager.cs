@@ -7,9 +7,19 @@ public class HintManager : MonoBehaviourSingleton<HintManager>, IReadData, IPrep
     private int _totalHintTimes;
     private bool _isHint;
 
+    public void LoadData()
+    {
+        _totalHintTimes = Data.ReadData.LoadData(GlobalKey.TOTAL_HINT_TIMES, 9);
+    }
+
+    public void Prepare()
+    {
+        HintUI.Instance.ChangeQuantity(_totalHintTimes);
+    }
+
     public void Hint()
     {
-        if (_totalHintTimes <= 0) return;
+        if (_totalHintTimes == 0) return;
         if (_isHint) return;
         _isHint = true;
         _totalHintTimes--;
@@ -25,16 +35,6 @@ public class HintManager : MonoBehaviourSingleton<HintManager>, IReadData, IPrep
         if (!_isHint) return;
         _isHint = false;
         ItemSpawner.Instance.UnHint();
-    }
-
-    public void LoadData()
-    {
-        _totalHintTimes = Data.ReadData.LoadData(GlobalKey.TOTAL_HINT_TIMES, 9);
-    }
-
-    public void Prepare()
-    {
-        HintUI.Instance.ChangeQuantity(_totalHintTimes);
     }
 
     public void AddHintTimes(int quantity)

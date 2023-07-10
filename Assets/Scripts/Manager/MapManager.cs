@@ -18,7 +18,7 @@ public class MapManager : MonoBehaviourSingleton<MapManager>, IReadData, IPrepar
 
     public void Remap()
     {
-        if (_totalRemapTimes <= 0) return;
+        if (_totalRemapTimes == 0) return;
         _totalRemapTimes--;
         BoardManager.Instance.Remap();
         Data.WriteData.Save(GlobalKey.TOTAL_REMAP_TIMES, _totalRemapTimes);

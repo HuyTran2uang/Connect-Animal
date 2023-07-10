@@ -233,10 +233,4 @@ public class Matrix
         }
         return null;
     }
-
-    public void CheckSuccess(Point p1, Point p2)
-    {
-        _matrix[p1.x, p1.y] = -1;
-        _matrix[p2.x, p2.y] = -1;
-    }
 }

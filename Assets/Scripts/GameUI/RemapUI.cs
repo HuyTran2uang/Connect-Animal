@@ -16,7 +16,6 @@ public class RemapUI : MonoBehaviourSingleton<RemapUI>
     public void ChangeQuantity(int quantity)
     {
         _changeQuantityText.SetQuantity(quantity);
-        if (quantity == 0)
-            _coinPanel.SetActive(true);
+        _coinPanel.SetActive(quantity == 0);
     }
 }

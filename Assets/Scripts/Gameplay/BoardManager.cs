@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class BoardManager : MonoBehaviourSingleton<BoardManager>
 {
@@ -13,6 +14,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     private Node _startNode, _endNode;
     Matrix _matrix;
     List<Graph> _graphes = new List<Graph>();
+    SpecialType _specialType;
 
     public int TotalItems => (_totalRows - 2) * (_totalCols - 2);
     public Node[,] Board => _board;
@@ -74,9 +76,22 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     private void SetListValues()
     {
         _values = new List<int>();
-        for (int i = 0; i < TotalItems / 2; i++)
+        for (int i = 0; i < TotalItems / 2 - 1; i++)
         {
-            int val = UnityEngine.Random.Range(0, _itemSpriteStorage.Sprites.Count);
+            int val = UnityEngine.Random.Range(1, _itemSpriteStorage.Sprites.Count);
+            _values.Add(val);
+            _values.Add(val);
+        }
+        if(LevelManager.Instance.Level % 4 != 0)
+        {
+            _values.Add(0);
+            _values.Add(0);
+            Array values = Enum.GetValues(typeof(SpecialType));
+            _specialType = (SpecialType)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+        }
+        else
+        {
+            int val = UnityEngine.Random.Range(1, _itemSpriteStorage.Sprites.Count);
             _values.Add(val);
             _values.Add(val);
         }
@@ -100,10 +115,19 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
                 {
                     int val = values[id];
                     Vector3 position = new Vector3(_startX + col, _startY - row, 0.0f);
-                    Item item = ItemSpawner.Instance.GetItemSpawned(position);
-                    item.Init(row, col, _itemSpriteStorage.Sprites[val], val);
+                    if (val == 0)
+                    {
+                        SpecialItem item = ItemSpawner.Instance.GetSpecialItemSpawned(position, _specialType);
+                        item.Init(row, col, val);
+                        _boardUI[row, col] = item;
+                    }
+                    else
+                    {
+                        Item item = ItemSpawner.Instance.GetItemSpawned(position);
+                        item.Init(row, col, _itemSpriteStorage.Sprites[val], val);
+                        _boardUI[row, col] = item;
+                    }
                     _board[row, col] = new Node(row, col, val, position);
-                    _boardUI[row, col] = item;
                     id += 1;
                 }
             }
@@ -165,21 +189,68 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
             _graphes.Add(new Graph(id));
     }
 
+    private Node GetRandomNodeFromId(int id)
+    {
+        List<Node> nodes = new List<Node>();
+        for (int row = 0; row < _totalRows; row++)
+        {
+            for (int col = 0; col < _totalCols; col++)
+            {
+                if (_board[row, col] != null && _board[row, col].Val == id)
+                    nodes.Add(_board[row, col]);
+            }
+        }
+        if (nodes.Count == 0) return null;
+        return nodes[UnityEngine.Random.Range(0, nodes.Count)];
+    }
+
+    private void RemoveAndFindToRemove(int row, int col)
+    {
+        if (_board[row, col] == null) return;
+        int id = _board[row, col].Val;
+        ExplodeAndRemoveItem(row, col);
+        Node nodeCoupled = GetRandomNodeFromId(id);
+        ExplodeAndRemoveItem(nodeCoupled.X, nodeCoupled.Y);
+    }
+
+    private void ExecuteSpecial(SpecialType specialType)
+    {
+        switch (specialType)
+        {
+            case SpecialType.Rocket:
+                RocketSpawner.Instance.ShootRocket(_startNode.Pos, _endNode.Pos);
+                break;
+            case SpecialType.Bomb:
+                RemoveAndFindToRemove(_startNode.X + 1, _startNode.Y);
+                RemoveAndFindToRemove(_startNode.X - 1, _startNode.Y);
+                RemoveAndFindToRemove(_startNode.X, _startNode.Y + 1);
+                RemoveAndFindToRemove(_startNode.X, _startNode.Y - 1);
+
+                RemoveAndFindToRemove(_endNode.X + 1, _endNode.Y);
+                RemoveAndFindToRemove(_endNode.X - 1, _endNode.Y);
+                RemoveAndFindToRemove(_endNode.X, _endNode.Y + 1);
+                RemoveAndFindToRemove(_endNode.X, _endNode.Y - 1);
+                break;
+            case SpecialType.Lightning:
+                if (_values.Count > 0)
+                    RemoveRandomCouple();
+                if (_values.Count > 0)
+                    RemoveRandomCouple();
+                if (_values.Count > 0)
+                    RemoveRandomCouple();
+                if (_values.Count > 0)
+                    RemoveRandomCouple();
+                break;
+        }
+    }
+
     private void CoupleSuccess()
     {
         AudioManager.Instance.PlaySoundConnectButton();
-        _board[_startNode.X, _startNode.Y] = null;
-        _board[_endNode.X, _endNode.Y] = null;
-        _boardUI[_startNode.X, _startNode.Y].gameObject.SetActive(false);
-        _boardUI[_endNode.X, _endNode.Y].gameObject.SetActive(false);
-        _boardUI[_startNode.X, _startNode.Y] = null;
-        _boardUI[_endNode.X, _endNode.Y] = null;
-        _matrix.CheckSuccess(
-            new Point(_startNode.X, _startNode.Y),
-            new Point(_endNode.X, _endNode.Y)
-        );
-        _values.Remove(_startNode.Val);
-        _values.Remove(_endNode.Val);
+        RemoveItem(_startNode.X, _startNode.Y);
+        RemoveItem(_endNode.X, _endNode.Y);
+        if (_startNode.Val == 0)
+            ExecuteSpecial(_specialType);
     }
 
     private void CoupleFail()
@@ -204,7 +275,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         StarSpawner.Instance.TakeStar();
         HintManager.Instance.UnHint();
         GameManager.Instance.Wait();
-        if (_values.Count > 0) return;
+        if (!CheckCompletedMap()) return;
         CompletedLevel();
     }
 
@@ -218,12 +289,15 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
             LineSpawner.Instance.Concatenate(points);
             CoupleSuccess();
             graph.RemovePathFrom(_startNode, _endNode);
-            if (!this.CheckExistCouple())
-                this.Remap();
-            else
+            if (_values.Count > 0)
             {
                 this.SetMatrix();
                 this.SetGraphs();
+            }
+            if (!this.CheckExistCouple())
+            {
+                Debug.Log("No Exist Couple");
+                this.Remap();
             }
         }
         else
@@ -298,6 +372,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 
     public void Remap()
     {
+        Debug.Log("Remap");
         UnSelectUIAll();
         CompletedConnection();
         GameManager.Instance.Wait();
@@ -329,6 +404,8 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
                 _sameNodes.Add(_board[row, col]);
             }
         }
+        if (_sameNodes.Count == 0)
+            return null;
         Node node1 = _sameNodes[UnityEngine.Random.Range(0, _sameNodes.Count)];
         _sameNodes.Remove(node1);
         Node node2 = _sameNodes[UnityEngine.Random.Range(0, _sameNodes.Count)];
@@ -339,9 +416,39 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         return couple;
     }
 
-    public void ReceiveItem(int row, int col)
+    public void RemoveItem(int row, int col)
     {
-        _boardUI[row, col] = null;
+        _boardUI[row, col].gameObject.SetActive(false);
+        _values.Remove(_board[row, col].Val);
         _board[row, col] = null;
+        _boardUI[row, col] = null;
+    }
+
+    public void ExplodeAndRemoveItem(int row, int col)
+    {
+        AudioManager.Instance.PlaySoundExplosion();
+        FXSpawner.Instance.ExplodeFX(_board[row, col].Pos);
+        RemoveItem(row, col);
+    }
+
+    public void ResetDataMap()
+    {
+        GameManager.Instance.Wait();
+        this.SetMatrix();
+        this.SetGraphs();
+        GameManager.Instance.ResumeGame();
+    }
+
+    public bool CheckCompletedMap()
+    {
+        return _values.Count == 0;
+    }
+
+    public void RemoveRandomCouple()
+    {
+        Couple randCouple = this.GetRandomCouple();
+        RemoveItem(randCouple.Coord1.x, randCouple.Coord1.y);
+        RemoveItem(randCouple.Coord2.x, randCouple.Coord2.y);
+        ResetDataMap();
     }
 }

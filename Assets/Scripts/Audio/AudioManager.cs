@@ -93,5 +93,9 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>, IReadData
     {
         PlayAudioOnceShot(AudioName.Lose);
     }
+    public void PlaySoundExplosion()
+    {
+        PlayAudioOnceShot(AudioName.Explosion);
+    }
     #endregion
 }

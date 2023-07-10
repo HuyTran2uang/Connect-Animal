@@ -7,14 +7,11 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _iconSR;
-    [SerializeField] private int _row, _col, _id;
+    [SerializeField] protected int _row, _col, _id;
     [SerializeField] GameObject _border;
-#if UNITY_EDITOR
-    [SerializeField] TMPro.TMP_Text _text;
-#endif
     Tweener _highLight, _hint;
     float _originalScale = .7f, _hintScale = .4f, _highLightScale = .8f, _bombTargetScale = .6f;
-    bool _isHint, _isBombTarget;
+    bool _isHint;
 
     private void Awake()
     {
@@ -25,21 +22,14 @@ public class Item : MonoBehaviour
     {
         _row = row;
         _col = column;
-        _iconSR.sprite = icon;
         _id = id;
-#if UNITY_EDITOR
-        _text.gameObject.SetActive(true);
-        _text.text = $"[{_row},{_col}]-id:{_id}";
-#endif
+        _iconSR.sprite = icon;
     }
 
     public void SetCoordinate(int row, int col)
     {
         _row = row;
         _col = col;
-#if UNITY_EDITOR
-        _text.text = $"[{_row},{_col}]-id:{_id}";
-#endif
     }
 
     public void Select()
@@ -77,20 +67,11 @@ public class Item : MonoBehaviour
         _hint.Kill();
         transform.localScale = Vector3.one * _originalScale;
     }
+}
 
-    public void BombTarget()
-    {
-        if(_isBombTarget) return;
-        _isBombTarget = true;
-        var sr = GetComponent<SpriteRenderer>();
-        sr.DOColor(new Color(1, 90f / 255, 90f / 255), .5f);
-        transform.DOScale(Vector3.one * _bombTargetScale, .5f);
-    }
-
-    public void BombExplode()
-    {
-        _isBombTarget = false;
-        BoardManager.Instance.ReceiveItem(_row, _col);
-        gameObject.SetActive(false);
-    }
+public enum SpecialType
+{
+    Rocket,
+    Bomb,
+    Lightning,
 }

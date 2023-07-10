@@ -2406,6 +2406,7 @@ GameObject:
   - component: {fileID: 213101605}
   - component: {fileID: 213101607}
   - component: {fileID: 213101606}
+  - component: {fileID: 213101608}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -2473,6 +2474,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 213101604}
   m_CullTransparentMesh: 1
+--- !u!114 &213101608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 213101604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6200ac8fbd8f7849abdd4e51e1f83aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelText: {fileID: 1006854025}
 --- !u!1 &214573683
 GameObject:
   m_ObjectHideFlags: 0
@@ -5659,6 +5673,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 566319076}
   m_CullTransparentMesh: 1
+--- !u!1 &567639639
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567639640}
+  - component: {fileID: 567639641}
+  m_Layer: 0
+  m_Name: FX Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &567639640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567639639}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324173064}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &567639641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567639639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a98db8654fa8774690832d1c55864b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _explodeFX: {fileID: 7669392696769561767, guid: a6e8d0ba5988dab45a0a746782cb7552, type: 3}
 --- !u!1 &594183650
 GameObject:
   m_ObjectHideFlags: 0
@@ -6418,6 +6477,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemPrefab: {fileID: 8443459207850948810, guid: 2dff720a2e7370142aeeee19ab6f75ca, type: 3}
+  _specialItemPrefab: {fileID: 722683092577688149, guid: 9d13659060299944e99821df7c6eb967, type: 3}
+  _specialIconPrefabs:
+  - {fileID: 4001974690695875335, guid: db6a4c16ebd99dd48a69101ce0959109, type: 3}
+  - {fileID: 1742219575279208067, guid: 25d2fa6ae522cf64c9bdaf26a61ba8f1, type: 3}
+  - {fileID: 6368161225598546696, guid: e3f5faea314adab47b82d1af5ae27c9c, type: 3}
 --- !u!1 &720531770
 GameObject:
   m_ObjectHideFlags: 0
@@ -8756,7 +8820,7 @@ GameObject:
   - component: {fileID: 1006854026}
   - component: {fileID: 1006854025}
   m_Layer: 5
-  m_Name: Level
+  m_Name: Level Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8802,7 +8866,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 99
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
@@ -10387,6 +10451,7 @@ GameObject:
   - component: {fileID: 1216742598}
   - component: {fileID: 1216742597}
   - component: {fileID: 1216742596}
+  - component: {fileID: 1216742599}
   m_Layer: 5
   m_Name: Boom Button
   m_TagString: Untagged
@@ -10498,6 +10563,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216742594}
   m_CullTransparentMesh: 1
+--- !u!114 &1216742599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216742594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 440309e080743284e93221ed0ac1fa8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1251626204
 GameObject:
   m_ObjectHideFlags: 0
@@ -11137,6 +11214,8 @@ Transform:
   - {fileID: 714289977}
   - {fileID: 20952964}
   - {fileID: 2038740515}
+  - {fileID: 1570474117}
+  - {fileID: 567639640}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12905,6 +12984,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1566845279}
   m_CullTransparentMesh: 1
+--- !u!1 &1570474116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1570474117}
+  - component: {fileID: 1570474118}
+  m_Layer: 0
+  m_Name: Rocket Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1570474117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570474116}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324173064}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1570474118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570474116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c800f12ccfe3aa042b64242e18d67db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rocketPrefab: {fileID: 5371392177268458643, guid: 7a54d85afccf22147949030b42ab4238, type: 3}
 --- !u!1 &1593787307
 GameObject:
   m_ObjectHideFlags: 0

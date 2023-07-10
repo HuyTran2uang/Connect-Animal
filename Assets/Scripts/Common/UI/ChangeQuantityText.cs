@@ -9,7 +9,7 @@ public class ChangeQuantityText : MonoBehaviour
 
     public void SetQuantity(int quantity)
     {
-        gameObject.SetActive(quantity == 0);
+        gameObject.SetActive(quantity != 0);
         _quantityText.text = quantity.ToString();
     }
 }
