@@ -23,7 +23,9 @@ public class WinPopup : MonoBehaviour
 
         _nextLevelButton.onClick.AddListener(delegate
         {
-
+            _winPopup.SetActive(false);
+            GameManager.Instance.Play();
+            Debug.Log(LevelManager.Instance.Level);
         });
     }
 }
