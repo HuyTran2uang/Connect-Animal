@@ -82,18 +82,29 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
             _values.Add(val);
             _values.Add(val);
         }
-        if(LevelManager.Instance.Level % 4 != 0)
+        if (LevelManager.Instance.Level < 12)
         {
-            _values.Add(0);
-            _values.Add(0);
-            Array values = Enum.GetValues(typeof(SpecialType));
-            _specialType = (SpecialType)values.GetValue(UnityEngine.Random.Range(0, values.Length));
+            if (LevelManager.Instance.Level % 4 == 0)
+            {
+                _values.Add(0);
+                _values.Add(0);
+                _specialType = SpecialSpawner.Instance.GetRandomSpecialType();
+            }
         }
         else
         {
-            int val = UnityEngine.Random.Range(1, _itemSpriteStorage.Sprites.Count);
-            _values.Add(val);
-            _values.Add(val);
+            if (LevelManager.Instance.Level % 3 == 1)
+            {
+                _values.Add(0);
+                _values.Add(0);
+                _specialType = SpecialSpawner.Instance.GetRandomSpecialType();
+            }
+            else
+            {
+                int val = UnityEngine.Random.Range(1, _itemSpriteStorage.Sprites.Count);
+                _values.Add(val);
+                _values.Add(val);
+            }
         }
     }
 
@@ -232,14 +243,17 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
                 RemoveAndFindToRemove(_endNode.X, _endNode.Y - 1);
                 break;
             case SpecialType.Lightning:
-                if (_values.Count > 0)
-                    RemoveRandomCouple();
-                if (_values.Count > 0)
-                    RemoveRandomCouple();
-                if (_values.Count > 0)
-                    RemoveRandomCouple();
-                if (_values.Count > 0)
-                    RemoveRandomCouple();
+                AudioManager.Instance.PlaySoundExplosion();
+                FXSpawner.Instance.LightningStrikeFX(_startNode.Pos);
+                FXSpawner.Instance.LightningStrikeFX(_endNode.Pos);
+                if (_values.Count == 0) return;
+                RemoveRandomCouple();
+                //if (_values.Count == 0) return;
+                //RemoveRandomCouple();
+                //if (_values.Count == 0) return;
+                //RemoveRandomCouple();
+                //if (_values.Count == 0) return;
+                //RemoveRandomCouple();
                 break;
         }
     }
@@ -272,7 +286,6 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         _startNode = null;
         _endNode = null;
         DOVirtual.DelayedCall(.1f, LineSpawner.Instance.ClearLines);
-        StarSpawner.Instance.TakeStar();
         HintManager.Instance.UnHint();
         GameManager.Instance.Wait();
         if (!CheckCompletedMap()) return;
@@ -428,6 +441,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     {
         AudioManager.Instance.PlaySoundExplosion();
         FXSpawner.Instance.ExplodeFX(_board[row, col].Pos);
+        StarSpawner.Instance.StarSpawned(_board[row, col].Pos);
         RemoveItem(row, col);
     }
 
@@ -447,6 +461,8 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     public void RemoveRandomCouple()
     {
         Couple randCouple = this.GetRandomCouple();
+        StarSpawner.Instance.StarSpawned(_board[randCouple.Coord1.x, randCouple.Coord1.y].Pos);
+        StarSpawner.Instance.StarSpawned(_board[randCouple.Coord2.x, randCouple.Coord2.y].Pos);
         RemoveItem(randCouple.Coord1.x, randCouple.Coord1.y);
         RemoveItem(randCouple.Coord2.x, randCouple.Coord2.y);
         ResetDataMap();

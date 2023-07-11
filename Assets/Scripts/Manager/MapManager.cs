@@ -8,7 +8,7 @@ public class MapManager : MonoBehaviourSingleton<MapManager>, IReadData, IPrepar
 
     public void LoadData()
     {
-        _totalRemapTimes = Data.ReadData.LoadData(GlobalKey.TOTAL_REMAP_TIMES, 9);
+        _totalRemapTimes = Data.ReadData.LoadData(GlobalKey.TOTAL_REMAP_TIMES, 3);
     }
 
     public void Prepare()

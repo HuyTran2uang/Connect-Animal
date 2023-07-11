@@ -9,7 +9,7 @@ public class HintManager : MonoBehaviourSingleton<HintManager>, IReadData, IPrep
 
     public void LoadData()
     {
-        _totalHintTimes = Data.ReadData.LoadData(GlobalKey.TOTAL_HINT_TIMES, 9);
+        _totalHintTimes = Data.ReadData.LoadData(GlobalKey.TOTAL_HINT_TIMES, 3);
     }
 
     public void Prepare()

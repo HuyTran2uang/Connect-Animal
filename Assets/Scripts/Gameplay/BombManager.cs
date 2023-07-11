@@ -11,7 +11,7 @@ public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrep
 
     public void LoadData()
     {
-        _totalThrowBombTimes = Data.ReadData.LoadData(GlobalKey.TOTAL_BOMB_TIMES, 10);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+        _totalThrowBombTimes = Data.ReadData.LoadData(GlobalKey.TOTAL_BOMB_TIMES, 3);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
     }
 
     public void Prepare()

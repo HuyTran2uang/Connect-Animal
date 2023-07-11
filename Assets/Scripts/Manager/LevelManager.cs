@@ -15,6 +15,11 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>, IReadData, IPr
     {
         _level++;
         Data.WriteData.Save(GlobalKey.LEVEL, _level);
+        if(_level == 12)
+        {
+            SpecialSpawner.Instance.AddSpecialType(SpecialType.Bomb);
+            SpecialSpawner.Instance.AddSpecialType(SpecialType.Lightning);
+        }
         _changeLevelTexts.ForEach(i => i.ChangeLevelText(Level));
     }
 
@@ -27,5 +32,10 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>, IReadData, IPr
     {
         _changeLevelTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<IChangeLevelText>().ToList();
         _changeLevelTexts.ForEach(i => i.ChangeLevelText(Level));
+        if(_level > 12)
+        {
+            SpecialSpawner.Instance.AddSpecialType(SpecialType.Bomb);
+            SpecialSpawner.Instance.AddSpecialType(SpecialType.Lightning);
+        }
     }
 }

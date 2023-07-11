@@ -73,15 +73,12 @@ public class LineSpawner : MonoBehaviourSingleton<LineSpawner>
     {
         string path = "";
         for (int i = 0; i < points.Count - 1; i++)
-        {
             path += StepA2B(points[i + 1], points[i]);
-        }
         return path;
     }
 
     public void Concatenate(List<Vector2> points)
     {
-        StarSpawner.Instance.TakeStar();
         Vector3 curPos = BoardManager.Instance.Board[(int)points[0].x, (int)points[0].y].Pos;
         string path = ConvertToStringPath(points);
         foreach (char dir in path)
