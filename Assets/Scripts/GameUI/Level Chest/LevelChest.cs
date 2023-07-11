@@ -4,29 +4,34 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class LevelChest : MonoBehaviour
 {
     [SerializeField] GameObject iconCloseChest, iconOpenChest;
     [SerializeField] Button buttonChest;
     [SerializeField] TMP_Text coinReward;
+    [SerializeField] CointMove _coints;
 
     Tweener animChest;
     int coinRewardNumber;
 
     public bool isOpened { get; private set; }
+    public Button ButtonChest => buttonChest;
 
-    private void Awake()
+    public void Awake()
     {
         buttonChest.onClick.AddListener(DoOpenChest);
     }
 
-    private void DoOpenChest()
+    public void DoOpenChest()
     {
-        coinRewardNumber = Random.Range(1, 66);
+        if (LevelChestPanel.Instance.CountKey <= 0) return;
+        coinRewardNumber = Random.Range(1, 200);
         iconCloseChest.SetActive(false);
         iconOpenChest.SetActive(true);
         coinReward.text = coinRewardNumber.ToString();
+        _coints.ActiveCoint();
         buttonChest.interactable = false;
         isOpened = true;
     }
@@ -42,10 +47,5 @@ public class LevelChest : MonoBehaviour
     public void SetDeActive()
     {
         buttonChest.interactable = false;
-    }
-
-    public void SetAnimChest()
-    {
-        iconOpenChest.transform.DOScale(1.3f, 1).SetLoops(-1, LoopType.Yoyo);
     }
 }

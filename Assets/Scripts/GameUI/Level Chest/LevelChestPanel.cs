@@ -3,47 +3,65 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Pool;
+using System;
 
-public class LevelChestPanel : MonoBehaviour
+public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
 {
     [SerializeField] List<Key> keys;
     [SerializeField] List<LevelChest> levelChests;
 
+    [SerializeField] GameObject levelChestPopup;
     [SerializeField] GameObject boardKey;
     [SerializeField] Button backButton, watchAdsButton;
     [SerializeField] TMP_Text coinText;
 
     int coin;
-    int countKey;
-    int countKeyLimit = 3;
+    int countKey = 3;   
+
+    public int CountKey => countKey;
+
+
 
     public void CheckOpenedChest()
     {
+        countKey = 3;
         foreach (LevelChest levelChest in levelChests)
         {
             if (levelChest.isOpened)
             {
-                countKey++;
-                if (countKey == countKeyLimit)
+                countKey --;
+                if (countKey <= 0)
                 {
-                    for (int i = 0; i < levelChests.Count; i++)
-                    {
-                        levelChests[i].SetDeActive();
-                    }
                     ActiveWatchADS();
-                }
-                else
-                {
-                    int index = keys.Count - countKey;
-                    if (index < 0)
-                    {
-                        index = 0;
-                    }
-                    keys[index].UnKey();
                 }
             }
         }
-        countKey = 0;
+    }
+
+    private void Awake()
+    {
+        backButton.onClick.AddListener(Back);
+        watchAdsButton.onClick.AddListener(WatchADSDone);
+        foreach (LevelChest levelChest in levelChests)
+        {
+            levelChest.ButtonChest.onClick.AddListener(CheckOpenedChest);
+        }
+    }
+
+    public void WatchADSDone()
+    {
+        foreach (LevelChest levelChest in levelChests)
+        {
+            if (!levelChest.isOpened)
+            {
+                levelChest.ResetChest();
+            }
+        }
+    }
+    public void Back()
+    {
+        levelChestPopup.SetActive(false);
     }
     public void ActiveWatchADS()
     {
@@ -51,10 +69,15 @@ public class LevelChestPanel : MonoBehaviour
         watchAdsButton.gameObject.SetActive(true);
     }
 
-
-
     public void Update()
-    {
-        CheckOpenedChest();
+    {   
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            foreach (LevelChest levelChest in levelChests)
+            {
+                levelChest.ResetChest();
+            }
+        }
     }
+
 }
