@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   qualityServiceEnabled: 1
   sdkKey: dQ15CD6nC7CfuD2IKhScGfRyQOoJpENkqUqftd_Xg0z83xvbcqZKQG3JTTbzUAaR8bGxPGTBufsv3sqxsXzrcV
-  setAttributionReportEndpoint: 0
+  setAttributionReportEndpoint: 1
   consentFlowEnabled: 0
   consentFlowPlatform: 0
   consentFlowPrivacyPolicyUrl: 

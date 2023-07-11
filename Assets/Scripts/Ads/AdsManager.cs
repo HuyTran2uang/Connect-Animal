@@ -3,17 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AdsManager : MonoBehaviourSingleton<AdsManager>, IPrepareGame
+#if APPLOVIN
+public class AdsManager : MonoBehaviourSingleton<AdsManager>, IAfterPrepareGame
 {
-    private void Awake()
+    public void InitializeAds()
     {
-        BannerAds.Instance.InitializeBannerAds();
-        InterstitialAds.Instance.InitializeInterstitialAds();
-        RewardAds.Instance.InitializeRewardedAds();
+        MaxSdkCallbacks.OnSdkInitializedEvent += (MaxSdkBase.SdkConfiguration sdkConfiguration) => {
+            // AppLovin SDK is initialized, start loading ads
+            BannerAds.Instance.InitializeBannerAds();
+            InterstitialAds.Instance.InitializeInterstitialAds();
+            RewardAds.Instance.InitializeRewardedAds();
+        };
+
+        MaxSdk.SetSdkKey("dQ15CD6nC7CfuD2IKhScGfRyQOoJpENkqUqftd_Xg0z83xvbcqZKQG3JTTbzUAaR8bGxPGTBufsv3sqxsXzrcV");
+        //MaxSdk.SetUserId("USER_ID");
+        MaxSdk.InitializeSdk();
     }
 
-    public void Prepare()
+    public void AfterPrepareGame()
     {
+        BannerAds.Instance.Show();
         InterstitialAds.Instance.Show();
     }
 }
+#endif

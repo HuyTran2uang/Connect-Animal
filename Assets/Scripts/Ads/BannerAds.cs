@@ -7,7 +7,7 @@ namespace Applovin
     public class BannerAds : MonoBehaviourSingleton<BannerAds>
     {
 #if UNITY_EDITOR
-        string bannerAdUnitId = "YOUR_ANDROID_BANNER_AD_UNIT_ID";
+        string bannerAdUnitId = "YOUR_editor_BANNER_AD_UNIT_ID";
 #elif UNITY_IOS
         string bannerAdUnitId = "YOUR_IOS_BANNER_AD_UNIT_ID"; // Retrieve the ID from your account
 #elif UNITY_ANDROID
@@ -35,6 +35,7 @@ namespace Applovin
 
         public void Show()
         {
+            Debug.Log("Show banner ads");
             MaxSdk.ShowBanner(bannerAdUnitId);
         }
 

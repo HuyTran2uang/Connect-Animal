@@ -1,16 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 public class Loading : MonoBehaviourSingletonPersistent<Loading>
 {
     protected override void Awake()
     {
         base.Awake();
+#if APPLOVIN
+        AdsManager.Instance.InitializeAds();
+#endif
         StartCoroutine(LoadAllData());
-    }
+    } 
 
     private IEnumerator LoadAllData()
     {
@@ -27,5 +30,14 @@ public class Loading : MonoBehaviourSingletonPersistent<Loading>
         foreach (var prepareGame in prepareGames)
             prepareGame.Prepare();
         yield return SceneManager.UnloadSceneAsync("Loading");
+        yield return LoadAllAfterPrepare();
+    }
+
+    private IEnumerator LoadAllAfterPrepare()
+    {
+        var afterPrepareGames = FindObjectsOfType<MonoBehaviour>().OfType<IAfterPrepareGame>();
+        foreach (var after in afterPrepareGames)
+            after.AfterPrepareGame();
+        yield return null;
     }
 }
