@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         AudioManager.Instance.PlaySoundWinButton();
         LevelManager.Instance.LevelUp();
         StarManager.Instance.PassStarInLevelToData();
+        UIManager.Instance.Win();
         Debug.Log("Win");
     }
 
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         _gameState = GameState.None;
         Wait();
         AudioManager.Instance.PlaySoundLoseButton();
+        UIManager.Instance.Lose();
         Debug.Log("Lose");
     }
 }

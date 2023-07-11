@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class GlobalKey
 {
+<<<<<<< HEAD
     public static string COINT = "coint";
+=======
+>>>>>>> origin/binh
 
     public enum Audio
     {
