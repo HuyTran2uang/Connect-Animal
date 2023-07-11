@@ -82,30 +82,23 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
             _values.Add(val);
             _values.Add(val);
         }
-        if (LevelManager.Instance.Level < 12)
+        int lastNodeId = 0;
+        if (LevelManager.Instance.Level < 10)
         {
             if (LevelManager.Instance.Level % 4 == 0)
-            {
-                _values.Add(0);
-                _values.Add(0);
                 _specialType = SpecialSpawner.Instance.GetRandomSpecialType();
-            }
+            else
+                lastNodeId = UnityEngine.Random.Range(1, _itemSpriteStorage.Sprites.Count);
         }
         else
         {
-            if (LevelManager.Instance.Level % 3 == 1)
-            {
-                _values.Add(0);
-                _values.Add(0);
+            if (LevelManager.Instance.Level % 2 == 0)
                 _specialType = SpecialSpawner.Instance.GetRandomSpecialType();
-            }
             else
-            {
-                int val = UnityEngine.Random.Range(1, _itemSpriteStorage.Sprites.Count);
-                _values.Add(val);
-                _values.Add(val);
-            }
+                _specialType = SpecialSpawner.Instance.GetRandomBombAndLightning();
         }
+        _values.Add(lastNodeId);
+        _values.Add(lastNodeId);
     }
 
     private void SpawnItems(List<int> values)

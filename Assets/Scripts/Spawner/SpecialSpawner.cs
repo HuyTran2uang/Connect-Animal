@@ -11,6 +11,11 @@ public class SpecialSpawner : MonoBehaviourSingleton<SpecialSpawner>
         return _specialTypes[UnityEngine.Random.Range(0, _specialTypes.Count)];
     }
 
+    public SpecialType GetRandomBombAndLightning()
+    {
+        return _specialTypes[UnityEngine.Random.Range(1, _specialTypes.Count)];
+    }
+
     public void AddSpecialType(SpecialType specialType)
     {
         _specialTypes.Add(specialType);
