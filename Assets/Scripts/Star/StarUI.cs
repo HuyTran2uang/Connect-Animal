@@ -7,6 +7,7 @@ public class StarUI : MonoBehaviour, IChangeStarText
 {
     [SerializeField] TMP_Text _starText;
     [SerializeField] TMP_Text _starTextInLevel;
+    [SerializeField] TMP_Text _starTextReceived;
 
 
     public void ChangeStarText(int quantity)
@@ -17,5 +18,8 @@ public class StarUI : MonoBehaviour, IChangeStarText
     public void ChangeStarTextInLevel(int level)
     {
         _starTextInLevel.text = level.ToString();
+        _starTextReceived.text = level.ToString();
     }
+
+
 }
