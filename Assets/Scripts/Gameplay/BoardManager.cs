@@ -289,7 +289,8 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     {
         GameManager.Instance.Wait();
         Graph graph = GetGraphById(_startNode.Val);
-        var points = GetPathFrom(_startNode, _endNode);
+        //var points = GetPathFrom(_startNode, _endNode);
+        var points = _matrix.GetPath(new Point(_startNode.X, _startNode.Y), new Point(_endNode.X, _endNode.Y));
         if (points != null)
         {
             LineSpawner.Instance.Concatenate(points);

@@ -99,7 +99,7 @@ public class Matrix
                 {
                     new Vector2(pMinX.x, pMinX.y),
                     new Vector2(x, pMinX.y),
-                    new Vector2(x, pMinX.y),
+                    new Vector2(x, pMaxX.y),
                     new Vector2(pMaxX.x, pMaxX.y),
                 };
                 return x;

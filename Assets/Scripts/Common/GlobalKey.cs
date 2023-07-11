@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GlobalKey
 {
-    public static string LEVEL = "level";
     public static string COINT = "coint";
 
     public enum Audio
