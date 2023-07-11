@@ -643,10 +643,10 @@ TextureImporter:
       name: game-assets-2_33
       rect:
         serializedVersion: 2
-        x: 1955
-        y: 1201
-        width: 91
-        height: 95
+        x: 1959
+        y: 1216
+        width: 81
+        height: 80
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1824,7 +1824,7 @@ TextureImporter:
         width: 158
         height: 143
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
