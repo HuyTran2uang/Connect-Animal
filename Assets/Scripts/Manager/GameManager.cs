@@ -12,11 +12,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void Play()
     {
+        Wait();
         _gameState = GameState.OnBattle;
-        _battleState = BattleState.None;
         TimerManager.Instance.SetTimer(180);
         StarManager.Instance.ClearStarInLevel();
         BoardManager.Instance.CreateBoard(LevelConfigStorage.LevelConfigs[LevelManager.Instance.Level]);
+        ResumeGame();
     }
 
     public void GoToMenuFromBattle()
@@ -38,9 +39,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void Replay()
     {
-        Wait();
-        BoardManager.Instance.CreateBoard(LevelConfigStorage.LevelConfigs[LevelManager.Instance.Level]);
-        ResumeGame();
+        Play();
     }
 
     public void Win()
