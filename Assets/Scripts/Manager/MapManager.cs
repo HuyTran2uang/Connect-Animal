@@ -2,33 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MapManager : MonoBehaviourSingleton<MapManager>, IReadData, IPrepareGame
+public class MapManager : MonoBehaviour
 {
-    private int _totalRemapTimes;
+    int[,] _grid;
+    int _totalIds, _totalRows, _totalCols;
 
-    public void LoadData()
+    public int[,] GetGrid() => _grid;
+    public int GetTotalIds() => _totalIds;
+    public int GetTotalRows() => _totalRows;
+    public int GetTotalCols() => _totalCols;
+
+    //4x6/NoTopLeft(2);NoBottomRight(2)/U
+    public void CreateMap(string code)
     {
-        _totalRemapTimes = Data.ReadData.LoadData(GlobalKey.TOTAL_REMAP_TIMES, 3);
+
     }
 
-    public void Prepare()
+    public void SetGrid(int totalRows, int totalCols)
     {
-        RemapUI.Instance.ChangeQuantity(_totalRemapTimes);
+        _totalRows = totalRows;
+        _totalCols = totalCols;
+        _grid = new int[_totalRows, _totalCols];
+        for (int row = 0; row < _totalRows; row++)
+            for (int col = 0; col < _totalCols; col++)
+                _grid[row, col] = 1;
+    }
+    
+    //shape
+    private void NoTopLeft(int radius)
+    {
+        for (int row = 0; row < _totalRows; row++)
+            for (int col = 0; col < _totalCols; col++)
+                if (row < radius || col < radius)
+                    _grid[row, col] = 0;
     }
 
-    public void Remap()
+    private void NoBottomRight(int radius)
     {
-        if (_totalRemapTimes == 0) return;
-        _totalRemapTimes--;
-        BoardManager.Instance.Remap();
-        Data.WriteData.Save(GlobalKey.TOTAL_REMAP_TIMES, _totalRemapTimes);
-        RemapUI.Instance.ChangeQuantity(_totalRemapTimes);
+        for (int row = _totalRows - 1; row >= 0; row--)
+            for (int col = _totalCols; col >= 0; col--)
+                if (row > _totalRows - radius || col > _totalCols - radius)
+                    _grid[row, col] = 0;
+    }
+    //movement
+    private void CanMoveUp()
+    {
+
     }
 
-    public void AddRemapTimes(int quantity)
+    private void CanMoveDown()
     {
-        _totalRemapTimes += quantity;
-        Data.WriteData.Save(GlobalKey.TOTAL_REMAP_TIMES, _totalRemapTimes);
-        RemapUI.Instance.ChangeQuantity(_totalRemapTimes);
+
+    }
+
+    private void CanMoveLeft()
+    {
+
+    }
+
+    private void CanMoveRight()
+    {
+
     }
 }

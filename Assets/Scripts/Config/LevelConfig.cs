@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class LevelConfig
 {
-    private int _row, _col;
-    private List<Vector2> _nullPoses;
+    private int _totalRows, _totalCols, _totalVals;
+    private int[,] _grid;
 
-    public LevelConfig(int row, int col, List<Vector2> nullPoses)
+    public LevelConfig(int row, int col, int[,] grid, int totalVals)
     {
-        _row = row;
-        _col = col;
-        _nullPoses = nullPoses;
+        _totalRows = row;
+        _totalCols = col;
+        _grid = grid;
+        _totalVals = totalVals;
     }
 
-    public int Row => _row;
-    public int Col => _col;
-    public List<Vector2> NullPoses => _nullPoses;
+    public int TotalRows => _totalRows;
+    public int TotalCols => _totalCols;
+    public int TotalVals => _totalVals;
+    public int[,] Grid => _grid;
 }

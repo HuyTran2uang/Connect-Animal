@@ -45,12 +45,11 @@ public class Item : MonoBehaviour
 
     public void HighLight()
     {
-        _highLight = transform.DOScale(Vector3.one * _highLightScale, 1f).SetLoops(-1, LoopType.Yoyo);
+        transform.localScale = Vector3.one * _highLightScale;
     }
 
     public void UnHighLight()
     {
-        _highLight.Kill();
         transform.localScale = Vector3.one * _originalScale;
     }
 

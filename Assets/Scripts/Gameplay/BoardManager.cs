@@ -17,7 +17,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     SpecialType _specialType;
 
     public int TotalItems => (_totalRows - 2) * (_totalCols - 2);
-    public Node[,] Board => _board;
+    public Node[,] Board =>_board;
     public Item[,] BoardUI => _boardUI;
 
     private void SetPosCam()
@@ -61,11 +61,11 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     public void CreateBoard(LevelConfig config)
     {
         Clear();
-        _totalRows = config.Row + 2;//border null
-        _totalCols = config.Col + 2;//border null
-        SetListValues();
+        _totalRows = config.TotalRows;//border null
+        _totalCols = config.TotalCols;//border null
+        SetListValues(config.TotalVals);
         _values.Shuffle();
-        SpawnItems(_values);
+        SpawnItems(_values, config.Grid);
         this.SetMatrix();
         this.SetGraphs();
         SetPosCam();
@@ -73,10 +73,10 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         CreateBoard(config);
     }
 
-    private void SetListValues()
+    private void SetListValues(int totalVals)
     {
         _values = new List<int>();
-        for (int i = 0; i < TotalItems / 2 - 1; i++)
+        for (int i = 0; i < totalVals; i++)
         {
             int val = UnityEngine.Random.Range(1, _itemSpriteStorage.Sprites.Count);
             _values.Add(val);
@@ -101,7 +101,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         _values.Add(lastNodeId);
     }
 
-    private void SpawnItems(List<int> values)
+    private void SpawnItems(List<int> values, int[,] grid)
     {
         _board = new Node[_totalRows, _totalCols];
         _boardUI = new Item[_totalRows, _totalCols];
@@ -110,7 +110,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         {
             for (int col = 0; col < _totalCols; col++)
             {
-                if (col == 0 || col == _totalCols - 1 || row == 0 || row == _totalRows - 1)
+                if (col == 0 || col == _totalCols - 1 || row == 0 || row == _totalRows - 1 || grid[row, col] == 0)
                 {
                     _board[row, col] = null;
                     _boardUI[row, col] = null;

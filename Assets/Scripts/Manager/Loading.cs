@@ -9,9 +9,7 @@ public class Loading : MonoBehaviourSingletonPersistent<Loading>
     protected override void Awake()
     {
         base.Awake();
-#if APPLOVIN
-        AdsManager.Instance.InitializeAds();
-#endif
+        ApplovinManager.Instance.Init();
         StartCoroutine(LoadAllData());
     } 
 
@@ -39,5 +37,6 @@ public class Loading : MonoBehaviourSingletonPersistent<Loading>
         foreach (var after in afterPrepareGames)
             after.AfterPrepareGame();
         yield return null;
+        ApplovinManager.Instance.ShowBanner();
     }
 }

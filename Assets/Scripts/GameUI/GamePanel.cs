@@ -24,7 +24,7 @@ public class GamePanel : MonoBehaviour
         _remapButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            MapManager.Instance.Remap();
+            RemapManager.Instance.Remap();
         });
     }
 }

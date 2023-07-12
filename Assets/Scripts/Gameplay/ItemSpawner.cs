@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
 {
@@ -35,6 +36,12 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
 
     public void DetectDown()
     {
+#if UNITY_EDITOR
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+#else
+        foreach (var touch in Input.touches)
+            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) return;
+#endif
         if (GameManager.Instance.GameState != GameState.OnBattle) return;
         if (GameManager.Instance.BattleState != BattleState.None) return;
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), -Vector2.up);
@@ -49,7 +56,8 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
         if (GameManager.Instance.BattleState != BattleState.None) return;
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), -Vector2.up);
         Item item = hit.collider?.GetComponent<Item>();
-        item?.Select();
+        if (item == _highLightItem)
+            _highLightItem.Select();
         _highLightItem.UnHighLight();
     }
 

@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         _gameState = GameState.OnBattle;
         TimerManager.Instance.SetTimer(180);
         StarManager.Instance.ClearStarInLevel();
-        BoardManager.Instance.CreateBoard(LevelConfigStorage.LevelConfigs[LevelManager.Instance.Level]);
+        BoardManager.Instance.CreateBoard(LevelConfigConverter.GetLevelConfig(LevelManager.Instance.Level));
         ResumeGame();
     }
 
