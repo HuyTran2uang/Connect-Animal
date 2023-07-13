@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviourSingleton<AudioManager>, IReadData
+public class AudioManager : MonoBehaviourSingleton<AudioManager>, IReadData, IPrepareGame
 {
     Dictionary<AudioName, AudioData> _audioDict = new Dictionary<AudioName, AudioData>();
     bool _isOpenMusic, _isOpenSound;
@@ -25,6 +26,12 @@ public class AudioManager : MonoBehaviourSingleton<AudioManager>, IReadData
     {
         _isOpenMusic = Convert.ToBoolean(PlayerPrefs.GetInt($"{GlobalKey.Audio.Music}", 1));
         _isOpenSound = Convert.ToBoolean(PlayerPrefs.GetInt($"{GlobalKey.Audio.Sound}", 1));
+    }
+
+    public void Prepare()
+    {
+        var setters = FindObjectsOfType<MonoBehaviour>(true).OfType<ISoundButton>().ToList();
+        setters.ForEach(i => i.SetState(_isOpenSound));
     }
 
     public void Music()

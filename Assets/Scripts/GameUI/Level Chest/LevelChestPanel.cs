@@ -21,8 +21,6 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
 
     public int CountKey => countKey;
 
-
-
     public void CheckOpenedChest()
     {
         countKey = 3;
@@ -36,6 +34,7 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
                     ActiveWatchADS();
                 }
             }
+            Debug.Log(countKey);
         }
     }
 
@@ -51,13 +50,7 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
 
     public void WatchADSDone()
     {
-        foreach (LevelChest levelChest in levelChests)
-        {
-            if (!levelChest.isOpened)
-            {
-                levelChest.ResetChest();
-            }
-        }
+        countKey = 9;
     }
     public void Back()
     {
@@ -68,16 +61,11 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
         boardKey.SetActive(false);
         watchAdsButton.gameObject.SetActive(true);
     }
-
-    public void Update()
-    {   
-        if (Input.GetKeyDown(KeyCode.I))
+    private void OnEnable()
+    {
+        foreach (LevelChest levelChest in levelChests)
         {
-            foreach (LevelChest levelChest in levelChests)
-            {
-                levelChest.ResetChest();
-            }
+            levelChest.ResetChest();
         }
     }
-
 }

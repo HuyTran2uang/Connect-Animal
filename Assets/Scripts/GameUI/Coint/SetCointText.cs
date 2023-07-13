@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class SetCointText : MonoBehaviour
+public class SetCointText : MonoBehaviour, ISetCointText
 {
-    [SerializeField] TMP_Text cointText;
+    [SerializeField] List<TMP_Text> cointText = new List<TMP_Text>();
 
-    public void SetCoint(int coint)
+    void ISetCointText.SetCointText(int _coint)
     {
-        cointText.text = coint.ToString();
+        foreach(TMP_Text coint in cointText)
+        {
+            coint.text = _coint.ToString();
+        }
     }
-
 }

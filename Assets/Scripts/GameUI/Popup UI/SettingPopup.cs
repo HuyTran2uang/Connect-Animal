@@ -19,34 +19,49 @@ public class SettingPopup : MonoBehaviour
     {
         _resumeButton.onClick.AddListener(delegate 
         {
+            AudioManager.Instance.PlaySoundClickButton();
             _settingPopup.SetActive(false);
         });
 
         _homeButton.onClick.AddListener(delegate 
         {
+            AudioManager.Instance.PlaySoundClickButton();
             _homePanel.SetActive(true);
             _gamePanel.SetActive(false);
             _settingPopup.SetActive(false);
+            BoardManager.Instance.Clear();
         });
 
         _rateButton.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
 
         });
 
         _soundButton.onClick.AddListener(delegate
         {
-
+            AudioManager.Instance.PlaySoundClickButton();
+            AudioManager.Instance.Sound();
         });
 
         _vibrateButton.onClick.AddListener(delegate
         {
-
+            AudioManager.Instance.PlaySoundClickButton();
+            VibrationManager.Instance.Vibrate();
         });
 
         _tutorialButton.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
 
         });
+    }
+    private void OnEnable()
+    {
+        GameManager.Instance.Wait();
+    }
+    private void OnDisable()
+    {
+        GameManager.Instance.ResumeGame();
     }
 }
