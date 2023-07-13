@@ -16,6 +16,7 @@ public class WinPopup : MonoBehaviour
     {
         _homeButton.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
             _homePanel.SetActive(true);
             _gamePanel.SetActive(false);
             _winPopup.SetActive(false);
@@ -23,9 +24,9 @@ public class WinPopup : MonoBehaviour
 
         _nextLevelButton.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
             _winPopup.SetActive(false);
             GameManager.Instance.Play();
-            Debug.Log(LevelManager.Instance.Level);
         });
     }
 }

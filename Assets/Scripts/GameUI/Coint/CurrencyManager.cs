@@ -1,25 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class CurrencyManager : MonoBehaviour
+public class CurrencyManager : MonoBehaviourSingleton<CurrencyManager>, IPrepareGame, IReadData
 {
-    int coint;
+    List<ISetCointText> _SetCointTexts = new List<ISetCointText>();
+    int _coint;
+    public void LoadData()
+    {
+        _coint = Data.ReadData.LoadData(GlobalKey.COINT, 0);
+    }
+
+    public void Prepare()
+    {
+        //set ui
+        _SetCointTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<ISetCointText>().ToList();
+        _SetCointTexts.ForEach(i => i.SetCointText(_coint));
+    }
 
     public void AddCoint (int cointAdd)
     {
-        coint += cointAdd;
+        _coint += cointAdd;
+        Data.WriteData.Save(GlobalKey.COINT, _coint);
+        _SetCointTexts.ForEach(i => i.SetCointText(_coint));
     }
 
     public void SubtractCoint(int cointSubtract)
     {
-        if (cointSubtract > coint)
+        if (cointSubtract > _coint)
         {
             //TO DO
         }
         else
         {
-            coint -= cointSubtract;
+            _coint -= cointSubtract;
+            Data.WriteData.Save(GlobalKey.COINT, _coint);
+            _SetCointTexts.ForEach(i => i.SetCointText(_coint));
         }
     }
+
+
 }

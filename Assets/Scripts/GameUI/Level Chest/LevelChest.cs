@@ -28,6 +28,7 @@ public class LevelChest : MonoBehaviour
     {
         if (LevelChestPanel.Instance.CountKey <= 0) return;
         coinRewardNumber = Random.Range(1, 200);
+        CurrencyManager.Instance.AddCoint(coinRewardNumber);
         iconCloseChest.SetActive(false);
         iconOpenChest.SetActive(true);
         coinReward.text = coinRewardNumber.ToString();

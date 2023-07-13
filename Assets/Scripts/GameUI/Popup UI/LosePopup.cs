@@ -21,36 +21,41 @@ public class LosePopup : MonoBehaviour
     {
         _homeButton.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
             _homePanel.SetActive(true);
             _gamePanel.SetActive(false);
             _losePopup.SetActive(false);
+            BoardManager.Instance.Clear();
         });
 
         _restartButton.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
             _losePopup.SetActive(false);
             GameManager.Instance.Replay();
         });
 
         _restartButton2.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
             _losePopup.SetActive(false);
             GameManager.Instance.Replay();
         });
 
         _watchAdButton.onClick.AddListener(delegate
         {
-
+            AudioManager.Instance.PlaySoundClickButton();
         });
 
         _cointPlayButton.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
 
         });
 
         _cointPlayButton2.onClick.AddListener(delegate
         {
-
+            AudioManager.Instance.PlaySoundClickButton();
         });
     }
 }

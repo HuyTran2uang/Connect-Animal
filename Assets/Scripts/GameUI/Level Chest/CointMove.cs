@@ -23,9 +23,7 @@ public class CointMove : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
-            float posX = UnityEngine.Random.Range(-.2f, .2f);
             GameObject cointIntance = Instantiate(cointPrefab, transform);
-            cointIntance.transform.position += new Vector3(posX, 0, 0);
             CointMovePos(cointIntance, i);
         }
     }

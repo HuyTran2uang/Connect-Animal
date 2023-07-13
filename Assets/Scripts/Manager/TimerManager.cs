@@ -5,6 +5,7 @@ using UnityEngine;
 public class TimerManager : MonoBehaviourSingleton<TimerManager>
 {
     private float _battleDuration;
+    public float BattleDuration => _battleDuration;
 
     public void SetTimer(int seconds)
     {
@@ -25,7 +26,10 @@ public class TimerManager : MonoBehaviourSingleton<TimerManager>
     {
         if (GameManager.Instance.BattleState != BattleState.None) return;
         if (_battleDuration > 0)
+        {
             _battleDuration -= Time.deltaTime;
+            TimeUI.Instance.CountDown(_battleDuration / 180);
+        }
         else
             TimeOut();
     }
