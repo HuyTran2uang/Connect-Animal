@@ -28,12 +28,14 @@ public class LosePopup : MonoBehaviour
 
         _restartButton.onClick.AddListener(delegate
         {
-
+            _losePopup.SetActive(false);
+            GameManager.Instance.Replay();
         });
 
         _restartButton2.onClick.AddListener(delegate
         {
-
+            _losePopup.SetActive(false);
+            GameManager.Instance.Replay();
         });
 
         _watchAdButton.onClick.AddListener(delegate
