@@ -63,4 +63,5 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
     }
 
     public void UnHint() => _items.ForEach(i => i.UnHint());
+    public void UnSelectAll() => _items.ForEach(i => i.UnSelect());
 }

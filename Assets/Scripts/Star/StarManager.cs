@@ -28,7 +28,7 @@ public class StarManager : MonoBehaviourSingleton<StarManager>, IReadData, IPrep
     public void AddStar(int quantity)
     {
         _quantityStarInLevel += quantity;
-        _changeStarTexts.ForEach(i => i.ChangeStarTextInLevel(_quantityStar));
+        _changeStarTexts.ForEach(i => i.ChangeStarTextInLevel(_quantityStarInLevel));
     }
 
     public void PassStarInLevelToData()
@@ -39,6 +39,6 @@ public class StarManager : MonoBehaviourSingleton<StarManager>, IReadData, IPrep
     public void ClearStarInLevel()
     {
         _quantityStarInLevel = 0;
-        _changeStarTexts.ForEach(i => i.ChangeStarTextInLevel(_quantityStar));
+        _changeStarTexts.ForEach(i => i.ChangeStarTextInLevel(_quantityStarInLevel));
     }
 }

@@ -7,7 +7,7 @@ public class Graph
 {
     private int _id;
     private List<Node> _nodes = new List<Node>();
-    private Dictionary<Couple, List<Vector2>> _pathDict = new Dictionary<Couple, List<Vector2>>();
+    private Dictionary<Couple, List<Vector2Int>> _pathDict = new Dictionary<Couple, List<Vector2Int>>();
 
     public Graph(int id)
     {
@@ -18,9 +18,9 @@ public class Graph
             for (int j = 0; j < _nodes.Count; j++)
             {
                 if (_nodes[j] == _nodes[i]) continue;
-                Couple key = new Couple(new Vector2Int(_nodes[j].X, _nodes[j].Y), new Vector2Int(_nodes[i].X, _nodes[i].Y));
+                Couple key = new Couple(new Vector2Int(_nodes[j].x, _nodes[j].y), new Vector2Int(_nodes[i].x, _nodes[i].y));
                 if (_pathDict.ContainsKey(key)) continue;
-                List<Vector2> points = BoardManager.Instance.GetPathFrom(_nodes[j], _nodes[i]);
+                List<Vector2Int> points = BoardManager.Instance.GetPathFrom(_nodes[j], _nodes[i]);
                 if (points == null || points.Count == 0) continue;
                 _pathDict.Add(key, points);
             }
@@ -29,17 +29,17 @@ public class Graph
 
     public int Id => _id;
 
-    public List<Vector2> GetPathFrom(Node nodeA, Node nodeB)
+    public List<Vector2Int> GetPathFrom(Node nodeA, Node nodeB)
     {
-        Couple key = new Couple(new Vector2Int(nodeA.X, nodeA.Y), new Vector2Int(nodeB.X, nodeB.Y));
+        Couple key = new Couple(new Vector2Int(nodeA.x, nodeA.y), new Vector2Int(nodeB.x, nodeB.y));
         return _pathDict.ContainsKey(key) ? _pathDict[key] : null;
     }
 
     public void RemovePathFrom(Node nodeA, Node nodeB)
     {
-        Couple key = new Couple(new Vector2Int(nodeA.X, nodeA.Y), new Vector2Int(nodeB.X, nodeB.Y));
+        Couple key = new Couple(new Vector2Int(nodeA.x, nodeA.y), new Vector2Int(nodeB.x, nodeB.y));
         _pathDict.Remove(key);
-        Couple keyReverse = new Couple(new Vector2Int(nodeB.X, nodeB.Y), new Vector2Int(nodeA.X, nodeA.Y));
+        Couple keyReverse = new Couple(new Vector2Int(nodeB.x, nodeB.y), new Vector2Int(nodeA.x, nodeA.y));
         _pathDict.Remove(keyReverse);
     }
 
@@ -47,6 +47,7 @@ public class Graph
 
     public Couple GetGraphKeyFirst()
     {
+        if (_pathDict.Count == 0) return null;
         return _pathDict.First().Key;
     }
 }

@@ -12,7 +12,7 @@ public class Bomb : MonoBehaviour
     {
         _row = row;
         _col = col;
-        Vector3 targetPos = BoardManager.Instance.Board[_row, _col].Pos;
+        Vector3 targetPos = BoardManager.Instance.GetPosFrom(row, col);
         MoveToTarget(targetPos);
     }
 

@@ -5,7 +5,7 @@ public class Matrix
 {
     private int _notBarrier = -1;
     private int[,] _matrix;
-    List<Vector2> _points = new List<Vector2>();
+    List<Vector2Int> _points = new List<Vector2Int>();
 
     public Matrix(int[,] matrix, int totalRows, int totalCols)
     {
@@ -66,12 +66,12 @@ public class Matrix
                     && CheckLineY(pMinY.x, pMaxY.x, y)
                     && CheckLineX(y, pMaxY.y, pMaxY.x))
             {
-                _points = new List<Vector2>()
+                _points = new List<Vector2Int>()
                 {
-                    new Vector2(pMinY.x, pMinY.y),
-                    new Vector2(pMinY.x, y),
-                    new Vector2(pMaxY.x, y),
-                    new Vector2(pMaxY.x, pMaxY.y),
+                    new Vector2Int(pMinY.x, pMinY.y),
+                    new Vector2Int(pMinY.x, y),
+                    new Vector2Int(pMaxY.x, y),
+                    new Vector2Int(pMaxY.x, pMaxY.y),
                 };
                 return y;
             }
@@ -95,12 +95,12 @@ public class Matrix
                     && CheckLineX(pMinX.y, pMaxX.y, x)
                     && CheckLineY(x, pMaxX.x, pMaxX.y))
             {
-                _points = new List<Vector2>()
+                _points = new List<Vector2Int>()
                 {
-                    new Vector2(pMinX.x, pMinX.y),
-                    new Vector2(x, pMinX.y),
-                    new Vector2(x, pMaxX.y),
-                    new Vector2(pMaxX.x, pMaxX.y),
+                    new Vector2Int(pMinX.x, pMinX.y),
+                    new Vector2Int(x, pMinX.y),
+                    new Vector2Int(x, pMaxX.y),
+                    new Vector2Int(pMaxX.x, pMaxX.y),
                 };
                 return x;
             }
@@ -133,12 +133,12 @@ public class Matrix
             {
                 if (CheckLineY(pMinY.x, pMaxY.x, y))
                 {
-                    _points = new List<Vector2>()
+                    _points = new List<Vector2Int>()
                     {
-                        new Vector2(pMinY.x, pMinY.y),
-                        new Vector2(pMinY.x, y),
-                        new Vector2(pMaxY.x, y),
-                        new Vector2(pMaxY.x, pMaxY.y),
+                        new Vector2Int(pMinY.x, pMinY.y),
+                        new Vector2Int(pMinY.x, y),
+                        new Vector2Int(pMaxY.x, y),
+                        new Vector2Int(pMaxY.x, pMaxY.y),
                     };
                     return y;
                 }
@@ -173,12 +173,12 @@ public class Matrix
             {
                 if (CheckLineX(pMinX.y, pMaxX.y, x))
                 {
-                    _points = new List<Vector2>()
+                    _points = new List<Vector2Int>()
                     {
-                        new Vector2(pMinX.x, pMinX.y),
-                        new Vector2(x, pMinX.y),
-                        new Vector2(x, pMaxX.y),
-                        new Vector2(pMaxX.x, pMaxX.y),
+                        new Vector2Int(pMinX.x, pMinX.y),
+                        new Vector2Int(x, pMinX.y),
+                        new Vector2Int(x, pMaxX.y),
+                        new Vector2Int(pMaxX.x, pMaxX.y),
                     };
                     return x;
                 }
@@ -188,19 +188,19 @@ public class Matrix
         return -1;
     }
 
-    public List<Vector2> GetPath(Point p1, Point p2)
+    public List<Vector2Int> GetPath(Point p1, Point p2)
     {
-        _points = new List<Vector2>();
+        _points = new List<Vector2Int>();
         if (!p1.Equals(p2) && _matrix[p1.x, p1.y] == _matrix[p2.x, p2.y])
         {
             if (p1.x == p2.x)
             {
                 if (CheckLineX(p1.y, p2.y, p1.x))
                 {
-                    _points = new List<Vector2>()
+                    _points = new List<Vector2Int>()
                     {
-                        new Vector2(p1.x, p1.y),
-                        new Vector2(p2.x, p2.y),
+                        new Vector2Int(p1.x, p1.y),
+                        new Vector2Int(p2.x, p2.y),
                     };
                     return _points;
                 }
@@ -209,10 +209,10 @@ public class Matrix
             {
                 if (CheckLineY(p1.x, p2.x, p1.y))
                 {
-                    _points = new List<Vector2>()
+                    _points = new List<Vector2Int>()
                     {
-                        new Vector2(p1.x, p1.y),
-                        new Vector2(p2.x, p2.y),
+                        new Vector2Int(p1.x, p1.y),
+                        new Vector2Int(p2.x, p2.y),
                     };
                     return _points;
                 }

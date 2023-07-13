@@ -15,5 +15,25 @@ public class InputManager : MonoBehaviour
         {
             ItemSpawner.Instance.DetectUp();
         }
+
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            BoardManager.Instance.Up();
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            BoardManager.Instance.Down();
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            BoardManager.Instance.Left();
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            BoardManager.Instance.Right();
+        }
     }
 }

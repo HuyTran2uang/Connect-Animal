@@ -20,6 +20,4 @@ public class StarUI : MonoBehaviour, IChangeStarText
         _starTextInLevel.text = level.ToString();
         _starTextReceived.text = level.ToString();
     }
-
-
 }

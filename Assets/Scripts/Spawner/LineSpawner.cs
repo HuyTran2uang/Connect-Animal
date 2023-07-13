@@ -36,7 +36,7 @@ public class LineSpawner : MonoBehaviourSingleton<LineSpawner>
         _lines.Clear();
     }
 
-    private string StepA2B(Vector2 p1, Vector2 p2)
+    private string StepA2B(Vector2Int p1, Vector2Int p2)
     {
         string path = "";
         if (p1.y == p2.y)
@@ -68,7 +68,7 @@ public class LineSpawner : MonoBehaviourSingleton<LineSpawner>
         return path;
     }
 
-    private string ConvertToStringPath(List<Vector2> points)
+    private string ConvertToStringPath(List<Vector2Int> points)
     {
         string path = "";
         for (int i = 0; i < points.Count - 1; i++)
@@ -76,9 +76,9 @@ public class LineSpawner : MonoBehaviourSingleton<LineSpawner>
         return path;
     }
 
-    public void Concatenate(List<Vector2> points)
+    public void Concatenate(List<Vector2Int> points)
     {
-        Vector3 curPos = BoardManager.Instance.Board[(int)points[0].x, (int)points[0].y].Pos;
+        Vector3 curPos = BoardManager.Instance.GetPosFrom(points[0].x, points[0].y);
         string path = ConvertToStringPath(points);
         foreach (char dir in path)
         {
