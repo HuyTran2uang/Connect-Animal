@@ -8,7 +8,7 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
     [SerializeField] Item _itemPrefab;
     [SerializeField] SpecialItem _specialItemPrefab;
     [SerializeField] List<GameObject> _specialIconPrefabs; 
-    List<Item> _items = new List<Item>();
+    [SerializeField] List<Item> _items = new List<Item>();
     Item _highLightItem;
 
     public Item GetItemSpawned(Vector3 pos)
@@ -32,6 +32,7 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
         if (_items.Count > 0)
             for (int i = _items.Count - 1; i >= 0; i--)
                 Destroy(_items[i].gameObject);
+        _items.Clear();
     }
 
     public void DetectDown()

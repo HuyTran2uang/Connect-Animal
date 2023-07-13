@@ -7,7 +7,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 {
     [SerializeField] private ItemSpriteStorage _itemSpriteStorage;
     private Node[,] _board;
-    private List<int> _values;
+    [SerializeField] private List<int> _values;
     private int _totalRows = 10, _totalCols = 7;
     private float _startX = 0, _startY = 0;
     private Item[,] _boardUI;
@@ -63,6 +63,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         Clear();
         _totalRows = config.TotalRows;//border null
         _totalCols = config.TotalCols;//border null
+        Debug.Log(config.TotalVals);
         SetListValues(config.TotalVals);
         _values.Shuffle();
         SpawnItems(_values, config.Grid);
@@ -76,7 +77,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     private void SetListValues(int totalVals)
     {
         _values = new List<int>();
-        for (int i = 0; i < totalVals; i++)
+        for (int i = 0; i < totalVals / 2 - 1; i++)
         {
             int val = UnityEngine.Random.Range(1, _itemSpriteStorage.Sprites.Count);
             _values.Add(val);
@@ -110,7 +111,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         {
             for (int col = 0; col < _totalCols; col++)
             {
-                if (col == 0 || col == _totalCols - 1 || row == 0 || row == _totalRows - 1 || grid[row, col] == 0)
+                if (grid[row, col] == 0)
                 {
                     _board[row, col] = null;
                     _boardUI[row, col] = null;
@@ -144,7 +145,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
             ItemSpawner.Instance.ClearItems();
         _boardUI = null;
         _board = null;
-        _values = null;
+        _values.Clear();
         _graphes = null;
         _matrix = null;
         _startNode = null;
@@ -241,12 +242,12 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
                 FXSpawner.Instance.LightningStrikeFX(_endNode.Pos);
                 if (_values.Count == 0) return;
                 RemoveRandomCouple();
-                //if (_values.Count == 0) return;
-                //RemoveRandomCouple();
-                //if (_values.Count == 0) return;
-                //RemoveRandomCouple();
-                //if (_values.Count == 0) return;
-                //RemoveRandomCouple();
+                if (_values.Count == 0) return;
+                RemoveRandomCouple();
+                if (_values.Count == 0) return;
+                RemoveRandomCouple();
+                if (_values.Count == 0) return;
+                RemoveRandomCouple();
                 break;
         }
     }
@@ -289,8 +290,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     {
         GameManager.Instance.Wait();
         Graph graph = GetGraphById(_startNode.Val);
-        //var points = GetPathFrom(_startNode, _endNode);
-        var points = _matrix.GetPath(new Point(_startNode.X, _startNode.Y), new Point(_endNode.X, _endNode.Y));
+        var points = GetPathFrom(_startNode, _endNode);
         if (points != null)
         {
             LineSpawner.Instance.Concatenate(points);
@@ -302,10 +302,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
                 this.SetGraphs();
             }
             if (!this.CheckExistCouple())
-            {
-                Debug.Log("No Exist Couple");
                 this.Remap();
-            }
         }
         else
             this.CoupleFail();
@@ -315,6 +312,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 
     private void CompletedLevel()
     {
+        Clear();
         GameManager.Instance.Win();
     }
 
@@ -379,7 +377,6 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 
     public void Remap()
     {
-        Debug.Log("Remap");
         UnSelectUIAll();
         CompletedConnection();
         GameManager.Instance.Wait();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Accessibility;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>
 {
@@ -37,8 +38,17 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         _battleState = BattleState.None;
     }
 
+    public void Continue()
+    {
+        Wait();
+        BoardManager.Instance.Clear();
+        Play();
+    }
+
     public void Replay()
     {
+        Wait();
+        BoardManager.Instance.Clear();
         Play();
     }
 
