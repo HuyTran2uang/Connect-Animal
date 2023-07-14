@@ -34,7 +34,6 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
                     ActiveWatchADS();
                 }
             }
-            Debug.Log(countKey);
         }
     }
 

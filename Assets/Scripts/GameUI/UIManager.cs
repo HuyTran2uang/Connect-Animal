@@ -44,5 +44,12 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     {
         //show popup lose
         _losePopup.SetActive(true);
+        if (TimerManager.Instance.TotalTime == 180)
+        {
+            _losePopup.GetComponent<LosePopup>().FirstLose();
+        } else
+        {
+            _losePopup.GetComponent<LosePopup>().AfterFirstLose();
+        }
     }
 }

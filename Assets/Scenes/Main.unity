@@ -3555,6 +3555,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 644057096}
   m_CullTransparentMesh: 1
+--- !u!1 &655322902
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 655322903}
+  - component: {fileID: 655322904}
+  m_Layer: 0
+  m_Name: Timer Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &655322903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655322902}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324173064}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &655322904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655322902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e625579816b2349a7d26075a0816d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &708287237
 GameObject:
   m_ObjectHideFlags: 0
@@ -6637,6 +6681,8 @@ Transform:
   - {fileID: 1570474117}
   - {fileID: 567639640}
   - {fileID: 898540375}
+  - {fileID: 1642757441}
+  - {fileID: 655322903}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8053,6 +8099,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _quantityText: {fileID: 1935689139}
+--- !u!1 &1642757440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1642757441}
+  - component: {fileID: 1642757442}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1642757441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642757440}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1324173064}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1642757442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642757440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5a06f17d67bded489738d3a40c7d0ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameState: 0
+  _battleState: 0
 --- !u!1 &1657318894
 GameObject:
   m_ObjectHideFlags: 0
@@ -9027,6 +9119,7 @@ MonoBehaviour:
   - {fileID: 1964427276}
   - {fileID: 3668751315831670391}
   - {fileID: 549888693218282090}
+  - {fileID: 1359577857}
 --- !u!1 &1900207685
 GameObject:
   m_ObjectHideFlags: 0
@@ -12490,6 +12583,8 @@ MonoBehaviour:
   _losePopup: {fileID: 287698321848036409}
   _homePanel: {fileID: 1539590894}
   _gamePanel: {fileID: 1657318894}
+  _playCointButton: {fileID: 7257589058693250701}
+  _adCoint: {fileID: 4462718485293897645}
   _homeButton: {fileID: 1567477752582382432}
   _restartButton: {fileID: 8266530862437621932}
   _restartButton2: {fileID: 9035014311882682070}
