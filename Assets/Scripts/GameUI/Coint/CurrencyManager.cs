@@ -26,17 +26,20 @@ public class CurrencyManager : MonoBehaviourSingleton<CurrencyManager>, IPrepare
         _SetCointTexts.ForEach(i => i.SetCointText(_coint));
     }
 
-    public void SubtractCoint(int cointSubtract)
+    public bool SubtractCoint(int cointSubtract)
     {
         if (cointSubtract > _coint)
         {
             //TO DO
+            return false;
         }
         else
         {
             _coint -= cointSubtract;
             Data.WriteData.Save(GlobalKey.COINT, _coint);
             _SetCointTexts.ForEach(i => i.SetCointText(_coint));
+
+            return true;
         }
     }
 

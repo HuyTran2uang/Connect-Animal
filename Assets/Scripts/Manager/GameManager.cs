@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
     public void ResumeGame()
     {
+        _gameState = GameState.OnBattle;
         _battleState = BattleState.None;
     }
 
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         AudioManager.Instance.PlaySoundWinButton();
         LevelManager.Instance.LevelUp();
         StarManager.Instance.PassStarInLevelToData();
+        TimerManager.Instance.ResetTotalTime();
         UIManager.Instance.Win();
         Debug.Log("Win");
     }
