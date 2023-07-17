@@ -9,7 +9,7 @@ public class FactoryProductData
     {
         PackageCoin package = new PackageCoin(coin);
         ProductData product = new ProductData(id, productType, package);
-        //ui
+        PackageUISpawner.Instance.SpawnProductCoinPackageUI(id, package, product.Metadata);
         return product;
     }
 
@@ -17,7 +17,7 @@ public class FactoryProductData
     {
         PackageNoAds package = new PackageNoAds();
         ProductData product = new ProductData(id, productType, package);
-        //ui
+        PackageUISpawner.Instance.SpawnProductNoAdsPackageUI(id, package, product.Metadata);
         return product;
     }
 
@@ -25,7 +25,16 @@ public class FactoryProductData
     {
         BigPackage package = new BigPackage(coin, bomb, hint, remap, quantityDaysNoAds);
         ProductData product = new ProductData(id, productType, package);
-        //ui
+        PackageUISpawner.Instance.SpawnProductBigPackageUI(id, package, product.Metadata);
         return product;
+    }
+}
+
+public class FactoryPackageWatchAds
+{
+    public static void CreatePackageCoin(int coin)
+    {
+        PackageCoin package = new PackageCoin(coin);
+        PackageUISpawner.Instance.SpawnWatchAdsBuyCoinPackageUI(package);
     }
 }

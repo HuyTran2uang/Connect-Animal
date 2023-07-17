@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class CurrencyManager : MonoBehaviourSingleton<CurrencyManager>, IPrepareGame, IReadData
 {
-    List<ISetCointText> _SetCointTexts = new List<ISetCointText>();
+    List<ICointText> _setCointTexts = new List<ICointText>();
     int _coint;
+
     public void LoadData()
     {
         _coint = Data.ReadData.LoadData(GlobalKey.COINT, 0);
@@ -15,15 +16,15 @@ public class CurrencyManager : MonoBehaviourSingleton<CurrencyManager>, IPrepare
     public void Prepare()
     {
         //set ui
-        _SetCointTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<ISetCointText>().ToList();
-        _SetCointTexts.ForEach(i => i.SetCointText(_coint));
+        _setCointTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<ICointText>().ToList();
+        _setCointTexts.ForEach(i => i.SetCointText(_coint));
     }
 
     public void AddCoint (int cointAdd)
     {
         _coint += cointAdd;
         Data.WriteData.Save(GlobalKey.COINT, _coint);
-        _SetCointTexts.ForEach(i => i.SetCointText(_coint));
+        _setCointTexts.ForEach(i => i.SetCointText(_coint));
     }
 
     public bool SubtractCoint(int cointSubtract)
@@ -37,7 +38,7 @@ public class CurrencyManager : MonoBehaviourSingleton<CurrencyManager>, IPrepare
         {
             _coint -= cointSubtract;
             Data.WriteData.Save(GlobalKey.COINT, _coint);
-            _SetCointTexts.ForEach(i => i.SetCointText(_coint));
+            _setCointTexts.ForEach(i => i.SetCointText(_coint));
 
             return true;
         }

@@ -517,10 +517,10 @@ TextureImporter:
       name: game-assets-0_21
       rect:
         serializedVersion: 2
-        x: 938
+        x: 941
         y: 0
-        width: 964
-        height: 208
+        width: 959
+        height: 200
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

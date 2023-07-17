@@ -622,10 +622,10 @@ TextureImporter:
       name: game-assets-3_29
       rect:
         serializedVersion: 2
-        x: 1
-        y: 650
-        width: 268
-        height: 108
+        x: 2
+        y: 652
+        width: 267
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -769,10 +769,10 @@ TextureImporter:
       name: game-assets-3_37
       rect:
         serializedVersion: 2
-        x: 1
-        y: 538
-        width: 271
-        height: 110
+        x: 2
+        y: 541
+        width: 267
+        height: 105
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}

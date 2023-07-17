@@ -5,26 +5,38 @@ using UnityEngine.UI;
 
 public class GamePanel : MonoBehaviour
 {
-    [SerializeField] Button _bombButton, _hintButton, _remapButton;
+    [SerializeField] Button _bombButton, _hintButton, _remapButton, _coinButton;
+    [SerializeField] StorePanel _storePanel;
+    [SerializeField] NotEnoughCoinPopup _notEnoughCoinPopup;
 
     private void Awake()
     {
         _bombButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            BombManager.Instance.Throw();
+            if(!BombManager.Instance.Throw())
+                _notEnoughCoinPopup.gameObject.SetActive(true);
         });
 
         _hintButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            HintManager.Instance.Hint();
+            if(!HintManager.Instance.Hint())
+                _notEnoughCoinPopup.gameObject.SetActive(true);
         });
 
         _remapButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            RemapManager.Instance.Remap();
+            if(!RemapManager.Instance.Remap())
+                _notEnoughCoinPopup.gameObject.SetActive(true);
+        });
+
+        _coinButton.onClick.AddListener(delegate
+        {
+            AudioManager.Instance.PlaySoundClickButton();
+            _storePanel.gameObject.SetActive(true);
+            GameManager.Instance.Wait();
         });
     }
 }

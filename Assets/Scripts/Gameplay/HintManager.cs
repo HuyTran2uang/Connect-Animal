@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class HintManager : MonoBehaviourSingleton<HintManager>, IReadData, IPrepareGame
 {
     private int _totalHintTimes;
     private bool _isHint;
+    List<IHintText> _hintTexts = new List<IHintText>();
 
     public void LoadData()
     {
@@ -15,19 +17,23 @@ public class HintManager : MonoBehaviourSingleton<HintManager>, IReadData, IPrep
     public void Prepare()
     {
         HintUI.Instance.ChangeQuantity(_totalHintTimes);
+        _hintTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<IHintText>().ToList();
+        _hintTexts.ForEach(i => i.SetQuantityText(_totalHintTimes));
     }
 
-    public void Hint()
+    public bool Hint()
     {
-        if (_totalHintTimes == 0) return;
-        if (_isHint) return;
+        if (_totalHintTimes == 0) return false;
+        if (_isHint) return false;
         _isHint = true;
         _totalHintTimes--;
         Data.WriteData.Save(GlobalKey.TOTAL_HINT_TIMES, _totalHintTimes);
         HintUI.Instance.ChangeQuantity(_totalHintTimes);
+        _hintTexts.ForEach(i => i.SetQuantityText(_totalHintTimes));
         Couple couple = BoardManager.Instance.GetFirstGraphExistCouple().GetGraphKeyFirst();
         BoardManager.Instance.BoardUI[couple.Coord1.x, couple.Coord1.y].Hint();
         BoardManager.Instance.BoardUI[couple.Coord2.x, couple.Coord2.y].Hint();
+        return true;
     }
 
     public void UnHint()
@@ -42,5 +48,6 @@ public class HintManager : MonoBehaviourSingleton<HintManager>, IReadData, IPrep
         _totalHintTimes += quantity;
         Data.WriteData.Save(GlobalKey.TOTAL_HINT_TIMES, _totalHintTimes);
         HintUI.Instance.ChangeQuantity(_totalHintTimes);
+        _hintTexts.ForEach(i => i.SetQuantityText(_totalHintTimes));
     }
 }

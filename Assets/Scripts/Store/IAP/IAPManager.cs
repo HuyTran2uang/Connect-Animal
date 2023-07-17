@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
 using UnityEngine.SceneManagement;
+using static UnityEditor.ObjectChangeEventStream;
 
 public class IAPManager : MonoBehaviourSingleton<IAPManager>, IDetailedStoreListener, IPrepareGame
 {
@@ -37,7 +38,7 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>, IDetailedStoreList
         }
     }
 
-    internal ProductMetadata GetMetaData(string id)
+    public ProductMetadata GetMetaData(string id)
     {
         return m_StoreController.products.WithID(id).metadata;
     }
@@ -53,22 +54,28 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>, IDetailedStoreList
 
         // Create a builder, first passing in a suite of Unity provided stores.
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+        builder.AddProduct(IAP_BIG_PACK_1, ProductType.Consumable);
+        builder.AddProduct(IAP_BIG_PACK_2, ProductType.Consumable);
+        builder.AddProduct(IAP_BIG_PACK_3, ProductType.Consumable);
+        builder.AddProduct(IAP_PACK_1, ProductType.Consumable);
+        builder.AddProduct(IAP_PACK_2, ProductType.Consumable);
+        builder.AddProduct(IAP_PACK_3, ProductType.Consumable);
+        builder.AddProduct(IAP_REMOVE_ADS, ProductType.Consumable);
+        //---------------------
+        UnityPurchasing.Initialize(this, builder);
+        //----------------------
         _productDataDict.Add(IAP_BIG_PACK_1, FactoryProductData.CreateProductBigPackage(IAP_BIG_PACK_1, ProductType.Consumable, 1000, 5, 5, 5, 3));
         _productDataDict.Add(IAP_BIG_PACK_2, FactoryProductData.CreateProductBigPackage(IAP_BIG_PACK_2, ProductType.Consumable, 3000, 15, 15, 15, 9));
         _productDataDict.Add(IAP_BIG_PACK_3, FactoryProductData.CreateProductBigPackage(IAP_BIG_PACK_3, ProductType.Consumable, 10000, 40, 40, 40, 21));
-        _productDataDict.Add(IAP_PACK_1, FactoryProductData.CreateProductPakageCoin(IAP_PACK_3, ProductType.Consumable, 2000));
-        _productDataDict.Add(IAP_PACK_2, FactoryProductData.CreateProductPakageCoin(IAP_PACK_3, ProductType.Consumable, 6000));
+        //
+        FactoryPackageWatchAds.CreatePackageCoin(200);
+        //
+        _productDataDict.Add(IAP_PACK_1, FactoryProductData.CreateProductPakageCoin(IAP_PACK_1, ProductType.Consumable, 2000));
+        _productDataDict.Add(IAP_PACK_2, FactoryProductData.CreateProductPakageCoin(IAP_PACK_2, ProductType.Consumable, 6000));
         _productDataDict.Add(IAP_PACK_3, FactoryProductData.CreateProductPakageCoin(IAP_PACK_3, ProductType.Consumable, 14000));
+        //
         _productDataDict.Add(IAP_REMOVE_ADS, FactoryProductData.CreateProductPackageNoAds(IAP_REMOVE_ADS, ProductType.Consumable));
-
-        foreach (var productData in _productDataDict.Values)
-        {
-            builder.AddProduct(productData.Id, productData.ProductType);   
-        }
-
-        UnityPurchasing.Initialize(this, builder);
     }
-
 
     private bool IsInitialized()
     {

@@ -17,6 +17,7 @@ public class LosePopup : MonoBehaviour
     [SerializeField] Button _cointPlayButton;
     [SerializeField] Button _cointPlayButton2;
     [SerializeField] TMP_Text coint;
+    [SerializeField] NotEnoughCoinPopup _notEnoughCoinPopup;
 
     private void Awake()
     {
@@ -62,6 +63,10 @@ public class LosePopup : MonoBehaviour
                 GameManager.Instance.ResumeGame();
                 _losePopup.SetActive(false);
             }
+            else
+            {
+                _notEnoughCoinPopup.gameObject.SetActive(true);
+            }
         });
 
         _cointPlayButton2.onClick.AddListener(delegate
@@ -72,6 +77,10 @@ public class LosePopup : MonoBehaviour
                 TimerManager.Instance.IncreaseTime(60);
                 GameManager.Instance.ResumeGame();
                 _losePopup.SetActive(false);
+            }
+            else
+            {
+                _notEnoughCoinPopup.gameObject.SetActive(true);
             }
         });
     }

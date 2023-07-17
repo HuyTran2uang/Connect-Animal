@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StorePanel : MonoBehaviour
+public class NotEnoughCoinPopup : MonoBehaviour
 {
     [SerializeField] Button _closeButton;
 
@@ -14,6 +14,11 @@ public class StorePanel : MonoBehaviour
             AudioManager.Instance.PlaySoundClickButton();
             gameObject.SetActive(false);
         });
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.Wait();
     }
 
     private void OnDisable()
