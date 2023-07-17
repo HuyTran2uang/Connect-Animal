@@ -69,7 +69,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
         StarManager.Instance.PassStarInLevelToData();
         TimerManager.Instance.ResetTotalTime();
         UIManager.Instance.Win();
-        Debug.Log("Win");
     }
 
     public void Lose()
@@ -78,7 +77,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
         Wait();
         AudioManager.Instance.PlaySoundLoseButton();
         UIManager.Instance.Lose();
-        Debug.Log("Lose");
     }
 }
 

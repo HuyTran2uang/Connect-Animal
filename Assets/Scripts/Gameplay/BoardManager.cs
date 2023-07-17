@@ -69,10 +69,10 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     public void CreateBoard(LevelConfig config)
     {
         Clear();
+        TimerManager.Instance.ResetAutoHintTimer();
         _quantityWhenChangeMap = new List<int>() { 10, 14, 20, 28, 34, 40, 44, 50 };
         _totalRows = config.TotalRows;//border null
         _totalCols = config.TotalCols;//border null
-        Debug.Log(config.TotalVals);
         SetListValues(config.TotalVals);
         _ids.Shuffle();
         SpawnItems(_ids, config.Grid);
@@ -287,6 +287,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         _endNode = null;
         DOVirtual.DelayedCall(.1f, LineSpawner.Instance.ClearLines);
         HintManager.Instance.UnHint();
+        TimerManager.Instance.ResetAutoHintTimer();
         GridMove();
         if (!CheckCompletedMap()) return;
         CompletedLevel();
