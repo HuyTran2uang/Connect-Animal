@@ -23,6 +23,10 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     public Item[,] BoardUI => _boardUI;
 
     public Vector3 GetPosFrom(int row, int col) => _posGrid[row, col];
+    //movement
+    int _iMove;
+    List<int> _quantityWhenChangeMap = new List<int>() { 10, 14, 20, 28, 34, 40, 44, 50 };
+    //
 
     private void SetPosCam()
     {
@@ -65,6 +69,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     public void CreateBoard(LevelConfig config)
     {
         Clear();
+        _quantityWhenChangeMap = new List<int>() { 10, 14, 20, 28, 34, 40, 44, 50 };
         _totalRows = config.TotalRows;//border null
         _totalCols = config.TotalCols;//border null
         Debug.Log(config.TotalVals);
@@ -558,12 +563,10 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         this.SetGraphs();
     }
 
-    int _iMove;
-    List<int> _quantityWhenChangeMap = new List<int>() { 10, 14, 20, 28, 34, 40, 44, 50 };
-
     public void GridMove()
     {
         if (!_quantityWhenChangeMap.Contains(_ids.Count)) return;
+        _quantityWhenChangeMap.Remove(_ids.Count);
         switch (_iMove)
         {
             case 0:
@@ -583,6 +586,8 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
                 _iMove = 0;
                 break;
         }
+        if (!CheckExistCouple())
+            Remap();
     }
     #endregion
 }

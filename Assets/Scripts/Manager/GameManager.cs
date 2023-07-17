@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Accessibility;
 
-public class GameManager : MonoBehaviourSingleton<GameManager>
+public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 {
     private GameState _gameState;
     private BattleState _battleState;
 
     public GameState GameState => _gameState;
     public BattleState BattleState => _battleState;
+    GamePanel _gamePanel;
+
+    public void Prepare()
+    {
+        _gamePanel = FindObjectOfType<GamePanel>(true);
+    }
 
     public void Play()
     {
@@ -18,6 +24,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         TimerManager.Instance.SetTimer(180);
         StarManager.Instance.ClearStarInLevel();
         BoardManager.Instance.CreateBoard(LevelConfigConverter.GetLevelConfig(LevelManager.Instance.Level));
+        _gamePanel.SetLevelPlaying(LevelManager.Instance.Level);
         ResumeGame();
     }
 
