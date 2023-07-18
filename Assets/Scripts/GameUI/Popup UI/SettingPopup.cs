@@ -53,7 +53,7 @@ public class SettingPopup : MonoBehaviour
         _tutorialButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-
+            TutorialManager.Instance.StartTutorial();
         });
     }
     private void OnEnable()

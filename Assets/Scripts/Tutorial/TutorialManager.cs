@@ -5,12 +5,15 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviourSingleton<TutorialManager>, IReadData ,IPrepareGame, IAfterPrepareGame
 {
     TutorialPanel _tutorialPanel;
-    bool _isOpening;
+    bool _isOpening, _isPassedLevelTutorial;
     int _iTutorial;
+
+    public bool IsPassedLevelTutorial => _isPassedLevelTutorial;
 
     public void LoadData()
     {
-        _isOpening = Data.ReadData.LoadData(GlobalKey.TUTORIALOPENING, _isOpening);
+        _isOpening = Data.ReadData.LoadData(GlobalKey.TUTORIAL_OPENING, true);
+        _isPassedLevelTutorial = Data.ReadData.LoadData(GlobalKey.LEVEL_TUTORIAL_PASSED, false);
     }
 
     public void Prepare()
@@ -20,13 +23,14 @@ public class TutorialManager : MonoBehaviourSingleton<TutorialManager>, IReadDat
 
     public void AfterPrepareGame()
     {
-        if (_isOpening) return;
+        if (!_isOpening) return;
         StartTutorial();
     }
 
     public void StartTutorial()
     {
-        _isOpening = false;
+        _isOpening = true;
+        Data.WriteData.Save(GlobalKey.TUTORIAL_OPENING, _isOpening);
         _iTutorial = 0;
         NextTutorial();
     }
@@ -46,11 +50,24 @@ public class TutorialManager : MonoBehaviourSingleton<TutorialManager>, IReadDat
                 _tutorialPanel.OpenThirdTutorial();
                 break;
             case 3:
-                _isOpening = true;
+                _isOpening = false;
+                Data.WriteData.Save(GlobalKey.TUTORIAL_OPENING, _isOpening);
                 _tutorialPanel.gameObject.SetActive(false);
                 _tutorialPanel.CloseTutorials();
                 break;
         }
         _iTutorial++;
+    }
+
+    public void PassLevelTutorial()
+    {
+        _tutorialPanel.CompletedLevelTutorial();
+        _isPassedLevelTutorial = true;
+        Data.WriteData.Save(GlobalKey.LEVEL_TUTORIAL_PASSED, _isPassedLevelTutorial);
+    }
+
+    public void OpenLevelTutorial()
+    {
+        _tutorialPanel.OpenLevelTutorial();
     }
 }

@@ -18,5 +18,6 @@ public class GlobalKey
     public static string STAR = "Star";
 
     public static string VIBRATION = "Vibration";
-    public static string TUTORIALOPENING = "TutorialOpening";
+    public static string TUTORIAL_OPENING = "TutorialOpening";
+    public static string LEVEL_TUTORIAL_PASSED = "LevelTutorialPassed";
 }

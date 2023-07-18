@@ -16,6 +16,7 @@ public class HomePanel : MonoBehaviour
             GameManager.Instance.Play();
             UIManager.Instance.OnBattle();
         });
+
         _coinButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();

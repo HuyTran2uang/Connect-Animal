@@ -45,7 +45,7 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
 #endif
         if (GameManager.Instance.GameState != GameState.OnBattle) return;
         if (GameManager.Instance.BattleState != BattleState.None) return;
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), -Vector2.up);
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.forward);
         _highLightItem = hit.collider?.GetComponent<Item>();
         _highLightItem?.HighLight();
     }
@@ -55,7 +55,7 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
         if (_highLightItem == null) return;
         if (GameManager.Instance.GameState != GameState.OnBattle) return;
         if (GameManager.Instance.BattleState != BattleState.None) return;
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), -Vector2.up);
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), transform.forward);
         Item item = hit.collider?.GetComponent<Item>();
         if (item == _highLightItem)
             _highLightItem.Select();

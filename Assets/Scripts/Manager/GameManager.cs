@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     public void Play()
     {
+        if(!TutorialManager.Instance.IsPassedLevelTutorial)
+        {
+            Debug.Log("Level tutorial");
+            TutorialManager.Instance.OpenLevelTutorial();
+            return;
+        }
         Wait();
         _gameState = GameState.OnBattle;
         TimerManager.Instance.SetTimer(180);

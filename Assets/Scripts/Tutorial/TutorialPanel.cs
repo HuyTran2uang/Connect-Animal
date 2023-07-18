@@ -9,6 +9,7 @@ public class TutorialPanel : MonoBehaviour
     [SerializeField] TheFirstTutorialPanel _theFirstTutorialPanel;
     [SerializeField] TheSecondTutorialPanel _theSecondTutorialPanel;
     [SerializeField] TheThirdTutorialPanel _theThirdTutorialPanel;
+    [SerializeField] LevelTutorial _levelTutorial;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public class TutorialPanel : MonoBehaviour
 
     public void OpenFirstTutorial()
     {
+        _nextButton.gameObject.SetActive(true);
         _theFirstTutorialPanel.StartTutorial();
     }
 
@@ -38,8 +40,22 @@ public class TutorialPanel : MonoBehaviour
 
     public void CloseTutorials()
     {
-        _theFirstTutorialPanel.gameObject.SetActive(false);
-        _theSecondTutorialPanel.gameObject.SetActive(false);
-        _theThirdTutorialPanel.gameObject.SetActive(false);
+        _theFirstTutorialPanel.Done();
+        _theSecondTutorialPanel.Done();
+        _theThirdTutorialPanel.Done();
+    }
+
+    public void OpenLevelTutorial()
+    {
+        CloseTutorials();
+        _nextButton.gameObject.SetActive(false);
+        _levelTutorial.StartTutorial();
+        gameObject.SetActive(true);
+    }
+
+    public void CompletedLevelTutorial()
+    {
+        gameObject.SetActive(false);
+        _levelTutorial.gameObject.SetActive(false);
     }
 }
