@@ -13,9 +13,9 @@ public class SettingPopup : MonoBehaviour
     [SerializeField] Button _vibrateButton;
     [SerializeField] Button _restartButton;
     [SerializeField] GameObject _settingPopup;
-    [SerializeField] GameObject _gamePanel;
-    [SerializeField] GameObject _homePanel;
-    [SerializeField] GameObject _ratePopup;
+    [SerializeField] GamePanel _gamePanel;
+    [SerializeField] HomePanel _homePanel;
+    [SerializeField] RatePopupUI _ratePopup;
 
     private void Awake()
     {
@@ -28,8 +28,8 @@ public class SettingPopup : MonoBehaviour
         _homeButton.onClick.AddListener(delegate 
         {
             AudioManager.Instance.PlaySoundClickButton();
-            _homePanel.SetActive(true);
-            _gamePanel.SetActive(false);
+            _homePanel.gameObject.SetActive(true);
+            _gamePanel.gameObject.SetActive(false);
             _settingPopup.SetActive(false);
             GameManager.Instance.GoToMenuFromBattle();
         });
@@ -47,7 +47,7 @@ public class SettingPopup : MonoBehaviour
         _rateButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            _ratePopup.SetActive(true);
+            _ratePopup.gameObject.SetActive(true);
         });
 
         _soundButton.onClick.AddListener(delegate

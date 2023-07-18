@@ -8,9 +8,9 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     [SerializeField] Button _settingButton;
     [SerializeField] HomePanel _homePanel;
     [SerializeField] GamePanel _gamePanel;
-    [SerializeField] GameObject _winPopup;
-    [SerializeField] GameObject _losePopup;
-    [SerializeField] GameObject _settingPopup;
+    [SerializeField] WinPopup _winPopup;
+    [SerializeField] LosePopup _losePopup;
+    [SerializeField] SettingPopup _settingPopup;
 
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
         {
             AudioManager.Instance.PlaySoundClickButton();
             //show setting popup
-            _settingPopup.SetActive(true);
+            _settingPopup.gameObject.SetActive(true);
         });
     }
 
@@ -37,13 +37,13 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
     public void Win()
     {
         //show popup win
-        _winPopup.SetActive(true);
+        _winPopup.gameObject.SetActive(true);
     }
 
     public void Lose()
     {
         //show popup lose
-        _losePopup.SetActive(true);
+        _losePopup.gameObject.SetActive(true);
         if (TimerManager.Instance.TotalTime == 180)
         {
             _losePopup.GetComponent<LosePopup>().FirstLose();
