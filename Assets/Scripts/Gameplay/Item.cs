@@ -10,7 +10,7 @@ public class Item : MonoBehaviour
     [SerializeField] protected int _row, _col, _id;
     [SerializeField] GameObject _border;
     Tweener _highLight, _hint;
-    float _originalScale = .7f, _hintScale = .4f, _highLightScale = .8f;
+    float _originalScale = .7f, _hintScale = .6f, _highLightScale = .8f;
     bool _isHint;
 
     private void Awake()
