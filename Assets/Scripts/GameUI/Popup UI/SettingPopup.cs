@@ -11,9 +11,11 @@ public class SettingPopup : MonoBehaviour
     [SerializeField] Button _tutorialButton;
     [SerializeField] Button _soundButton;
     [SerializeField] Button _vibrateButton;
+    [SerializeField] Button _restartButton;
     [SerializeField] GameObject _settingPopup;
     [SerializeField] GameObject _gamePanel;
     [SerializeField] GameObject _homePanel;
+    [SerializeField] GameObject _ratePopup;
 
     private void Awake()
     {
@@ -29,13 +31,23 @@ public class SettingPopup : MonoBehaviour
             _homePanel.SetActive(true);
             _gamePanel.SetActive(false);
             _settingPopup.SetActive(false);
-            BoardManager.Instance.Clear();
+            GameManager.Instance.GoToMenuFromBattle();
+        });
+
+        _restartButton.onClick.AddListener(delegate
+        {
+            AudioManager.Instance.PlaySoundClickButton();
+            ApplovinManager.Instance.ShowRewardedAd(delegate
+            {
+                _settingPopup.SetActive(false);
+                GameManager.Instance.Replay();
+            });
         });
 
         _rateButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-
+            _ratePopup.SetActive(true);
         });
 
         _soundButton.onClick.AddListener(delegate
@@ -59,9 +71,26 @@ public class SettingPopup : MonoBehaviour
     private void OnEnable()
     {
         GameManager.Instance.Wait();
+        if (GameManager.Instance.GameState == GameState.None)
+        {
+            _rateButton.gameObject.SetActive(true);
+            _restartButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            _rateButton.gameObject.SetActive(false);
+            _restartButton.gameObject.SetActive(true);
+        }
     }
     private void OnDisable()
     {
-        GameManager.Instance.ResumeGame();
+        if (GameManager.Instance.GameState == GameState.None)
+        {
+            return;
+        } 
+        else
+        {
+            GameManager.Instance.ResumeGame();
+        }
     }
 }

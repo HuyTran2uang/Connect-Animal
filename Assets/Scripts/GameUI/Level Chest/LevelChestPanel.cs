@@ -40,7 +40,13 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
     private void Awake()
     {
         backButton.onClick.AddListener(Back);
-        watchAdsButton.onClick.AddListener(WatchADSDone);
+        watchAdsButton.onClick.AddListener(delegate
+        {
+            ApplovinManager.Instance.ShowRewardedAd(delegate
+            {
+                WatchADSDone();
+            });
+        });
         foreach (LevelChest levelChest in levelChests)
         {
             levelChest.ButtonChest.onClick.AddListener(CheckOpenedChest);
@@ -54,6 +60,7 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
     public void Back()
     {
         levelChestPopup.SetActive(false);
+        GameManager.Instance.Continue();
     }
     public void ActiveWatchADS()
     {
