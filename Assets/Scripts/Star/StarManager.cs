@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StarManager : MonoBehaviourSingleton<StarManager>, IReadData, IPrepareGame
 {
-    private int _quantityStar, _quantityStarInLevel;
+    [SerializeField] private int _quantityStar, _quantityStarInLevel;
     List<IChangeStarText> _changeStarTexts = new List<IChangeStarText>();
 
     public void LoadData()

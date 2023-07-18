@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
             TutorialManager.Instance.OpenLevelTutorial();
             return;
         }
+        if (LevelManager.Instance.Level == 32)
+        {
+            EvaluateManager.Instance.Open();
+        }
         Wait();
         _gameState = GameState.OnBattle;
         TimerManager.Instance.SetTimer(180);
@@ -72,9 +76,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
         Wait();
         AudioManager.Instance.PlaySoundWinButton();
         LevelManager.Instance.LevelUp();
+        if (LevelManager.Instance.Level % 10 == 0)
+        {
+            ChestManager.Instance.OpenLevelChest();
+        }
+        else
+        {
+            UIManager.Instance.Win();
+        }
         StarManager.Instance.PassStarInLevelToData();
         TimerManager.Instance.ResetTotalTime();
-        UIManager.Instance.Win();
     }
 
     public void Lose()

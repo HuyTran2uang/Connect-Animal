@@ -6,9 +6,10 @@ using TMPro;
 
 public class GamePanel : MonoBehaviour
 {
-    [SerializeField] Button _bombButton, _hintButton, _remapButton, _coinButton;
+    [SerializeField] Button _bombButton, _hintButton, _remapButton, _coinButton, _giftBoxButton;
     [SerializeField] StorePanel _storePanel;
     [SerializeField] NotEnoughCoinPopup _notEnoughCoinPopup;
+    [SerializeField] GiftBoxPopupUI _giftBoxPopup;
     [SerializeField] TMP_Text _levelText;
 
     private void Awake()
@@ -39,6 +40,12 @@ public class GamePanel : MonoBehaviour
             AudioManager.Instance.PlaySoundClickButton();
             _storePanel.gameObject.SetActive(true);
             GameManager.Instance.Wait();
+        });
+
+        _giftBoxButton.onClick.AddListener(delegate
+        {
+            AudioManager.Instance.PlaySoundClickButton();
+            _giftBoxPopup.gameObject.SetActive(true);
         });
     }
 

@@ -101,6 +101,5 @@ public class SpinWheelPopup : MonoBehaviour
     {
         _spinWheel.transform.eulerAngles = Vector3.zero;
         _countReward = 0;
-
     }
 }

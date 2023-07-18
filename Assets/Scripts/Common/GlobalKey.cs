@@ -12,10 +12,12 @@ public class GlobalKey
         Sound
     }
     public static string LEVEL = "Level";
+    public static string GIFTBOXTIME = "GifBoxTime";
     public static string TOTAL_HINT_TIMES = "TotalHintTimes";
     public static string TOTAL_BOMB_TIMES = "TotalBombTimes";
     public static string TOTAL_REMAP_TIMES = "TotalRemapTimes";
     public static string STAR = "Star";
+    public static string EVALUATE = "Evaluate";
 
     public static string VIBRATION = "Vibration";
     public static string TUTORIAL_OPENING = "TutorialOpening";
