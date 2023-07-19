@@ -21,10 +21,20 @@ public class HintManager : MonoBehaviourSingleton<HintManager>, IReadData, IPrep
         _hintTexts.ForEach(i => i.SetQuantityText(_totalHintTimes));
     }
 
-    public bool Hint()
+    public void Hint()
     {
-        if (_totalHintTimes == 0) return false;
-        if (_isHint) return false;
+        if (_isHint) return;
+        if (_totalHintTimes == 0)
+        {
+            if (CurrencyManager.Instance.SubtractCoint(150))
+            {
+                _totalHintTimes++;
+            }
+            else
+            {
+                return;
+            }
+        }
         _isHint = true;
         _totalHintTimes--;
         Data.WriteData.Save(GlobalKey.TOTAL_HINT_TIMES, _totalHintTimes);
@@ -33,7 +43,6 @@ public class HintManager : MonoBehaviourSingleton<HintManager>, IReadData, IPrep
         Couple couple = BoardManager.Instance.GetFirstGraphExistCouple().GetGraphKeyFirst();
         BoardManager.Instance.BoardUI[couple.Coord1.x, couple.Coord1.y].Hint();
         BoardManager.Instance.BoardUI[couple.Coord2.x, couple.Coord2.y].Hint();
-        return true;
     }
 
     public void HintFree()

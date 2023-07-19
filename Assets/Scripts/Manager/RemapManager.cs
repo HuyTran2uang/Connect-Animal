@@ -20,15 +20,24 @@ public class RemapManager : MonoBehaviourSingleton<RemapManager>, IReadData, IPr
         _remapTexts.ForEach(i => i.SetQuantityText(_totalRemapTimes));
     }
 
-    public bool Remap()
+    public void Remap()
     {
-        if (_totalRemapTimes == 0) return false;
+        if (_totalRemapTimes == 0)
+        {
+            if (CurrencyManager.Instance.SubtractCoint(150))
+            {
+                _totalRemapTimes++;
+            }
+            else
+            {
+                return;
+            }
+        }
         _totalRemapTimes--;
         BoardManager.Instance.Remap();
         Data.WriteData.Save(GlobalKey.TOTAL_REMAP_TIMES, _totalRemapTimes);
         RemapUI.Instance.ChangeQuantity(_totalRemapTimes);
         _remapTexts.ForEach(i => i.SetQuantityText(_totalRemapTimes));
-        return true;
     }
 
     public void AddRemapTimes(int quantity)

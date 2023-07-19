@@ -9,9 +9,10 @@ public class Item : MonoBehaviour
     [SerializeField] private SpriteRenderer _iconSR;
     [SerializeField] protected int _row, _col, _id;
     [SerializeField] GameObject _border;
-    Tweener _highLight, _hint;
-    float _originalScale = .7f, _hintScale = .6f, _highLightScale = .8f;
+    [SerializeField] Transform _light;
+    float _originalScale = .7f, _hintScale = .5f, _highLightScale = .8f;
     bool _isHint;
+    List<Tweener> _tweeners = new List<Tweener>();
 
     private void Awake()
     {
@@ -57,13 +58,24 @@ public class Item : MonoBehaviour
     {
         if (_isHint) return;
         _isHint = true;
-        _hint = transform.DOScale(Vector3.one * _hintScale, 1f).SetLoops(-1, LoopType.Yoyo);
+        var check = false;
+        var t = transform.DOScale(Vector3.one * _hintScale, .5f).SetLoops(-1, LoopType.Yoyo).OnStepComplete(delegate
+        {
+            if (!check)
+            {
+                _light.DOScale(Vector3.one * .3f, .2f).SetLoops(2, LoopType.Yoyo).SetAutoKill();
+                transform.DOShakeRotation(.1f, new Vector3(0, 0, 40), 10, 30).SetLoops(2, LoopType.Yoyo).SetAutoKill();
+            }
+            check = !check;
+        });
+        _tweeners.Add(t);
     }
 
     public void UnHint()
     {
         _isHint = false;
-        _hint.Kill();
+        _light.localScale = Vector3.one * .1f;
+        _tweeners.ForEach(i => i.Kill());
         transform.localScale = Vector3.one * _originalScale;
     }
 }
