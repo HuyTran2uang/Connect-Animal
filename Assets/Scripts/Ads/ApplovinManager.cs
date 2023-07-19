@@ -1,20 +1,28 @@
 using System;
+using System.Linq;
 using UnityEngine;
 using static MaxSdkCallbacks;
 
 public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
+    , IReadData
 {
 
     private const string SDK_KEY = "dQ15CD6nC7CfuD2IKhScGfRyQOoJpENkqUqftd_Xg0z83xvbcqZKQG3JTTbzUAaR8bGxPGTBufsv3sqxsXzrcV";
 
-    private bool isNoAdsPurchased;
+    private bool _isNoAdsPurchased;
+    public bool IsNoAdsPurchased => _isNoAdsPurchased;
 
-    private void Awake()
+    public void LoadData()
     {
-        //IAPManager.Instance.AddInitCallback(delegate
-        //{
-        //    isNoAdsPurchased = IAPManager.Instance.IsNoAdsPurchased();
-        //});
+        _isNoAdsPurchased = Data.ReadData.LoadData(GlobalKey.NO_ADS, false);
+    }
+
+    public void NoAds()
+    {
+        _isNoAdsPurchased = true;
+        Data.WriteData.Save(GlobalKey.NO_ADS, true);
+        var removers = FindObjectsOfType<MonoBehaviour>(true).OfType<IBoughtRemoveAds>();
+        removers.ToList().ForEach(i => i.BoughtRemoveAds());
     }
 
     public void Init()
@@ -160,7 +168,7 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
     public void ShowInterstitial()
     {
-        if (isNoAdsPurchased) return;
+        if (_isNoAdsPurchased) return;
         if (MaxSdkUnityEditor.IsInterstitialReady(interstitialAdUnitId))
         {
             MaxSdkUnityEditor.ShowInterstitial(interstitialAdUnitId);
@@ -174,7 +182,7 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
     public void ShowInterstitial()
     {
-        if(isNoAdsPurchased) return;
+        if(_isNoAdsPurchased) return;
         if (MaxSdk.IsInterstitialReady(interstitialAdUnitId))
         {
             MaxSdk.ShowInterstitial(interstitialAdUnitId);
@@ -256,6 +264,11 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
     public void ShowRewardedAd(Action _onReawarded)
     {
+        if(_isNoAdsPurchased)
+        {
+            _onReawarded.Invoke();
+            return;
+        }
         if (MaxSdkUnityEditor.IsRewardedAdReady(rewardedAdUnitId))
         {
             onRewarded = _onReawarded;
@@ -271,6 +284,11 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
     public void ShowRewardedAd(Action _onReawarded)
     {
+        if(_isNoAdsPurchased)
+        {
+            _onReawarded.Invoke();
+            return;
+        }
         if (MaxSdk.IsRewardedAdReady(rewardedAdUnitId))
         {
             onRewarded = _onReawarded;

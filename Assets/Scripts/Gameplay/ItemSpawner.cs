@@ -8,7 +8,7 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
     [SerializeField] Item _itemPrefab;
     [SerializeField] SpecialItem _specialItemPrefab;
     [SerializeField] List<GameObject> _specialIconPrefabs; 
-    [SerializeField] List<Item> _items = new List<Item>();
+    List<Item> _items = new List<Item>();
     Item _highLightItem;
 
     public Item GetItemSpawned(Vector3 pos)

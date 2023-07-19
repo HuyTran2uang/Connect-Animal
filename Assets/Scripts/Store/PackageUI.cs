@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PackageUI : MonoBehaviour
 {
-    [SerializeField] Button _buyButton;
+    [SerializeField] protected Button _buyButton;
 
     private void Awake()
     {

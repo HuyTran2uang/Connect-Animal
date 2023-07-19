@@ -9,9 +9,8 @@ using Unity.VisualScripting;
 
 public class SpinWheelPopup : MonoBehaviour
 {
-    [SerializeField] GameObject _spinWheel, _spinWheelPopup;
+    [SerializeField] GameObject _spinWheel;
     [SerializeField] Button _freeSpin, _freeSpinAd, _backButton;
-    [SerializeField] TMP_Text _coint, _bombCount, _hintCount, _remapCount;
 
     int _numberOfGift = 9, _countReward;
     float _timeRotate = 5;
@@ -25,6 +24,7 @@ public class SpinWheelPopup : MonoBehaviour
 
         _freeSpin.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
             StartCoroutine(RotateWheel());
             _freeSpin.interactable = false;
             _countReward += 1;
@@ -32,6 +32,7 @@ public class SpinWheelPopup : MonoBehaviour
 
         _freeSpinAd.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
             StartCoroutine(RotateWheel());
             _freeSpinAd.interactable = false;
             _countReward += 1;
@@ -39,7 +40,8 @@ public class SpinWheelPopup : MonoBehaviour
 
         _backButton.onClick.AddListener(delegate
         {
-            _spinWheelPopup.SetActive(false);
+            AudioManager.Instance.PlaySoundClickButton();
+            gameObject.SetActive(false);
         });
     }
 

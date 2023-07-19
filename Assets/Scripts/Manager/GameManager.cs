@@ -19,9 +19,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     public void Play()
     {
-        if(!TutorialManager.Instance.IsPassedLevelTutorial)
+        if (!TutorialManager.Instance.IsPassedLevelTutorial)
         {
-            Debug.Log("Level tutorial");
             TutorialManager.Instance.OpenLevelTutorial();
             return;
         }

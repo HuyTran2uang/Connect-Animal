@@ -9,9 +9,11 @@ public class Loading : MonoBehaviourSingletonPersistent<Loading>
     protected override void Awake()
     {
         base.Awake();
+        if(!NetworkManager.Instance.CheckHasInternet())
+            return;
         ApplovinManager.Instance.Init();
         StartCoroutine(LoadAllData());
-    } 
+    }
 
     private IEnumerator LoadAllData()
     {
@@ -24,7 +26,7 @@ public class Loading : MonoBehaviourSingletonPersistent<Loading>
 
     private IEnumerator LoadAllPrepare()
     {
-        var prepareGames = FindObjectsOfType<MonoBehaviour>().OfType<IPrepareGame>();
+        var prepareGames = FindObjectsOfType<MonoBehaviour>(true).OfType<IPrepareGame>();
         foreach (var prepareGame in prepareGames)
             prepareGame.Prepare();
         yield return SceneManager.UnloadSceneAsync("Loading");
@@ -33,7 +35,7 @@ public class Loading : MonoBehaviourSingletonPersistent<Loading>
 
     private IEnumerator LoadAllAfterPrepare()
     {
-        var afterPrepareGames = FindObjectsOfType<MonoBehaviour>().OfType<IAfterPrepareGame>();
+        var afterPrepareGames = FindObjectsOfType<MonoBehaviour>(true).OfType<IAfterPrepareGame>();
         foreach (var after in afterPrepareGames)
             after.AfterPrepareGame();
         yield return null;

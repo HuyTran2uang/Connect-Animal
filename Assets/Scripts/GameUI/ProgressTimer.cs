@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimeUI : MonoBehaviourSingleton<TimeUI>
+public class ProgressTimer : MonoBehaviour
 {
     [SerializeField] Image _timeProgress;
 

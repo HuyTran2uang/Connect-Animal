@@ -12,7 +12,7 @@ public class SettingPopup : MonoBehaviour
     [SerializeField] Button _soundButton;
     [SerializeField] Button _vibrateButton;
     [SerializeField] Button _restartButton;
-    [SerializeField] GameObject _settingPopup;
+    [SerializeField] SettingPopup _settingPopup;
     [SerializeField] GamePanel _gamePanel;
     [SerializeField] HomePanel _homePanel;
     [SerializeField] RatePopupUI _ratePopup;
@@ -22,7 +22,7 @@ public class SettingPopup : MonoBehaviour
         _resumeButton.onClick.AddListener(delegate 
         {
             AudioManager.Instance.PlaySoundClickButton();
-            _settingPopup.SetActive(false);
+            _settingPopup.gameObject.SetActive(false);
         });
 
         _homeButton.onClick.AddListener(delegate 
@@ -30,7 +30,7 @@ public class SettingPopup : MonoBehaviour
             AudioManager.Instance.PlaySoundClickButton();
             _homePanel.gameObject.SetActive(true);
             _gamePanel.gameObject.SetActive(false);
-            _settingPopup.SetActive(false);
+            _settingPopup.gameObject.SetActive(false);
             GameManager.Instance.GoToMenuFromBattle();
         });
 
@@ -39,7 +39,7 @@ public class SettingPopup : MonoBehaviour
             AudioManager.Instance.PlaySoundClickButton();
             ApplovinManager.Instance.ShowRewardedAd(delegate
             {
-                _settingPopup.SetActive(false);
+                _settingPopup.gameObject.SetActive(false);
                 GameManager.Instance.Replay();
             });
         });
@@ -66,6 +66,7 @@ public class SettingPopup : MonoBehaviour
         {
             AudioManager.Instance.PlaySoundClickButton();
             TutorialManager.Instance.StartTutorial();
+            gameObject.SetActive(false);
         });
     }
     private void OnEnable()

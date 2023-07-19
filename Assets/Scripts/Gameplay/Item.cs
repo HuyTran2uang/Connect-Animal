@@ -74,7 +74,7 @@ public class Item : MonoBehaviour
     public void UnHint()
     {
         _isHint = false;
-        _light.localScale = Vector3.one * .1f;
+        _light.localScale = Vector3.zero;
         _tweeners.ForEach(i => i.Kill());
         transform.localScale = Vector3.one * _originalScale;
     }

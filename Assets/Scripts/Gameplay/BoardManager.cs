@@ -7,7 +7,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 {
     [SerializeField] private ItemSpriteStorage _itemSpriteStorage;
     private Node[,] _board;
-    [SerializeField] private List<int> _ids;
+    private List<int> _ids;
     private int _totalRows = 10, _totalCols = 7;
     private float _startX = 0, _startY = 0;
     private Item[,] _boardUI;

@@ -35,7 +35,7 @@ public class GiftBoxManager : MonoBehaviourSingleton<GiftBoxManager>,IPrepareGam
             {
                 _duration = 0;
                 _timeIsRunning = false;
-                _giftBoxPopup.TimeEnd();
+                _giftBoxPopup?.TimeEnd();
             }
         }
         Data.WriteData.Save(GlobalKey.GIFTBOXTIME, _duration);

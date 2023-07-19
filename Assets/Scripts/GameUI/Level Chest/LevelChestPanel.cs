@@ -14,7 +14,6 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
     [SerializeField] GameObject levelChestPopup;
     [SerializeField] GameObject boardKey;
     [SerializeField] Button backButton, watchAdsButton;
-    [SerializeField] TMP_Text coinText;
 
     int coin;
     int countKey = 3;   
@@ -39,7 +38,12 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
 
     private void Awake()
     {
-        backButton.onClick.AddListener(Back);
+        backButton.onClick.AddListener(delegate
+        {
+            AudioManager.Instance.PlaySoundClickButton();
+            Back();
+        });
+
         watchAdsButton.onClick.AddListener(delegate
         {
             ApplovinManager.Instance.ShowRewardedAd(delegate
@@ -47,6 +51,7 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
                 WatchADSDone();
             });
         });
+
         foreach (LevelChest levelChest in levelChests)
         {
             levelChest.ButtonChest.onClick.AddListener(CheckOpenedChest);

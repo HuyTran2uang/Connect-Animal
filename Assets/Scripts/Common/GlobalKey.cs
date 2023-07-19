@@ -22,4 +22,5 @@ public class GlobalKey
     public static string VIBRATION = "Vibration";
     public static string TUTORIAL_OPENING = "TutorialOpening";
     public static string LEVEL_TUTORIAL_PASSED = "LevelTutorialPassed";
+    public static string NO_ADS = "NoAds";
 }

@@ -3,7 +3,9 @@ using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
 
-public class IAPManager : MonoBehaviourSingleton<IAPManager>, IDetailedStoreListener, IPrepareGame
+public class IAPManager : MonoBehaviourSingleton<IAPManager>
+    , IDetailedStoreListener
+    , IPrepareGame
 {
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
@@ -41,13 +43,6 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>, IDetailedStoreList
 
     private void InitializePurchasing()
     {
-        // If we have already connected to Purchasing ...
-        if (IsInitialized())
-        {
-            // ... we are done here.
-            return;
-        }
-
         // Create a builder, first passing in a suite of Unity provided stores.
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
         builder.AddProduct(IAP_BIG_PACK_1, ProductType.Consumable);
@@ -56,7 +51,8 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>, IDetailedStoreList
         builder.AddProduct(IAP_PACK_1, ProductType.Consumable);
         builder.AddProduct(IAP_PACK_2, ProductType.Consumable);
         builder.AddProduct(IAP_PACK_3, ProductType.Consumable);
-        builder.AddProduct(IAP_REMOVE_ADS, ProductType.Consumable);
+        if (!ApplovinManager.Instance.IsNoAdsPurchased)
+            builder.AddProduct(IAP_REMOVE_ADS, ProductType.Consumable);
         //---------------------
         UnityPurchasing.Initialize(this, builder);
         //----------------------
@@ -70,7 +66,8 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>, IDetailedStoreList
         _productDataDict.Add(IAP_PACK_2, FactoryProductData.CreateProductPakageCoin(IAP_PACK_2, ProductType.Consumable, 6000));
         _productDataDict.Add(IAP_PACK_3, FactoryProductData.CreateProductPakageCoin(IAP_PACK_3, ProductType.Consumable, 14000));
         //
-        _productDataDict.Add(IAP_REMOVE_ADS, FactoryProductData.CreateProductPackageNoAds(IAP_REMOVE_ADS, ProductType.Consumable));
+        if (!ApplovinManager.Instance.IsNoAdsPurchased)
+            _productDataDict.Add(IAP_REMOVE_ADS, FactoryProductData.CreateProductPackageNoAds(IAP_REMOVE_ADS, ProductType.Consumable));
     }
 
     private bool IsInitialized()

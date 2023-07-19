@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerManager : MonoBehaviourSingleton<TimerManager>
+public class TimerManager : MonoBehaviourSingleton<TimerManager>, IPrepareGame
 {
     private float _battleDuration, _totalTime = 180, _autoHintDuration, _timeHintConfig = 15;
-
+    ProgressTimer _progressTimer;
     public float BattleDuration => _battleDuration;
     public float TotalTime => _totalTime;
+
+    public void Prepare()
+    {
+        _progressTimer = FindObjectOfType<ProgressTimer>(true);
+    }
 
     public void SetTimer(float seconds)
     {
@@ -43,7 +48,7 @@ public class TimerManager : MonoBehaviourSingleton<TimerManager>
         if (_battleDuration > 0)
         {
             _battleDuration -= Time.deltaTime;
-            TimeUI.Instance.CountDown(_battleDuration / 180);
+            _progressTimer?.CountDown(_battleDuration / 180);
         }
         else
             TimeOut();
