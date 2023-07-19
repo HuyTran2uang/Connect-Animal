@@ -296,21 +296,32 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     {
         Graph graph = GetGraphById(_startNode.id);
         var points = GetPathFrom(_startNode, _endNode);
-        if (points != null)
+        if (_startNode.id == _endNode.id)
         {
-            LineSpawner.Instance.Concatenate(points);
-            CoupleSuccess();
-            graph.RemovePathFrom(_startNode, _endNode);
-            if (_ids.Count > 0)
+            if (points != null)
             {
-                this.SetMatrix();
-                this.SetGraphs();
+                LineSpawner.Instance.Concatenate(points);
+                CoupleSuccess();
+                graph.RemovePathFrom(_startNode, _endNode);
+                if (_ids.Count > 0)
+                {
+                    this.SetMatrix();
+                    this.SetGraphs();
+                }
+                if (!this.CheckExistCouple())
+                    this.Remap();
             }
-            if (!this.CheckExistCouple())
-                this.Remap();
+            else
+            {
+                if (LevelManager.Instance.Level < 6)
+                    MergeNodeFall.Instance.ShowPathFall(_startNode.x, _startNode.y, _endNode.x, _endNode.y, _matrix.GetMatrix);
+                this.CoupleFail();
+            }
         }
         else
+        {
             this.CoupleFail();
+        }
         this.CompletedConnection();
     }
 

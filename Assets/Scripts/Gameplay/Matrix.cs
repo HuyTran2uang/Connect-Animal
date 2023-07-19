@@ -13,6 +13,8 @@ public class Matrix
         //ShowMaxtrix(totalRows, totalCols);
     }
 
+    public int[,] GetMatrix => _matrix;
+
     private void ShowMaxtrix(int totalRows, int totalCols)
     {
         string matrixStr = "";
