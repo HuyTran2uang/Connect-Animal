@@ -18,6 +18,7 @@ public class GlobalKey
     public static string TOTAL_REMAP_TIMES = "TotalRemapTimes";
     public static string STAR = "Star";
     public static string EVALUATE = "Evaluate";
+    public static string DAYCOUNT = "DayCount";
     public static string LASTDAY = "LastDay";
     public static string LASTMONTH = "LastMonth";
     public static string LASTYEAR = "LastYear";

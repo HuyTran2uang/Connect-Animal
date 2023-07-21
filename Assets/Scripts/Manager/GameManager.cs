@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
         Wait();
         AudioManager.Instance.PlaySoundWinButton();
         LevelManager.Instance.LevelUp();
+        if (LevelManager.Instance.Level == 2) DailyManager.Instance.ActiveDailyReward();
         if (LevelManager.Instance.Level % 10 == 0)
         {
             ChestManager.Instance.OpenLevelChest();
