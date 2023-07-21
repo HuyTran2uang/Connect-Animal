@@ -80,7 +80,6 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
     public void Back()
     {
         levelChestPopup.SetActive(false);
-        GameManager.Instance.Continue();
     }
     public void ActiveWatchADS()
     {

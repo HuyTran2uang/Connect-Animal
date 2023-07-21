@@ -9,6 +9,8 @@ public class StarManager : MonoBehaviourSingleton<StarManager>, IReadData, IPrep
     List<IChangeStarText> _changeStarTexts = new List<IChangeStarText>();
     List<IStarText> _starTexts = new List<IStarText>();
 
+    public int QuantityStar => _quantityStar;
+
     public void LoadData()
     {
         _quantityStar = Data.ReadData.LoadData(GlobalKey.STAR, 0);
