@@ -7,6 +7,7 @@ public class StarManager : MonoBehaviourSingleton<StarManager>, IReadData, IPrep
 {
     [SerializeField] private int _quantityStar, _quantityStarInLevel;
     List<IChangeStarText> _changeStarTexts = new List<IChangeStarText>();
+    List<IStarText> _starTexts = new List<IStarText>();
 
     public void LoadData()
     {
@@ -17,12 +18,15 @@ public class StarManager : MonoBehaviourSingleton<StarManager>, IReadData, IPrep
     {
         _changeStarTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<IChangeStarText>().ToList();
         _changeStarTexts.ForEach(i => i.ChangeStarText(_quantityStar));
+        _starTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<IStarText>().ToList();
+        _starTexts.ForEach(i => i.SetQuantityText(_quantityStar));
     }
 
     private void AddStarData(int quantity)
     {
         _quantityStar += quantity;
         Data.WriteData.Save(GlobalKey.STAR, _quantityStar);
+        _starTexts.ForEach(i => i.SetQuantityText(_quantityStar));
     }
 
     public void AddStar(int quantity)
