@@ -154,7 +154,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: Packagecom.animalonet.connectanimal.tileconnect
+    Android: com.animalonet.connectanimal.tileconnect
     Standalone: com.DefaultCompany.2DProject
   buildNumber:
     Standalone: 0
@@ -777,7 +777,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: FIREBASE_ANALYTICSZ
+    Android: FIREBASE_ANALYTICS
   additionalCompilerArguments:
     Android: []
   platformArchitecture: {}

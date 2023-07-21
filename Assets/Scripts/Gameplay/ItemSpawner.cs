@@ -32,7 +32,7 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
         if (_items.Count > 0)
             for (int i = _items.Count - 1; i >= 0; i--)
                 Destroy(_items[i].gameObject);
-        _items.Clear();
+        _items = new List<Item>();
     }
 
     public void DetectDown()
@@ -52,6 +52,12 @@ public class ItemSpawner : MonoBehaviourSingleton<ItemSpawner>
 
     public void DetectUp()
     {
+#if UNITY_EDITOR
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+#else
+        foreach (var touch in Input.touches)
+            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId)) return;
+#endif
         if (_highLightItem == null) return;
         if (GameManager.Instance.GameState != GameState.OnBattle) return;
         if (GameManager.Instance.BattleState != BattleState.None) return;

@@ -5,7 +5,7 @@ using UnityEngine.Purchasing.Extension;
 
 public class IAPManager : MonoBehaviourSingleton<IAPManager>
     , IDetailedStoreListener
-    , IPrepareGame
+    //, IPrepareGame
 {
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;

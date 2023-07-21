@@ -54,7 +54,22 @@ public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
 
         foreach (LevelChest levelChest in levelChests)
         {
-            levelChest.ButtonChest.onClick.AddListener(CheckOpenedChest);
+            levelChest.ButtonChest.onClick.AddListener(delegate
+            {
+                if (countKey == 2)
+                {
+                    ApplovinManager.Instance.ShowRewardedAd(delegate
+                    {
+                        AudioManager.Instance.PlaySoundClickButton();
+                        CheckOpenedChest();
+                    });
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySoundClickButton();
+                    CheckOpenedChest();
+                }
+            });
         }
     }
 

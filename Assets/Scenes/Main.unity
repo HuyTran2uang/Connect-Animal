@@ -9431,7 +9431,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &998398556
 Transform:
   m_ObjectHideFlags: 0
@@ -17725,7 +17725,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemSpriteStorage: {fileID: 11400000, guid: b8927ae3c25d01943aadc07f4b5827fe, type: 2}
-  _ids: 
 --- !u!1 &1542553205
 GameObject:
   m_ObjectHideFlags: 0
@@ -25751,7 +25750,7 @@ MonoBehaviour:
   _rewardButton: {fileID: 3119605595814829101}
   _backButton: {fileID: 6334125905830987371}
   _giftBoxPopup: {fileID: 1472743458762872361}
-  _light: {fileID: 0}
+  _light: {fileID: 6449518795433390862}
   _timerIn: {fileID: 5654046802653992149}
   _timerOut: {fileID: 6888377457757009052}
   _rewardAds: {fileID: 6007702039551587741}

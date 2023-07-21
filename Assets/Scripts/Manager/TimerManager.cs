@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class TimerManager : MonoBehaviourSingleton<TimerManager>, IPrepareGame
 {
-    private float _battleDuration, _totalTime = 180, _autoHintDuration, _timeHintConfig = 15;
+    private float _battleDuration, _totalTime = 180, _autoHintDuration, _timeHintConfig = 15, _nextShowInterAds;
     ProgressTimer _progressTimer;
     public float BattleDuration => _battleDuration;
     public float TotalTime => _totalTime;
+    public float NextShowInterAds => _nextShowInterAds;
 
     public void Prepare()
     {
@@ -54,6 +55,11 @@ public class TimerManager : MonoBehaviourSingleton<TimerManager>, IPrepareGame
             TimeOut();
     }
 
+    public void SetNextShowInterAds()
+    {
+        _nextShowInterAds = 120;
+    }
+
     private void AutoHintTimer()
     {
         if (GameManager.Instance.GameState != GameState.OnBattle) return;
@@ -63,6 +69,7 @@ public class TimerManager : MonoBehaviourSingleton<TimerManager>, IPrepareGame
             _autoHintDuration -= Time.deltaTime;
         else
             HintManager.Instance.HintFree();
+        if (_nextShowInterAds > 0) _nextShowInterAds -= Time.deltaTime;
     }
 
     private void FixedUpdate()

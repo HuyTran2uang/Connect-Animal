@@ -29,4 +29,16 @@ public class WinPopup : MonoBehaviour
             GameManager.Instance.Play();
         });
     }
+
+    private void OnEnable()
+    {
+        ApplovinManager.Instance.HideBanner();
+        ApplovinManager.Instance.ShowMRec();
+    }
+
+    private void OnDisable()
+    {
+        ApplovinManager.Instance.HideMRec();
+        ApplovinManager.Instance.ShowBanner();
+    }
 }

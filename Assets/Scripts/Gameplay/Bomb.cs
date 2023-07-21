@@ -33,6 +33,5 @@ public class Bomb : MonoBehaviour
     public void Explode()
     {
         BoardManager.Instance.ExplodeAndRemoveItem(_row, _col);
-        Destroy(gameObject);
     }
 }

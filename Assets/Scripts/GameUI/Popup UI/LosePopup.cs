@@ -27,12 +27,14 @@ public class LosePopup : MonoBehaviour
             _homePanel.SetActive(true);
             _gamePanel.SetActive(false);
             _losePopup.SetActive(false);
+            GameManager.Instance.GoToMenuFromBattle();
             BoardManager.Instance.Clear();
         });
 
         _restartButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
+            ApplovinManager.Instance.ShowInterstitial();
             _losePopup.SetActive(false);
             TimerManager.Instance.ResetTotalTime();
             GameManager.Instance.Replay();
@@ -41,6 +43,7 @@ public class LosePopup : MonoBehaviour
         _restartButton2.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
+            ApplovinManager.Instance.ShowInterstitial();
             _losePopup.SetActive(false);
             TimerManager.Instance.ResetTotalTime();
             GameManager.Instance.Replay();
@@ -49,9 +52,12 @@ public class LosePopup : MonoBehaviour
         _watchAdButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            TimerManager.Instance.IncreaseTime(60);
-            GameManager.Instance.ResumeGame();
-            _losePopup.SetActive(false);
+            ApplovinManager.Instance.ShowRewardedAd(delegate
+            {
+                TimerManager.Instance.IncreaseTime(60);
+                GameManager.Instance.ResumeGame();
+                _losePopup.SetActive(false);
+            });
         });
 
         _cointPlayButton.onClick.AddListener(delegate

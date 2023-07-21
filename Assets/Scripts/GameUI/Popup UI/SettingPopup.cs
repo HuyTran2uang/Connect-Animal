@@ -22,12 +22,19 @@ public class SettingPopup : MonoBehaviour
         _resumeButton.onClick.AddListener(delegate 
         {
             AudioManager.Instance.PlaySoundClickButton();
+            if (GameManager.Instance.GameState == GameState.OnBattle)
+                ApplovinManager.Instance.ShowInterstitial();
             _settingPopup.gameObject.SetActive(false);
         });
 
         _homeButton.onClick.AddListener(delegate 
         {
             AudioManager.Instance.PlaySoundClickButton();
+            if (GameManager.Instance.GameState == GameState.OnBattle && TimerManager.Instance.NextShowInterAds <= 0)
+            {
+                TimerManager.Instance.SetNextShowInterAds();
+                ApplovinManager.Instance.ShowInterstitial();
+            }
             _homePanel.gameObject.SetActive(true);
             _gamePanel.gameObject.SetActive(false);
             _settingPopup.gameObject.SetActive(false);
@@ -37,16 +44,23 @@ public class SettingPopup : MonoBehaviour
         _restartButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            ApplovinManager.Instance.ShowRewardedAd(delegate
+            if (GameManager.Instance.GameState == GameState.OnBattle && TimerManager.Instance.NextShowInterAds <= 0)
             {
-                _settingPopup.gameObject.SetActive(false);
-                GameManager.Instance.Replay();
-            });
+                TimerManager.Instance.SetNextShowInterAds();
+                ApplovinManager.Instance.ShowInterstitial();
+            }
+            _settingPopup.gameObject.SetActive(false);
+            GameManager.Instance.Replay();
         });
 
         _rateButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
+            if (GameManager.Instance.GameState == GameState.OnBattle && TimerManager.Instance.NextShowInterAds <= 0)
+            {
+                TimerManager.Instance.SetNextShowInterAds();
+                ApplovinManager.Instance.ShowInterstitial();
+            }
             _ratePopup.gameObject.SetActive(true);
         });
 
@@ -65,6 +79,11 @@ public class SettingPopup : MonoBehaviour
         _tutorialButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
+            if (GameManager.Instance.GameState == GameState.OnBattle && TimerManager.Instance.NextShowInterAds <= 0)
+            {
+                TimerManager.Instance.SetNextShowInterAds();
+                ApplovinManager.Instance.ShowInterstitial();
+            }
             TutorialManager.Instance.StartTutorial();
             gameObject.SetActive(false);
         });
@@ -86,12 +105,8 @@ public class SettingPopup : MonoBehaviour
     private void OnDisable()
     {
         if (GameManager.Instance.GameState == GameState.None)
-        {
             return;
-        } 
         else
-        {
             GameManager.Instance.ResumeGame();
-        }
     }
 }

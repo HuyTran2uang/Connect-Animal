@@ -67,6 +67,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 
     public void CreateBoard(LevelConfig config)
     {
+        Debug.Log("START CREATE BOARD");
         Clear();
         TimerManager.Instance.ResetAutoHintTimer();
         _quantityWhenChangeMap = new List<int>() { 10, 14, 20, 28, 34, 40, 44, 50 };
@@ -78,7 +79,11 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         this.SetMatrix();
         this.SetGraphs();
         SetPosCam();
-        if (CheckExistCouple()) return;
+        if (CheckExistCouple())
+        {
+            Debug.Log("END CREATE BOARD");
+            return;
+        }
         CreateBoard(config);
     }
 
@@ -156,7 +161,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         _boardUI = null;
         _board = null;
         _posGrid = null;
-        _ids.Clear();
+        _ids = null;
         _graphes = null;
         _matrix = null;
         _startNode = null;

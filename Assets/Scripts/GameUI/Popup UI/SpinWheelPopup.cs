@@ -1,11 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
-using DG.Tweening;
-using System;
-using Unity.VisualScripting;
 
 public class SpinWheelPopup : MonoBehaviour
 {
@@ -33,9 +28,12 @@ public class SpinWheelPopup : MonoBehaviour
         _freeSpinAd.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            StartCoroutine(RotateWheel());
-            _freeSpinAd.interactable = false;
-            _countReward += 1;
+            ApplovinManager.Instance.ShowRewardedAd(delegate
+            {
+                StartCoroutine(RotateWheel());
+                _freeSpinAd.interactable = false;
+                _countReward += 1;
+            });
         });
 
         _backButton.onClick.AddListener(delegate

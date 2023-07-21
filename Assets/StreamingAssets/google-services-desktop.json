@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "526640298440",
+    "project_id": "animal-onet-pets-tile-connect",
+    "storage_bucket": "animal-onet-pets-tile-connect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526640298440:android:08ecadc8b24cc86bd1e8fd",
+        "android_client_info": {
+          "package_name": "com.animalonet.connectanimal.tileconnect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "526640298440-9ae2g6dmvj91k8i3jci3dre0gsoqhcp3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb5GDx5mWvO9a-FIbuZ6Gzr7-KHyrkM1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "526640298440-9ae2g6dmvj91k8i3jci3dre0gsoqhcp3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

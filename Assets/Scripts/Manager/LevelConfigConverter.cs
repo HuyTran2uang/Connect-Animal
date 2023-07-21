@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,6 +9,7 @@ public class LevelConfigConverter
 {
     public static LevelConfig GetLevelConfig(int level)
     {
+        Debug.Log("CONVERTER");
         var stringMatrix = File.ReadAllText($"Assets/Resources/Levels/Level_{level}.txt");
         int totalVals = stringMatrix.ToList().Count(i => i == '1');
         int totalRows = stringMatrix.ToList().Count(i => i == '{');

@@ -59,7 +59,6 @@ public class MergeNodeFall : MonoBehaviourSingleton<MergeNodeFall>
     public void ShowPathFall(int x1, int y1, int x2, int y2, int[,] matrix)
     {
         string path = PathFall(x1, y1, x2, y2, matrix);
-        Debug.Log(path);
         Vector3 pos = BoardManager.Instance.GetPosFrom(x1, y1);
         for (int i = 0; i < path.Length; i++)
         {
