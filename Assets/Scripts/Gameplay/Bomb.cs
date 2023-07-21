@@ -18,7 +18,7 @@ public class Bomb : MonoBehaviour
 
     private void MoveToTarget(Vector3 targetPos)
     {
-        Vector3 direction = (targetPos - (Vector3)transform.position).normalized;
+        Vector3 direction = (targetPos - transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         var offset = -90f;
         transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));

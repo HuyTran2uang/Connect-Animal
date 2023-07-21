@@ -51,7 +51,7 @@ public class DailyManager : MonoBehaviourSingleton<DailyManager>, IAfterPrepareG
 
     public void ActiveDailyReward()
     {
-        _dailyPopup.gameObject.SetActive(true);
-        _dailyPopup.SetListItemUI(_cointDayReward, _dayCount);
+        _dailyPopup?.gameObject.SetActive(true);
+        _dailyPopup?.SetListItemUI(_cointDayReward, _dayCount);
     }
 }

@@ -240,6 +240,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         {
             case SpecialType.Rocket:
                 if (_ids.Count == 0) return;
+                GameManager.Instance.Wait();
                 RocketSpawner.Instance.ShootRocket(_posGrid[_startNode.x, _startNode.y], _posGrid[_endNode.x, _endNode.y]);
                 break;
             case SpecialType.Bomb:
@@ -274,7 +275,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         AudioManager.Instance.PlaySoundConnectButton();
         RemoveItem(_startNode.x, _startNode.y);
         RemoveItem(_endNode.x, _endNode.y);
-        if (_startNode.id == 0)
+        if (_startNode?.id == 0)
             ExecuteSpecial(_specialType);
     }
 
@@ -293,8 +294,6 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         HintManager.Instance.UnHint();
         TimerManager.Instance.ResetAutoHintTimer();
         GridMove();
-        if (!CheckCompletedMap()) return;
-        CompletedLevel();
     }
 
     private void EndNodeDifStartNode()
@@ -454,6 +453,10 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         _ids.Remove(_board[row, col].id);
         _board[row, col] = null;
         _boardUI[row, col] = null;
+        if(_ids.Count == 0)
+        {
+            GameManager.Instance.Win();
+        }
     }
 
     public void ExplodeAndRemoveItem(int row, int col)
@@ -468,11 +471,6 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     {
         this.SetMatrix();
         this.SetGraphs();
-    }
-
-    public bool CheckCompletedMap()
-    {
-        return _ids.Count == 0;
     }
 
     public void RemoveRandomCouple()

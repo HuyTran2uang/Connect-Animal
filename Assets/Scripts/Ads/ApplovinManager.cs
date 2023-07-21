@@ -117,10 +117,18 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
     }
 
 #if UNITY_EDITOR
-    public void ShowBanner() => MaxSdkUnityEditor.ShowBanner(bannerAdUnitId);
+    public void ShowBanner()
+    {
+        if (_isNoAdsPurchased) return;
+        MaxSdkUnityEditor.ShowBanner(bannerAdUnitId);
+    }
     public void HideBanner() => MaxSdkUnityEditor.HideBanner(bannerAdUnitId);
 #else
-    public void ShowBanner() => MaxSdk.ShowBanner(bannerAdUnitId);
+    public void ShowBanner()
+    {
+        if (_isNoAdsPurchased) return;
+        MaxSdk.ShowBanner(bannerAdUnitId);
+    }
 
     public void HideBanner() => MaxSdk.HideBanner(bannerAdUnitId);
 #endif
@@ -350,9 +358,9 @@ string mrecAdUnitId = "YOUR_IOS_AD_UNIT_ID"; // Retrieve the ID from your accoun
     {
         // MRECs are sized to 300x250 on phones and tablets
 #if UNITY_EDITOR
-        MaxSdkUnityEditor.CreateMRec(mrecAdUnitId, MaxSdkBase.AdViewPosition.Centered);
+        MaxSdkUnityEditor.CreateMRec(mrecAdUnitId, MaxSdkBase.AdViewPosition.BottomCenter);
 #else
-        MaxSdk.CreateMRec(mrecAdUnitId, MaxSdkBase.AdViewPosition.Centered);
+        MaxSdk.CreateMRec(mrecAdUnitId, MaxSdkBase.AdViewPosition.BottomCenter);
 #endif
         MaxSdkCallbacks.MRec.OnAdLoadedEvent += OnMRecAdLoadedEvent;
         MaxSdkCallbacks.MRec.OnAdLoadFailedEvent += OnMRecAdLoadFailedEvent;
@@ -363,11 +371,25 @@ string mrecAdUnitId = "YOUR_IOS_AD_UNIT_ID"; // Retrieve the ID from your accoun
     }
 
 #if UNITY_EDITOR
-    public void ShowMRec() => MaxSdkUnityEditor.ShowMRec(mrecAdUnitId);
-    public void HideMRec() => MaxSdkUnityEditor.HideMRec(mrecAdUnitId);
+    public void ShowMRec()
+    {
+        if (_isNoAdsPurchased) return;
+        MaxSdkUnityEditor.ShowMRec(mrecAdUnitId);
+    }
+    public void HideMRec()
+    {
+        MaxSdkUnityEditor.HideMRec(mrecAdUnitId);
+    }
 #else
-    public void ShowMRec() => MaxSdk.ShowMRec(mrecAdUnitId);
-    public void HideMRec() => MaxSdk.HideMRec(mrecAdUnitId);
+    public void ShowMRec()
+    {
+        if (_isNoAdsPurchased) return;
+        MaxSdk.ShowMRec(mrecAdUnitId);
+    }
+    public void HideMRec()
+    {
+        MaxSdk.HideMRec(mrecAdUnitId);
+    }
 #endif
 
     public void OnMRecAdLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }

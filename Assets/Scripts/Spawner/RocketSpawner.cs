@@ -26,7 +26,5 @@ public class RocketSpawner : MonoBehaviourSingleton<RocketSpawner>
         _rockets.Remove(rocket);
         if (_rockets.Count > 0) return;
         GameManager.Instance.ResumeGame();
-        if(BoardManager.Instance.CheckCompletedMap())
-            GameManager.Instance.Win();
     }
 }

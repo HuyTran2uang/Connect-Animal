@@ -5,7 +5,7 @@ using UnityEngine.Purchasing.Extension;
 
 public class IAPManager : MonoBehaviourSingleton<IAPManager>
     , IDetailedStoreListener
-    //, IPrepareGame
+    , IAfterPrepareGame
 {
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
@@ -21,7 +21,7 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>
     const string IAP_REMOVE_ADS = "iap_remove_ads";
     //
 
-    public void Prepare()
+    public void AfterPrepareGame()
     {
         Init();
     }
@@ -43,6 +43,11 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>
 
     private void InitializePurchasing()
     {
+        if (IsInitialized())
+        {
+            // ... we are done here.
+            return;
+        }
         // Create a builder, first passing in a suite of Unity provided stores.
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
         builder.AddProduct(IAP_BIG_PACK_1, ProductType.Consumable);

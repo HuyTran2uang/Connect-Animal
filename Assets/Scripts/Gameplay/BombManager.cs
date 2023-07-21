@@ -37,6 +37,7 @@ public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrep
                 return;       
             }
         }
+        HintManager.Instance.UnHint();
         _isThrowingBomb = true;
         _totalThrowBombTimes--;
         Data.WriteData.Save(GlobalKey.TOTAL_BOMB_TIMES, _totalThrowBombTimes);
@@ -59,8 +60,6 @@ public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrep
     {
         BoardManager.Instance.ResetDataMap();
         _isThrowingBomb = false;
-        if (!BoardManager.Instance.CheckCompletedMap()) return;
-        GameManager.Instance.Win();
     }
 
     public void OnBombExplode(Bomb bomb)

@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     public void Win()
     {
+        Debug.Log("WIN");
         _gameState = GameState.None;
         if (LevelManager.Instance.Level > 5)
             ApplovinManager.Instance.ShowInterstitial();
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     public void Lose()
     {
+        Debug.Log("LOSE");
         if (LevelManager.Instance.Level > 5)
             ApplovinManager.Instance.ShowInterstitial();
         Wait();
