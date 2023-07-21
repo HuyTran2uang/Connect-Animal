@@ -47,8 +47,8 @@ public class GiftBoxPopupUI : MonoBehaviour
         _rewardButton.interactable = false;
         _timerIn.gameObject.SetActive(true);
         _timerOut.gameObject.SetActive(true);
-
-        _light.SetActive(false);
+        if (_light != null)
+            _light.SetActive(false);
         _rewardAds.gameObject.SetActive(false);
         _rewardAdsText.gameObject.SetActive(false);
     }
@@ -58,8 +58,8 @@ public class GiftBoxPopupUI : MonoBehaviour
         _rewardButton.interactable = true;
         _timerIn.gameObject.SetActive(false);
         _timerOut.gameObject.SetActive(false);
-
-        _light.SetActive(true);
+        if (_light != null)
+            _light.SetActive(true);
         _rewardAds.gameObject.SetActive(true);
         _rewardAdsText.gameObject.SetActive(true);
     }

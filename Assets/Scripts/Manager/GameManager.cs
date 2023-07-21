@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Accessibility;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 {
@@ -19,11 +16,15 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     public void Play()
     {
-        if(!TutorialManager.Instance.IsPassedLevelTutorial)
+        if (!TutorialManager.Instance.IsPassedLevelTutorial)
         {
-            Debug.Log("Level tutorial");
+            Debug.Log("OPEN TUTORIAL LEVEL");
             TutorialManager.Instance.OpenLevelTutorial();
             return;
+        }
+        if(LevelManager.Instance.Level % 10 == 9)
+        {
+            ApplovinManager.Instance.ShowInterstitial();
         }
         if (LevelManager.Instance.Level == 32)
         {
@@ -31,8 +32,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
         }
         Wait();
         _gameState = GameState.OnBattle;
+        Debug.Log("SET TIME");
         TimerManager.Instance.SetTimer(180);
+        Debug.Log("CLEAR STAR CHEST");
         StarManager.Instance.ClearStarInLevel();
+        Debug.Log("CREATE BOARD");
         BoardManager.Instance.CreateBoard(LevelConfigConverter.GetLevelConfig(LevelManager.Instance.Level));
         _gamePanel.SetLevelPlaying(LevelManager.Instance.Level);
         ResumeGame();
@@ -52,7 +56,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     public void ResumeGame()
     {
-        _gameState = GameState.OnBattle;
         _battleState = BattleState.None;
     }
 
@@ -73,6 +76,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
     public void Win()
     {
         _gameState = GameState.None;
+        if (LevelManager.Instance.Level > 5)
+            ApplovinManager.Instance.ShowInterstitial();
         Wait();
         AudioManager.Instance.PlaySoundWinButton();
         LevelManager.Instance.LevelUp();
@@ -91,10 +96,19 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     public void Lose()
     {
-        _gameState = GameState.None;
+        if (LevelManager.Instance.Level > 5)
+            ApplovinManager.Instance.ShowInterstitial();
         Wait();
         AudioManager.Instance.PlaySoundLoseButton();
         UIManager.Instance.Lose();
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if(focus)
+        {
+            ApplovinManager.Instance.ShowInterstitial();
+        }
     }
 }
 

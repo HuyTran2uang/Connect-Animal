@@ -13,6 +13,7 @@ public class HomePanel : MonoBehaviour
         _playButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
+            Debug.Log("PLAY CLICKED");
             GameManager.Instance.Play();
             UIManager.Instance.OnBattle();
         });

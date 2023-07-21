@@ -30,7 +30,7 @@ public class PackageNoAds : IPackage
 
     public void GetReward()
     {
-        //no ads
+        ApplovinManager.Instance.NoAds();
     }
 }
 

@@ -1,20 +1,26 @@
 using System;
+using System.Linq;
 using UnityEngine;
-using static MaxSdkCallbacks;
 
 public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
+    , IReadData
 {
-
     private const string SDK_KEY = "dQ15CD6nC7CfuD2IKhScGfRyQOoJpENkqUqftd_Xg0z83xvbcqZKQG3JTTbzUAaR8bGxPGTBufsv3sqxsXzrcV";
 
-    private bool isNoAdsPurchased;
+    private bool _isNoAdsPurchased;
+    public bool IsNoAdsPurchased => _isNoAdsPurchased;
 
-    private void Awake()
+    public void LoadData()
     {
-        //IAPManager.Instance.AddInitCallback(delegate
-        //{
-        //    isNoAdsPurchased = IAPManager.Instance.IsNoAdsPurchased();
-        //});
+        _isNoAdsPurchased = Data.ReadData.LoadData(GlobalKey.NO_ADS, false);
+    }
+
+    public void NoAds()
+    {
+        _isNoAdsPurchased = true;
+        Data.WriteData.Save(GlobalKey.NO_ADS, true);
+        var removers = FindObjectsOfType<MonoBehaviour>(true).OfType<IBoughtRemoveAds>();
+        removers.ToList().ForEach(i => i.BoughtRemoveAds());
     }
 
     public void Init()
@@ -24,6 +30,7 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
             InitializeBannerAds();
             InitializeInterstitialAds();
             InitializeRewardedAds();
+            InitializeMRecAds();
         };
 
         // Show AppOpenAd
@@ -111,7 +118,6 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
 #if UNITY_EDITOR
     public void ShowBanner() => MaxSdkUnityEditor.ShowBanner(bannerAdUnitId);
-
     public void HideBanner() => MaxSdkUnityEditor.HideBanner(bannerAdUnitId);
 #else
     public void ShowBanner() => MaxSdk.ShowBanner(bannerAdUnitId);
@@ -160,7 +166,7 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
     public void ShowInterstitial()
     {
-        if (isNoAdsPurchased) return;
+        if (_isNoAdsPurchased) return;
         if (MaxSdkUnityEditor.IsInterstitialReady(interstitialAdUnitId))
         {
             MaxSdkUnityEditor.ShowInterstitial(interstitialAdUnitId);
@@ -174,7 +180,7 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
     public void ShowInterstitial()
     {
-        if(isNoAdsPurchased) return;
+        if(_isNoAdsPurchased) return;
         if (MaxSdk.IsInterstitialReady(interstitialAdUnitId))
         {
             MaxSdk.ShowInterstitial(interstitialAdUnitId);
@@ -256,6 +262,11 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
     public void ShowRewardedAd(Action _onReawarded)
     {
+        if(_isNoAdsPurchased)
+        {
+            _onReawarded.Invoke();
+            return;
+        }
         if (MaxSdkUnityEditor.IsRewardedAdReady(rewardedAdUnitId))
         {
             onRewarded = _onReawarded;
@@ -271,6 +282,11 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
     public void ShowRewardedAd(Action _onReawarded)
     {
+        if(_isNoAdsPurchased)
+        {
+            _onReawarded.Invoke();
+            return;
+        }
         if (MaxSdk.IsRewardedAdReady(rewardedAdUnitId))
         {
             onRewarded = _onReawarded;
@@ -322,4 +338,48 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
         onRewarded.Invoke();
     }
     #endregion
+
+    #region MREC
+#if UNITY_IOS
+string mrecAdUnitId = "YOUR_IOS_AD_UNIT_ID"; // Retrieve the ID from your account
+#else // UNITY_ANDROID
+    string mrecAdUnitId = "280f68d3366281fd"; // Retrieve the ID from your account
+#endif
+
+    public void InitializeMRecAds()
+    {
+        // MRECs are sized to 300x250 on phones and tablets
+#if UNITY_EDITOR
+        MaxSdkUnityEditor.CreateMRec(mrecAdUnitId, MaxSdkBase.AdViewPosition.Centered);
+#else
+        MaxSdk.CreateMRec(mrecAdUnitId, MaxSdkBase.AdViewPosition.Centered);
+#endif
+        MaxSdkCallbacks.MRec.OnAdLoadedEvent += OnMRecAdLoadedEvent;
+        MaxSdkCallbacks.MRec.OnAdLoadFailedEvent += OnMRecAdLoadFailedEvent;
+        MaxSdkCallbacks.MRec.OnAdClickedEvent += OnMRecAdClickedEvent;
+        MaxSdkCallbacks.MRec.OnAdRevenuePaidEvent += OnMRecAdRevenuePaidEvent;
+        MaxSdkCallbacks.MRec.OnAdExpandedEvent += OnMRecAdExpandedEvent;
+        MaxSdkCallbacks.MRec.OnAdCollapsedEvent += OnMRecAdCollapsedEvent;
+    }
+
+#if UNITY_EDITOR
+    public void ShowMRec() => MaxSdkUnityEditor.ShowMRec(mrecAdUnitId);
+    public void HideMRec() => MaxSdkUnityEditor.HideMRec(mrecAdUnitId);
+#else
+    public void ShowMRec() => MaxSdk.ShowMRec(mrecAdUnitId);
+    public void HideMRec() => MaxSdk.HideMRec(mrecAdUnitId);
+#endif
+
+    public void OnMRecAdLoadedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }
+
+    public void OnMRecAdLoadFailedEvent(string adUnitId, MaxSdkBase.ErrorInfo error) { }
+
+    public void OnMRecAdClickedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }
+
+    public void OnMRecAdRevenuePaidEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }
+
+    public void OnMRecAdExpandedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }
+
+    public void OnMRecAdCollapsedEvent(string adUnitId, MaxSdkBase.AdInfo adInfo) { }
+#endregion
 }

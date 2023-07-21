@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerManager : MonoBehaviourSingleton<TimerManager>
+public class TimerManager : MonoBehaviourSingleton<TimerManager>, IPrepareGame
 {
-    private float _battleDuration, _totalTime = 180, _autoHintDuration, _timeHintConfig = 15;
-
+    private float _battleDuration, _totalTime = 180, _autoHintDuration, _timeHintConfig = 15, _nextShowInterAds;
+    ProgressTimer _progressTimer;
     public float BattleDuration => _battleDuration;
     public float TotalTime => _totalTime;
+    public float NextShowInterAds => _nextShowInterAds;
+
+    public void Prepare()
+    {
+        _progressTimer = FindObjectOfType<ProgressTimer>(true);
+    }
 
     public void SetTimer(float seconds)
     {
@@ -43,10 +49,15 @@ public class TimerManager : MonoBehaviourSingleton<TimerManager>
         if (_battleDuration > 0)
         {
             _battleDuration -= Time.deltaTime;
-            TimeUI.Instance.CountDown(_battleDuration / 180);
+            _progressTimer?.CountDown(_battleDuration / 180);
         }
         else
             TimeOut();
+    }
+
+    public void SetNextShowInterAds()
+    {
+        _nextShowInterAds = 120;
     }
 
     private void AutoHintTimer()
@@ -58,6 +69,7 @@ public class TimerManager : MonoBehaviourSingleton<TimerManager>
             _autoHintDuration -= Time.deltaTime;
         else
             HintManager.Instance.HintFree();
+        if (_nextShowInterAds > 0) _nextShowInterAds -= Time.deltaTime;
     }
 
     private void FixedUpdate()

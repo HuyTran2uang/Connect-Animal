@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Purchasing;
 
-public class ProductNoAdsPackageUI : ProductPackageUI
+public class ProductNoAdsPackageUI : ProductPackageUI, IBoughtRemoveAds
 {
     [SerializeField] TMP_Text _priceText;
 
@@ -12,5 +12,10 @@ public class ProductNoAdsPackageUI : ProductPackageUI
     {
         _id = id;
         _priceText.text = metadata.localizedPriceString;
+    }
+
+    public void BoughtRemoveAds()
+    {
+        _buyButton.interactable = false;
     }
 }

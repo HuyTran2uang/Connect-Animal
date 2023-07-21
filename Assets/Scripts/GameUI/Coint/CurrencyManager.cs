@@ -7,6 +7,7 @@ public class CurrencyManager : MonoBehaviourSingleton<CurrencyManager>, IPrepare
 {
     List<ICointText> _setCointTexts = new List<ICointText>();
     int _coint;
+    NotEnoughCoinPopup _notEnoughCoinPopup;
 
     public void LoadData()
     {
@@ -15,7 +16,7 @@ public class CurrencyManager : MonoBehaviourSingleton<CurrencyManager>, IPrepare
 
     public void Prepare()
     {
-        //set ui
+        _notEnoughCoinPopup = FindObjectOfType<NotEnoughCoinPopup>(true);
         _setCointTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<ICointText>().ToList();
         _setCointTexts.ForEach(i => i.SetCointText(_coint));
     }
@@ -32,6 +33,7 @@ public class CurrencyManager : MonoBehaviourSingleton<CurrencyManager>, IPrepare
         if (cointSubtract > _coint)
         {
             //TO DO
+            _notEnoughCoinPopup.gameObject.SetActive(true);
             return false;
         }
         else

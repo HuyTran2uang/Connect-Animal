@@ -30,7 +30,7 @@ public class LevelTutorial : MonoBehaviourSingleton<LevelTutorial>
     {
         if (_nodeA == null)
             _nodeA = node;
-        else
+        if(_nodeA != null && node != _nodeA)
         {
             _nodeB = node;
             _lines[_iCouple].SetActive(true);

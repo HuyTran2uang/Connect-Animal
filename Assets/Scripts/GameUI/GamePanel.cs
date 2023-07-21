@@ -17,22 +17,19 @@ public class GamePanel : MonoBehaviour
         _bombButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            if(!BombManager.Instance.Throw())
-                _notEnoughCoinPopup.gameObject.SetActive(true);
+            BombManager.Instance.Throw();
         });
 
         _hintButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            if(!HintManager.Instance.Hint())
-                _notEnoughCoinPopup.gameObject.SetActive(true);
+            HintManager.Instance.Hint();
         });
 
         _remapButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            if(!RemapManager.Instance.Remap())
-                _notEnoughCoinPopup.gameObject.SetActive(true);
+            RemapManager.Instance.Remap();
         });
 
         _coinButton.onClick.AddListener(delegate

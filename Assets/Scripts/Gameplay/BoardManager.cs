@@ -7,7 +7,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 {
     [SerializeField] private ItemSpriteStorage _itemSpriteStorage;
     private Node[,] _board;
-    [SerializeField] private List<int> _ids;
+    private List<int> _ids;
     private int _totalRows = 10, _totalCols = 7;
     private float _startX = 0, _startY = 0;
     private Item[,] _boardUI;
@@ -67,6 +67,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 
     public void CreateBoard(LevelConfig config)
     {
+        Debug.Log("START CREATE BOARD");
         Clear();
         TimerManager.Instance.ResetAutoHintTimer();
         _quantityWhenChangeMap = new List<int>() { 10, 14, 20, 28, 34, 40, 44, 50 };
@@ -78,7 +79,11 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         this.SetMatrix();
         this.SetGraphs();
         SetPosCam();
-        if (CheckExistCouple()) return;
+        if (CheckExistCouple())
+        {
+            Debug.Log("END CREATE BOARD");
+            return;
+        }
         CreateBoard(config);
     }
 
@@ -156,7 +161,7 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         _boardUI = null;
         _board = null;
         _posGrid = null;
-        _ids.Clear();
+        _ids = null;
         _graphes = null;
         _matrix = null;
         _startNode = null;
@@ -296,21 +301,32 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
     {
         Graph graph = GetGraphById(_startNode.id);
         var points = GetPathFrom(_startNode, _endNode);
-        if (points != null)
+        if (_startNode.id == _endNode.id)
         {
-            LineSpawner.Instance.Concatenate(points);
-            CoupleSuccess();
-            graph.RemovePathFrom(_startNode, _endNode);
-            if (_ids.Count > 0)
+            if (points != null)
             {
-                this.SetMatrix();
-                this.SetGraphs();
+                LineSpawner.Instance.Concatenate(points);
+                CoupleSuccess();
+                graph.RemovePathFrom(_startNode, _endNode);
+                if (_ids.Count > 0)
+                {
+                    this.SetMatrix();
+                    this.SetGraphs();
+                }
+                if (!this.CheckExistCouple())
+                    this.Remap();
             }
-            if (!this.CheckExistCouple())
-                this.Remap();
+            else
+            {
+                if (LevelManager.Instance.Level < 6)
+                    MergeNodeFall.Instance.ShowPathFall(_startNode.x, _startNode.y, _endNode.x, _endNode.y, _matrix.GetMatrix);
+                this.CoupleFail();
+            }
         }
         else
+        {
             this.CoupleFail();
+        }
         this.CompletedConnection();
     }
 

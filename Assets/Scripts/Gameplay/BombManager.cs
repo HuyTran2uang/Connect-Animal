@@ -7,7 +7,7 @@ using UnityEngine;
 public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrepareGame
 {
     [SerializeField] Bomb _bomPrefab;
-    private bool _isThrowBomb;
+    private bool _isThrowingBomb;
     [SerializeField] private int _numBomb = 2, _countBomb, _totalThrowBombTimes;
     List<IBombText> _bombTexts = new List<IBombText>();
 
@@ -23,12 +23,21 @@ public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrep
         _bombTexts.ForEach(i => i.SetQuantityText(_totalThrowBombTimes));
     }
 
-    public bool Throw()
+    public void Throw()
     {
-        if (GameManager.Instance.GameState != GameState.OnBattle) return false;
-        if (_totalThrowBombTimes == 0) return false;
-        if (_isThrowBomb) return false;
-        _isThrowBomb = true;
+        if (_isThrowingBomb) return;
+        if (_totalThrowBombTimes == 0)
+        {
+            if(CurrencyManager.Instance.SubtractCoint(150))
+            {
+                _totalThrowBombTimes++;
+            }
+            else
+            {
+                return;       
+            }
+        }
+        _isThrowingBomb = true;
         _totalThrowBombTimes--;
         Data.WriteData.Save(GlobalKey.TOTAL_BOMB_TIMES, _totalThrowBombTimes);
         BombUI.Instance.ChangeQuantity(_totalThrowBombTimes);
@@ -38,19 +47,18 @@ public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrep
         if(couple == null)
         {
             Debug.Log("No Exist Couple");
-            return false;
+            return;
         }
         Bomb bomb1 = Instantiate(_bomPrefab, BombSpawner.Instance.transform.position,  Quaternion.identity);
         bomb1.Target(couple.Coord1.x, couple.Coord1.y);
         Bomb bomb2 = Instantiate(_bomPrefab, BombSpawner.Instance.transform.position, Quaternion.identity);
         bomb2.Target(couple.Coord2.x, couple.Coord2.y);
-        return true;
     }
 
     public void CompletedThrowBomb()
     {
         BoardManager.Instance.ResetDataMap();
-        _isThrowBomb = false;
+        _isThrowingBomb = false;
         if (!BoardManager.Instance.CheckCompletedMap()) return;
         GameManager.Instance.Win();
     }
@@ -58,7 +66,7 @@ public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrep
     public void OnBombExplode(Bomb bomb)
     {
         bomb.Explode();
-        Destroy(gameObject);
+        Destroy(bomb.gameObject);
         _countBomb--;
         if (_countBomb > 0) return;
         CompletedThrowBomb();

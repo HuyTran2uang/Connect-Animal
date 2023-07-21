@@ -15,9 +15,4 @@ public class StorePanel : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
-
-    private void OnDisable()
-    {
-        GameManager.Instance.ResumeGame();
-    }
 }
