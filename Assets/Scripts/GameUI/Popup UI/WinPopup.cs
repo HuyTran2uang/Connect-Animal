@@ -32,12 +32,15 @@ public class WinPopup : MonoBehaviour
 
     private void OnEnable()
     {
+        if (LevelManager.Instance.Level < 2) return;
+        Debug.Log("Show MREC");
         ApplovinManager.Instance.HideBanner();
         ApplovinManager.Instance.ShowMRec();
     }
 
     private void OnDisable()
     {
+        if (LevelManager.Instance.Level < 2) return;
         ApplovinManager.Instance.HideMRec();
         ApplovinManager.Instance.ShowBanner();
     }

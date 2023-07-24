@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IChangeLevelText
+public interface ILevelText
 {
-    void ChangeLevelText(int level);
+    void SetLevelText(int level);
 }

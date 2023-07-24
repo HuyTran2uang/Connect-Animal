@@ -34889,6 +34889,7 @@ GameObject:
   - component: {fileID: 956188448197685826}
   - component: {fileID: 527815638221405034}
   - component: {fileID: 4137395905931618467}
+  - component: {fileID: 4137395905931618468}
   m_Layer: 5
   m_Name: Level Text
   m_TagString: Untagged
@@ -40484,6 +40485,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4137395905931618468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2044958474977729745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6200ac8fbd8f7849abdd4e51e1f83aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelText: {fileID: 4137395905931618467}
 --- !u!224 &4140586944979771890
 RectTransform:
   m_ObjectHideFlags: 0
@@ -46938,6 +46952,7 @@ GameObject:
   - component: {fileID: 8766414883634624685}
   - component: {fileID: 338563283476739363}
   - component: {fileID: 4287933974187260048}
+  - component: {fileID: 8766414883634624686}
   m_Layer: 5
   m_Name: Level Text
   m_TagString: Untagged
@@ -47870,7 +47885,6 @@ GameObject:
   - component: {fileID: 8992350057989286177}
   - component: {fileID: 5969051551391959140}
   - component: {fileID: 1599557636991117525}
-  - component: {fileID: 7272446126064717961}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -48354,19 +48368,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7272446126064717961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7089828759253691188}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6200ac8fbd8f7849abdd4e51e1f83aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _levelText: {fileID: 4137395905931618467}
 --- !u!222 &7275630487255139946
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -51420,6 +51421,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6692222057910084909}
   m_CullTransparentMesh: 1
+--- !u!114 &8766414883634624686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6692222057910084909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a29f5bac85f332a4680a276d167d2637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelText: {fileID: 338563283476739363}
 --- !u!224 &8781192133482331629
 RectTransform:
   m_ObjectHideFlags: 0

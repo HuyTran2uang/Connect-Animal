@@ -6,7 +6,8 @@ using UnityEngine;
 public class LevelManager : MonoBehaviourSingleton<LevelManager>, IReadData, IPrepareGame
 {
     private int _level;
-    List<IChangeLevelText> _changeLevelTexts = new List<IChangeLevelText>();
+    List<ILevelText> _levelTexts = new List<ILevelText>();
+    List<ILevelMapText> _levelMapTexts = new List<ILevelMapText>();
 
     public int Level => _level;
 
@@ -19,7 +20,12 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>, IReadData, IPr
             SpecialSpawner.Instance.AddSpecialType(SpecialType.Bomb);
             SpecialSpawner.Instance.AddSpecialType(SpecialType.Lightning);
         }
-        _changeLevelTexts.ForEach(i => i.ChangeLevelText(Level));
+        _levelTexts.ForEach(i => i.SetLevelText(Level));
+    }
+
+    public void SetLevelMap()
+    {
+        _levelMapTexts.ForEach(i => i.SetLevelText(_level));
     }
 
     public void LoadData()
@@ -29,8 +35,9 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>, IReadData, IPr
 
     public void Prepare()
     {
-        _changeLevelTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<IChangeLevelText>().ToList();
-        _changeLevelTexts.ForEach(i => i.ChangeLevelText(Level));
+        _levelTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<ILevelText>().ToList();
+        _levelMapTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<ILevelMapText>().ToList();
+        _levelTexts.ForEach(i => i.SetLevelText(Level));
         if(_level > 12)
         {
             SpecialSpawner.Instance.AddSpecialType(SpecialType.Bomb);

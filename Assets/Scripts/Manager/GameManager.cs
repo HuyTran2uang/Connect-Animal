@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
@@ -31,9 +32,14 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
         }
         Wait();
         _gameState = GameState.OnBattle;
+        LevelManager.Instance.SetLevelMap();
         TimerManager.Instance.SetTimer(180);
         StarManager.Instance.ClearStarInLevel();
-        BoardManager.Instance.CreateBoard(LevelConfigConverter.GetLevelConfig(LevelManager.Instance.Level));
+        BoardManager.Instance.CreateBoard(
+            LevelConfigConverter.GetLevelConfig(
+                LevelManager.Instance.Level <= 100 ? LevelManager.Instance.Level : UnityEngine.Random.Range(10, 100)
+                )
+            );
         _gamePanel.SetLevelPlaying(LevelManager.Instance.Level);
         ResumeGame();
     }

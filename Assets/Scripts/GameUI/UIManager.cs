@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviourSingleton<UIManager>
         _settingButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            //show setting popup
             _settingPopup.gameObject.SetActive(true);
         });
     }
