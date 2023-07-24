@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,10 +10,12 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
     public GameState GameState => _gameState;
     public BattleState BattleState => _battleState;
     GamePanel _gamePanel;
+    int _countMaps;
 
     public void Prepare()
     {
         _gamePanel = FindObjectOfType<GamePanel>(true);
+        _countMaps = Resources.LoadAll<TextAsset>("Levels").Count();
     }
 
     public void Play()
@@ -37,7 +40,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
         StarManager.Instance.ClearStarInLevel();
         BoardManager.Instance.CreateBoard(
             LevelConfigConverter.GetLevelConfig(
-                LevelManager.Instance.Level <= 100 ? LevelManager.Instance.Level : UnityEngine.Random.Range(10, 100)
+                LevelManager.Instance.Level < _countMaps ? LevelManager.Instance.Level : UnityEngine.Random.Range(10, _countMaps)
                 )
             );
         _gamePanel.SetLevelPlaying(LevelManager.Instance.Level);

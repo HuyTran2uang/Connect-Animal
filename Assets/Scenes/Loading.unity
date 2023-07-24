@@ -1130,7 +1130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1776365015
 Transform:
   m_ObjectHideFlags: 0
@@ -1158,7 +1158,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6a4b67f8742de4fb8fad32b74b311c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _texture2Ds: []
+  _texture2Ds:
+  - {fileID: 2800000, guid: 9c75531173de834488f812a79303e827, type: 3}
+  - {fileID: 2800000, guid: 0946e29f13f62e24ebab7ae976a4fe10, type: 3}
+  - {fileID: 2800000, guid: 676eb8e47f3fbf5418f8eb73e03bb622, type: 3}
+  - {fileID: 2800000, guid: f1294f1d55b80c24297f24fd8b3e7ff3, type: 3}
+  - {fileID: 2800000, guid: 7c35027cbd9b6a946bc109e05a98bcd0, type: 3}
+  - {fileID: 2800000, guid: f8934da568abebf45b300f1c72849d4f, type: 3}
+  - {fileID: 2800000, guid: 4c2cd384d4d122d439df2cd9fedce455, type: 3}
+  - {fileID: 2800000, guid: b84df60dd5c056f478d81830661f458c, type: 3}
+  - {fileID: 2800000, guid: 7b9759ebb689d3e48bb24e8d4bed4271, type: 3}
+  - {fileID: 2800000, guid: baba2fa3e06b8d84f8bf66b99427afa9, type: 3}
 --- !u!1 &1825075338
 GameObject:
   m_ObjectHideFlags: 0
