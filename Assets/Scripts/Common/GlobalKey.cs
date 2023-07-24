@@ -22,6 +22,7 @@ public class GlobalKey
     public static string LASTDAY = "LastDay";
     public static string LASTMONTH = "LastMonth";
     public static string LASTYEAR = "LastYear";
+    public static string FIRSTSPINWHEEL = "FirstSpinWheel";
 
     public static string VIBRATION = "Vibration";
     public static string TUTORIAL_OPENING = "TutorialOpening";

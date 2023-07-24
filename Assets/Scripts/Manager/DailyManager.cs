@@ -22,6 +22,7 @@ public class DailyManager : MonoBehaviourSingleton<DailyManager>, IAfterPrepareG
             if (_lastYear != _currentDate.Year || _lastMonth != _currentDate.Month || _lastDay != _currentDate.Day)
             {
                 ActiveDailyReward();
+                SpinWheelManager.Instance.ActiveSpinWheel();
             }
         }
     }

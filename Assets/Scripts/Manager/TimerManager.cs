@@ -10,6 +10,9 @@ public class TimerManager : MonoBehaviourSingleton<TimerManager>, IPrepareGame
     public float TotalTime => _totalTime;
     public float NextShowInterAds => _nextShowInterAds;
 
+    float _timeFirstSpin;
+    bool _firstSpin;
+
     public void Prepare()
     {
         _progressTimer = FindObjectOfType<ProgressTimer>(true);

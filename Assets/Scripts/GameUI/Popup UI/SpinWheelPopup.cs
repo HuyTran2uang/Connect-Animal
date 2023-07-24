@@ -7,7 +7,7 @@ public class SpinWheelPopup : MonoBehaviour
     [SerializeField] GameObject _spinWheel;
     [SerializeField] Button _freeSpin, _freeSpinAd, _backButton;
 
-    int _numberOfGift = 9, _countReward;
+    int _numberOfGift = 8, _countReward;
     float _timeRotate = 5;
     float _numberCricleRotate = 8;
     float _angleOfGift, _currentTime, _indexGiftRandom, _offsetAngle;
@@ -58,35 +58,35 @@ public class SpinWheelPopup : MonoBehaviour
         }
         yield return new WaitForEndOfFrame();
         switch(_indexGiftRandom){
-            case 1:
+            case 8:
                 Debug.Log("+1 remap");
                 RemapManager.Instance.AddRemapTimes(1);
                 break;
-            case 2:
+            case 1:
                 Debug.Log("+150 coint");
                 CurrencyManager.Instance.AddCoint(150);
                 break;
-            case 3:
+            case 2:
                 Debug.Log("+2 hint");
                 HintManager.Instance.AddHintTimes(2);
                 break;
-            case 4:
+            case 3:
                 Debug.Log("+2 bomb");
                 BombManager.Instance.AddThrowTimes(2);
                 break;
-            case 5:
+            case 4:
                 Debug.Log("+2 remap");
                 RemapManager.Instance.AddRemapTimes(2);
                 break;
-            case 6:
+            case 5:
                 Debug.Log("+300 coint");
                 CurrencyManager.Instance.AddCoint(300);
                 break;
-            case 7:
+            case 6:
                 Debug.Log("+1 hint");
                 HintManager.Instance.AddHintTimes(1);
                 break;
-            case 8:
+            case 7:
                 Debug.Log("+1 bomb");
                 BombManager.Instance.AddThrowTimes(1);
                 break;
