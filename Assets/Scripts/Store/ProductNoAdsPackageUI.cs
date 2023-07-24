@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -11,7 +11,9 @@ public class ProductNoAdsPackageUI : ProductPackageUI, IBoughtRemoveAds
     public void Init(string id, ProductMetadata metadata)
     {
         _id = id;
-        _priceText.text = metadata.localizedPriceString;
+        string price = metadata?.localizedPriceString;
+        price = price.Replace("₫", "VND");
+        _priceText.text = price;
     }
 
     public void BoughtRemoveAds()

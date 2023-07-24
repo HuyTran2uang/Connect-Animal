@@ -9,7 +9,24 @@ public class StarText : MonoBehaviour, IStarText
 
     public void SetQuantityText(int quantity)
     {
-        _quantityText.text = quantity.ToString();
+        string quantityString = "";
+        if (quantity >= 1000 && quantity < 1000000)
+        {
+            quantityString = $"{quantity / 1000}K";
+        }
+        else if (quantity >= 1000000 && quantity < 1000000000)
+        {
+            quantityString = $"{quantity / 1000000}M";
+        }
+        else if (quantity >= 1000000000)
+        {
+            quantityString = $"{quantity / 1000000000}B";
+        }
+        else
+        {
+            quantityString = quantity.ToString();
+        }
+        _quantityText.text = quantityString;
     }
 
     private void Reset()

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Purchasing;
@@ -24,7 +24,9 @@ public class ProductBigPackageUI : ProductPackageUI
                 _iconChestes[2].SetActive(true);
                 break;
         }
-        _priceText.text = metadata.localizedPriceString;
+        string price = metadata?.localizedPriceString;
+        price = price.Replace("₫", "VND");
+        _priceText.text = price;
         _coinText.text = package.Coin.ToString();
         _bombText.text = package.Bomb.ToString();
         _hintText.text = package.Hint.ToString();

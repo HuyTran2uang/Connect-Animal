@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -26,7 +26,11 @@ public class ProductCoinPackageUI : ProductPackageUI
         }
         _coinText.text = package.Coin.ToString();
         if (_priceText != null)
-            _priceText.text = metadata.localizedPriceString;
+        {
+            string price = metadata?.localizedPriceString;
+            price = price.Replace("₫", "VND");
+            _priceText.text = price;
+        }
         else
             _coinText.text = $"+{package.Coin}";
     }

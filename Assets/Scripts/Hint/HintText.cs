@@ -9,7 +9,24 @@ public class HintText : MonoBehaviour, IHintText
 
     public void SetQuantityText(int quantity)
     {
-        _quantity.text = quantity.ToString();
+        string quantityString = "";
+        if (quantity >= 1000 && quantity < 1000000)
+        {
+            quantityString = $"{quantity / 1000}K";
+        }
+        else if (quantity >= 1000000 && quantity < 1000000000)
+        {
+            quantityString = $"{quantity / 1000000}M";
+        }
+        else if (quantity >= 1000000000)
+        {
+            quantityString = $"{quantity / 1000000000}B";
+        }
+        else
+        {
+            quantityString = quantity.ToString();
+        }
+        _quantity.text = quantityString;
     }
 
     private void Reset()

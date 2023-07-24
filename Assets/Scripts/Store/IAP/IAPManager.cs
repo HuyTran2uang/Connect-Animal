@@ -5,7 +5,6 @@ using UnityEngine.Purchasing.Extension;
 
 public class IAPManager : MonoBehaviourSingleton<IAPManager>
     , IDetailedStoreListener
-    , IAfterPrepareGame
 {
     private static IStoreController m_StoreController;
     private static IExtensionProvider m_StoreExtensionProvider;
@@ -21,12 +20,7 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>
     const string IAP_REMOVE_ADS = "iap_remove_ads";
     //
 
-    public void AfterPrepareGame()
-    {
-        Init();
-    }
-
-    private void Init()
+    private void Start()
     {
         // If we haven't set up the Unity Purchasing reference
         if (m_StoreController == null)
@@ -38,16 +32,16 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>
 
     public ProductMetadata GetMetaData(string id)
     {
-        return m_StoreController.products.WithID(id).metadata;
+        return m_StoreController?.products.WithID(id).metadata;
     }
 
     private void InitializePurchasing()
     {
         if (IsInitialized())
         {
-            // ... we are done here.
             return;
         }
+
         // Create a builder, first passing in a suite of Unity provided stores.
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
         builder.AddProduct(IAP_BIG_PACK_1, ProductType.Consumable);
@@ -60,6 +54,10 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>
             builder.AddProduct(IAP_REMOVE_ADS, ProductType.Consumable);
         //---------------------
         UnityPurchasing.Initialize(this, builder);
+    }
+
+    private void InitPackageUI()
+    {
         //----------------------
         _productDataDict.Add(IAP_BIG_PACK_1, FactoryProductData.CreateProductBigPackage(IAP_BIG_PACK_1, ProductType.Consumable, 1000, 5, 5, 5, 3));
         _productDataDict.Add(IAP_BIG_PACK_2, FactoryProductData.CreateProductBigPackage(IAP_BIG_PACK_2, ProductType.Consumable, 3000, 15, 15, 15, 9));
@@ -174,6 +172,7 @@ public class IAPManager : MonoBehaviourSingleton<IAPManager>
         m_StoreController = controller;
         // Store specific subsystem, for accessing device-specific store features.
         m_StoreExtensionProvider = extensions;
+        this.InitPackageUI();
     }
 
 

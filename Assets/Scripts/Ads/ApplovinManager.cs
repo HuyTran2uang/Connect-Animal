@@ -270,11 +270,6 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
     public void ShowRewardedAd(Action _onReawarded)
     {
-        if(_isNoAdsPurchased)
-        {
-            _onReawarded.Invoke();
-            return;
-        }
         if (MaxSdkUnityEditor.IsRewardedAdReady(rewardedAdUnitId))
         {
             onRewarded = _onReawarded;
@@ -290,11 +285,6 @@ public class ApplovinManager : MonoBehaviourSingleton<ApplovinManager>
 
     public void ShowRewardedAd(Action _onReawarded)
     {
-        if(_isNoAdsPurchased)
-        {
-            _onReawarded.Invoke();
-            return;
-        }
         if (MaxSdk.IsRewardedAdReady(rewardedAdUnitId))
         {
             onRewarded = _onReawarded;

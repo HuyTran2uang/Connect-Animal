@@ -36,7 +36,6 @@ public class GamePanel : MonoBehaviour
         {
             AudioManager.Instance.PlaySoundClickButton();
             _storePanel.gameObject.SetActive(true);
-            GameManager.Instance.Wait();
         });
 
         _giftBoxButton.onClick.AddListener(delegate
