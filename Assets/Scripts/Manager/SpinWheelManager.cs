@@ -6,7 +6,7 @@ public class SpinWheelManager : MonoBehaviourSingleton<SpinWheelManager>, IPrepa
 {
     SpinWheelPopup _spinWheel;
     bool _isFirstSpined;
-    float _15m = 15;
+    float _15m = 15 * 60;
 
     public void LoadData()
     {

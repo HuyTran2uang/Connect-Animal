@@ -39,8 +39,8 @@ public class WinPopup : MonoBehaviour
 
     private void OnDisable()
     {
-        if (LevelManager.Instance.Level < 3) return;
-        ApplovinManager.Instance.HideMRec();
+        if (LevelManager.Instance.Level >= 3)
+            ApplovinManager.Instance.HideMRec();
         ApplovinManager.Instance.ShowBanner();
     }
 }

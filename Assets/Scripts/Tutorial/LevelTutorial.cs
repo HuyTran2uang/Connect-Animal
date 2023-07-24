@@ -35,20 +35,23 @@ public class LevelTutorial : MonoBehaviourSingleton<LevelTutorial>
             _nodeB = node;
             _lines[_iCouple].SetActive(true);
             _stars[_iCouple].SetActive(true);
-            _nodeA.gameObject.SetActive(false);
-            _nodeB.gameObject.SetActive(false);
-            _nodeA = null;
-            _nodeB = null;
-            _lines[_iCouple].SetActive(false);
-            _stars[_iCouple].SetActive(false);
-            _iCouple++;
-            if (_iCouple < 6)
-                HintCouple();
-            else
+            DOVirtual.DelayedCall(.2f, delegate
             {
-                TutorialManager.Instance.PassLevelTutorial();
-                GameManager.Instance.Play();
-            }
+                _nodeA.gameObject.SetActive(false);
+                _nodeB.gameObject.SetActive(false);
+                _nodeA = null;
+                _nodeB = null;
+                _lines[_iCouple].SetActive(false);
+                _stars[_iCouple].SetActive(false);
+                _iCouple++;
+                if (_iCouple < 6)
+                    HintCouple();
+                else
+                {
+                    TutorialManager.Instance.PassLevelTutorial();
+                    GameManager.Instance.Play();
+                }
+            });
         }
     }
 
