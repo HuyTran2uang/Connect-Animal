@@ -82,16 +82,22 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
         Wait();
         AudioManager.Instance.PlaySoundWinButton();
         LevelManager.Instance.LevelUp();
+
         if (LevelManager.Instance.Level == 2) DailyManager.Instance.ActiveDailyReward();
         if (LevelManager.Instance.Level % 10 == 0)
         {
-            ChestManager.Instance.OpenLevelChest();
+            ChestManager.Instance.ShowLevelChest();
         }
         else
         {
             UIManager.Instance.Win();
         }
+        int oldCountStar = StarManager.Instance.QuantityStar;
         StarManager.Instance.PassStarInLevelToData();
+        if(StarManager.Instance.QuantityStar / 3000 - oldCountStar / 3000 >= 1)
+        {
+            ChestManager.Instance.ShowStarChests();
+        }
         TimerManager.Instance.ResetTotalTime();
     }
 

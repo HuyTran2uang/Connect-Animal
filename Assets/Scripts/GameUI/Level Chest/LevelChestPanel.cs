@@ -9,88 +9,61 @@ using System;
 public class LevelChestPanel : MonoBehaviourSingleton<LevelChestPanel>
 {
     [SerializeField] List<Key> keys;
-    [SerializeField] List<LevelChest> levelChests;
+    [SerializeField] List<Chest> chests;
 
-    [SerializeField] GameObject levelChestPopup;
     [SerializeField] GameObject boardKey;
     [SerializeField] Button backButton, watchAdsButton;
-
-    int coin;
-    int countKey = 3;   
-
-    public int CountKey => countKey;
-
-    public void CheckOpenedChest()
-    {
-        countKey = 3;
-        foreach (LevelChest levelChest in levelChests)
-        {
-            if (levelChest.isOpened)
-            {
-                countKey --;
-                if (countKey <= 0)
-                {
-                    ActiveWatchADS();
-                }
-            }
-        }
-    }
 
     private void Awake()
     {
         backButton.onClick.AddListener(delegate
         {
             AudioManager.Instance.PlaySoundClickButton();
-            Back();
+            gameObject.SetActive(false);
         });
 
         watchAdsButton.onClick.AddListener(delegate
         {
+            AudioManager.Instance.PlaySoundClickButton();
             ApplovinManager.Instance.ShowRewardedAd(delegate
             {
-                WatchADSDone();
+                ChestManager.Instance.BuyKey();
+                ResetKey();
             });
         });
-
-        foreach (LevelChest levelChest in levelChests)
-        {
-            levelChest.ButtonChest.onClick.AddListener(delegate
-            {
-                if (countKey == 2)
-                {
-                    ApplovinManager.Instance.ShowRewardedAd(delegate
-                    {
-                        AudioManager.Instance.PlaySoundClickButton();
-                        CheckOpenedChest();
-                    });
-                }
-                else
-                {
-                    AudioManager.Instance.PlaySoundClickButton();
-                    CheckOpenedChest();
-                }
-            });
-        }
     }
 
-    public void WatchADSDone()
-    {
-        countKey = 9;
-    }
-    public void Back()
-    {
-        levelChestPopup.SetActive(false);
-    }
-    public void ActiveWatchADS()
+    public void ShowWatchAdsButton()
     {
         boardKey.SetActive(false);
         watchAdsButton.gameObject.SetActive(true);
     }
+
+    public void HideWatchAdsButton()
+    {
+        boardKey.SetActive(true);
+        watchAdsButton.gameObject.SetActive(false);
+    }
+    public void UnKey(int index)
+    {
+        keys[index].UnKey();
+    }
+
+    public void ResetKey()
+    {
+        foreach (Key key in keys)
+        {
+            key.ActiveKey();
+        }
+    }
+
     private void OnEnable()
     {
-        foreach (LevelChest levelChest in levelChests)
+        ResetKey();
+        ChestManager.Instance.ShowLevelChest();
+        foreach (Chest chest in chests)
         {
-            levelChest.ResetChest();
+            chest.ResetChest();
         }
     }
 }

@@ -6,7 +6,7 @@ using TMPro;
 using DG.Tweening;
 using Unity.VisualScripting;
 
-public class LevelChest : MonoBehaviour
+public class Chest : MonoBehaviour
 {
     [SerializeField] GameObject iconCloseChest, iconOpenChest;
     [SerializeField] Button buttonChest;
@@ -21,12 +21,15 @@ public class LevelChest : MonoBehaviour
 
     public void Awake()
     {
-        buttonChest.onClick.AddListener(DoOpenChest);
+        buttonChest.onClick.AddListener(delegate
+        {
+            ChestManager.Instance.OpenChest(this);
+        });
     }
 
-    public void DoOpenChest()
+    public void Open()
     {
-        if (LevelChestPanel.Instance.CountKey <= 0) return;
+        if (ChestManager.Instance.CountKey <= 0) return;
         coinRewardNumber = Random.Range(1, 200);
         CurrencyManager.Instance.AddCoint(coinRewardNumber);
         iconCloseChest.SetActive(false);
@@ -43,10 +46,5 @@ public class LevelChest : MonoBehaviour
         iconOpenChest.SetActive(false);
         buttonChest.interactable = true;
         isOpened = false;
-    }
-
-    public void SetDeActive()
-    {
-        buttonChest.interactable = false;
     }
 }
