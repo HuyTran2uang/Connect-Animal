@@ -67,7 +67,6 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 
     public void CreateBoard(LevelConfig config)
     {
-        Debug.Log("START CREATE BOARD");
         Clear();
         TimerManager.Instance.ResetAutoHintTimer();
         _quantityWhenChangeMap = new List<int>() { 10, 14, 20, 28, 34, 40, 44, 50 };
@@ -81,7 +80,6 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         SetPosCam();
         if (CheckExistCouple())
         {
-            Debug.Log("END CREATE BOARD");
             return;
         }
         CreateBoard(config);
@@ -327,12 +325,6 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
             this.CoupleFail();
         }
         this.CompletedConnection();
-    }
-
-    private void CompletedLevel()
-    {
-        Clear();
-        GameManager.Instance.Win();
     }
 
     public void SelectNode(int row, int col)

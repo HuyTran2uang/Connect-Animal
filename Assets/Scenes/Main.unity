@@ -599,6 +599,7 @@ GameObject:
   - component: {fileID: 1013733942}
   - component: {fileID: 1013733943}
   - component: {fileID: 1013733941}
+  - component: {fileID: 1013733944}
   m_Layer: 5
   m_Name: Star Count
   m_TagString: Untagged
@@ -5577,16 +5578,16 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 722137512511077894}
-  - {fileID: 3357162835285209073}
-  - {fileID: 1164453938}
   - {fileID: 1885524487669730704}
   - {fileID: 157390061}
   - {fileID: 411743458}
   - {fileID: 1317877781}
   - {fileID: 2411342783833044406}
   - {fileID: 1371935215534523142}
-  - {fileID: 2126960443}
   - {fileID: 2000077969173481199}
+  - {fileID: 1164453938}
+  - {fileID: 3357162835285209073}
+  - {fileID: 2126960443}
   m_Father: {fileID: 1737584920}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13411,6 +13412,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 70984999}
   m_CullTransparentMesh: 1
+--- !u!114 &1013733944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70984999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e29495d7e7144a47b0cf5d0d4985de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _quantityText: {fileID: 1013733941}
 --- !u!1 &1017028180
 GameObject:
   m_ObjectHideFlags: 0
@@ -30117,6 +30131,7 @@ GameObject:
   - component: {fileID: 4010897696425299775}
   - component: {fileID: 6657623993194187458}
   - component: {fileID: 2628212128483577126}
+  - component: {fileID: 6657623993194187459}
   m_Layer: 5
   m_Name: Star Text
   m_TagString: Untagged
@@ -46870,6 +46885,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124866264005534212}
   m_CullTransparentMesh: 1
+--- !u!114 &6657623993194187459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124866264005534212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bfa9ed121aca534a9d4d7ddb5f42af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _quantityText: {fileID: 2628212128483577126}
 --- !u!224 &6666898790546130706
 RectTransform:
   m_ObjectHideFlags: 0
@@ -52240,7 +52268,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4736481553153534090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bfa9ed121aca534a9d4d7ddb5f42af6, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e29495d7e7144a47b0cf5d0d4985de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _quantityText: {fileID: 4749154389850580198}

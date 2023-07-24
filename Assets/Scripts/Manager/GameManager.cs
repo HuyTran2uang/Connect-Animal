@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
     {
         if (!TutorialManager.Instance.IsPassedLevelTutorial)
         {
-            Debug.Log("OPEN TUTORIAL LEVEL");
             TutorialManager.Instance.OpenLevelTutorial();
             return;
         }
@@ -32,11 +31,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
         }
         Wait();
         _gameState = GameState.OnBattle;
-        Debug.Log("SET TIME");
         TimerManager.Instance.SetTimer(180);
-        Debug.Log("CLEAR STAR CHEST");
         StarManager.Instance.ClearStarInLevel();
-        Debug.Log("CREATE BOARD");
         BoardManager.Instance.CreateBoard(LevelConfigConverter.GetLevelConfig(LevelManager.Instance.Level));
         _gamePanel.SetLevelPlaying(LevelManager.Instance.Level);
         ResumeGame();
@@ -75,7 +71,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     public void Win()
     {
-        Debug.Log("WIN");
         _gameState = GameState.None;
         if (LevelManager.Instance.Level > 5)
             ApplovinManager.Instance.ShowInterstitial();
@@ -103,7 +98,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     public void Lose()
     {
-        Debug.Log("LOSE");
         if (LevelManager.Instance.Level > 5)
             ApplovinManager.Instance.ShowInterstitial();
         Wait();

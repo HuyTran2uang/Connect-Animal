@@ -1158,31 +1158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a6a4b67f8742de4fb8fad32b74b311c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _texture2Ds:
-  - {fileID: 2800000, guid: a2af9288177238e409e8e383325ad27a, type: 3}
-  - {fileID: 2800000, guid: 32afd6567ccfb16438164bbacd683cba, type: 3}
-  - {fileID: 2800000, guid: 48c096fa351be544ba8c1f7e88b55318, type: 3}
-  - {fileID: 2800000, guid: ba979528e8195bf408301aa6ef08eac3, type: 3}
-  - {fileID: 2800000, guid: 04257f9305166db4abcb732671a7b843, type: 3}
-  - {fileID: 2800000, guid: 9c9ba64158ed34a40b738ccddbc0ec51, type: 3}
-  - {fileID: 2800000, guid: 32a7cfb61d68b984c95a53e9cead1b29, type: 3}
-  - {fileID: 2800000, guid: eda094bca7009ff4ba04fd326be354c1, type: 3}
-  - {fileID: 2800000, guid: a2987e1e3a2120e4e8ebcafbb7d8e691, type: 3}
-  - {fileID: 2800000, guid: c535c1bb5cb55cc4cad963ddab2fb306, type: 3}
-  - {fileID: 2800000, guid: 7e18d2507bbef5342852fdc45f09ece8, type: 3}
-  - {fileID: 2800000, guid: 5a8759ee3757f984d9e0876141adc2fa, type: 3}
-  - {fileID: 2800000, guid: ca1798d5fb87645429c76f5c8a7d7ba1, type: 3}
-  - {fileID: 2800000, guid: 57068b04a5387554097880556e5659c2, type: 3}
-  - {fileID: 2800000, guid: cf26147a158afc848957cb7ddc085cdb, type: 3}
-  - {fileID: 2800000, guid: 2efe19d9798d411408e745866529b610, type: 3}
-  - {fileID: 2800000, guid: 3c23e86968d517d428b15c09ebb6c002, type: 3}
-  - {fileID: 2800000, guid: a833aff70477bcf44b21e91d6f97099e, type: 3}
-  - {fileID: 2800000, guid: 91914032e39978c46b83532ca04f2257, type: 3}
-  - {fileID: 2800000, guid: d53842c139b8b0e43b9b94b734f6b070, type: 3}
-  - {fileID: 2800000, guid: 65bba6f8ff707244db51ea79da206321, type: 3}
-  - {fileID: 2800000, guid: 5bed2d6c9c2533546a16a1f7e4ddfb6d, type: 3}
-  - {fileID: 2800000, guid: 113d3ca41ebac4b4da1be4001dfd6e41, type: 3}
-  - {fileID: 2800000, guid: cf16fe30268e05f4e9f06339b195259e, type: 3}
+  _texture2Ds: []
 --- !u!1 &1825075338
 GameObject:
   m_ObjectHideFlags: 0

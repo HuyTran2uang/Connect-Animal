@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,8 +5,8 @@ using UnityEngine;
 public class StarManager : MonoBehaviourSingleton<StarManager>, IReadData, IPrepareGame
 {
     [SerializeField] private int _quantityStar, _quantityStarInLevel;
-    List<IChangeStarText> _changeStarTexts = new List<IChangeStarText>();
     List<IStarText> _starTexts = new List<IStarText>();
+    List<IStarLevelText> _starLevelTexts = new List<IStarLevelText>();
 
     public int QuantityStar => _quantityStar;
 
@@ -18,10 +17,9 @@ public class StarManager : MonoBehaviourSingleton<StarManager>, IReadData, IPrep
 
     public void Prepare()
     {
-        _changeStarTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<IChangeStarText>().ToList();
-        _changeStarTexts.ForEach(i => i.ChangeStarText(_quantityStar));
         _starTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<IStarText>().ToList();
         _starTexts.ForEach(i => i.SetQuantityText(_quantityStar));
+        _starLevelTexts = FindObjectsOfType<MonoBehaviour>(true).OfType<IStarLevelText>().ToList();
     }
 
     private void AddStarData(int quantity)
@@ -34,7 +32,7 @@ public class StarManager : MonoBehaviourSingleton<StarManager>, IReadData, IPrep
     public void AddStar(int quantity)
     {
         _quantityStarInLevel += quantity;
-        _changeStarTexts.ForEach(i => i.ChangeStarTextInLevel(_quantityStarInLevel));
+        _starLevelTexts.ForEach(i => i.SetQuantityText(_quantityStarInLevel));
     }
 
     public void PassStarInLevelToData()
@@ -45,6 +43,6 @@ public class StarManager : MonoBehaviourSingleton<StarManager>, IReadData, IPrep
     public void ClearStarInLevel()
     {
         _quantityStarInLevel = 0;
-        _changeStarTexts.ForEach(i => i.ChangeStarTextInLevel(_quantityStarInLevel));
+        _starLevelTexts.ForEach(i => i.SetQuantityText(_quantityStarInLevel));
     }
 }
