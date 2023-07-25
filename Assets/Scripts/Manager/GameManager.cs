@@ -81,7 +81,6 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     public void Win()
     {
-        _gameState = GameState.None;
         if (LevelManager.Instance.Level > 5)
             ApplovinManager.Instance.ShowInterstitial();
         Wait();

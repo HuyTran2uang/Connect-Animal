@@ -22,6 +22,7 @@ public class SpinWheelPopup : MonoBehaviour
             AudioManager.Instance.PlaySoundClickButton();
             StartCoroutine(RotateWheel());
             _freeSpin.interactable = false;
+            _backButton.interactable = false;
             _countReward += 1;
         });
 
@@ -32,6 +33,7 @@ public class SpinWheelPopup : MonoBehaviour
             {
                 StartCoroutine(RotateWheel());
                 _freeSpinAd.interactable = false;
+                _backButton.interactable = false;
                 _countReward += 1;
             });
         });
@@ -92,9 +94,8 @@ public class SpinWheelPopup : MonoBehaviour
                 break;
         }
         if (_countReward == 1)
-        {
             _freeSpin.gameObject.SetActive(false);
-        }
+        _backButton.interactable = true;
     }
 
     private void OnEnable()

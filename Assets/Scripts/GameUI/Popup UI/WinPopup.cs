@@ -20,6 +20,7 @@ public class WinPopup : MonoBehaviour
             _homePanel.gameObject.SetActive(true);
             _gamePanel.gameObject.SetActive(false);
             _winPopup.gameObject.SetActive(false);
+            GameManager.Instance.GoToMenuFromBattle();
         });
 
         _nextLevelButton.onClick.AddListener(delegate
