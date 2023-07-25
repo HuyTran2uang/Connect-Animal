@@ -54,7 +54,7 @@ public class LosePopup : MonoBehaviour
             AudioManager.Instance.PlaySoundClickButton();
             ApplovinManager.Instance.ShowRewardedAd(delegate
             {
-                TimerManager.Instance.IncreaseTime(60);
+                TimerManager.Instance.SetTimer(60);
                 GameManager.Instance.ResumeGame();
                 _losePopup.SetActive(false);
             });
@@ -65,7 +65,7 @@ public class LosePopup : MonoBehaviour
             AudioManager.Instance.PlaySoundClickButton();
             if (CurrencyManager.Instance.SubtractCoint(300)) 
             {
-                TimerManager.Instance.IncreaseTime(60);
+                TimerManager.Instance.SetTimer(60);
                 GameManager.Instance.ResumeGame();
                 _losePopup.SetActive(false);
             }
@@ -80,7 +80,7 @@ public class LosePopup : MonoBehaviour
             AudioManager.Instance.PlaySoundClickButton();
             if (CurrencyManager.Instance.SubtractCoint(500)) 
             {
-                TimerManager.Instance.IncreaseTime(60);
+                TimerManager.Instance.SetTimer(60);
                 GameManager.Instance.ResumeGame();
                 _losePopup.SetActive(false);
             }

@@ -28,12 +28,6 @@ public class TimerManager : MonoBehaviourSingleton<TimerManager>, IPrepareGame
         _totalTime = 180;
     }
 
-    public void IncreaseTime(int seconds)
-    {
-        _battleDuration += seconds;
-        _totalTime += seconds;
-    }
-
     public void ResetAutoHintTimer()
     {
         if (LevelManager.Instance.Level > 5) return;

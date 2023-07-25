@@ -15,4 +15,14 @@ public class StorePanel : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.GoToStore();
+    }
+
+    private void OnDisable()
+    {
+        GameManager.Instance.OutStore();
+    }
 }

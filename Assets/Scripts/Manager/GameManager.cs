@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
     public BattleState BattleState => _battleState;
     GamePanel _gamePanel;
     int _countMaps;
+    bool _onStore;
 
     public void Prepare()
     {
@@ -116,10 +117,20 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 
     private void OnApplicationFocus(bool focus)
     {
-        if(focus)
+        if(focus && !_onStore)
         {
             ApplovinManager.Instance.ShowInterstitial();
         }
+    }
+
+    public void GoToStore()
+    {
+        _onStore = true;
+    }
+
+    public void OutStore()
+    {
+        _onStore = false;
     }
 }
 
