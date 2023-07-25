@@ -24,6 +24,7 @@ public class RocketSpawner : MonoBehaviourSingleton<RocketSpawner>
     {
         rocket.Explode();
         _rockets.Remove(rocket);
+        Destroy(rocket.gameObject);
         if (_rockets.Count > 0) return;
         GameManager.Instance.ResumeGame();
     }
