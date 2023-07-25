@@ -63,7 +63,8 @@ public class Item : MonoBehaviour
         {
             if (!check)
             {
-                _light.DOScale(Vector3.one * .3f, .2f).SetLoops(2, LoopType.Yoyo).SetAutoKill();
+                if (_light != null)
+                    _light.DOScale(Vector3.one * .3f, .2f).SetLoops(2, LoopType.Yoyo).SetAutoKill();
                 transform.DOShakeRotation(.1f, new Vector3(0, 0, 40), 10, 30).SetLoops(2, LoopType.Yoyo).SetAutoKill();
             }
             check = !check;
@@ -74,7 +75,8 @@ public class Item : MonoBehaviour
     public void UnHint()
     {
         _isHint = false;
-        _light.localScale = Vector3.zero;
+        if (_light != null)
+            _light.localScale = Vector3.zero;
         _tweeners.ForEach(i => i.Kill());
         transform.localScale = Vector3.one * _originalScale;
     }
