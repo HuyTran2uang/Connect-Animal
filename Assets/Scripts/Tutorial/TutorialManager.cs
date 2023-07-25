@@ -29,6 +29,7 @@ public class TutorialManager : MonoBehaviourSingleton<TutorialManager>, IReadDat
 
     public void StartTutorial()
     {
+        GameManager.Instance.OpenTutorial();
         _isOpening = true;
         Data.WriteData.Save(GlobalKey.TUTORIAL_OPENING, _isOpening);
         _iTutorial = 0;
@@ -54,6 +55,7 @@ public class TutorialManager : MonoBehaviourSingleton<TutorialManager>, IReadDat
                 Data.WriteData.Save(GlobalKey.TUTORIAL_OPENING, _isOpening);
                 _tutorialPanel.gameObject.SetActive(false);
                 _tutorialPanel.CloseTutorials();
+                GameManager.Instance.CloseTutorial();
                 break;
         }
         _iTutorial++;
@@ -64,6 +66,7 @@ public class TutorialManager : MonoBehaviourSingleton<TutorialManager>, IReadDat
         _tutorialPanel.CompletedLevelTutorial();
         _isPassedLevelTutorial = true;
         Data.WriteData.Save(GlobalKey.LEVEL_TUTORIAL_PASSED, _isPassedLevelTutorial);
+        GameManager.Instance.CloseTutorial();
     }
 
     public void OpenLevelTutorial()

@@ -19,10 +19,21 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
         _countMaps = Resources.LoadAll<TextAsset>("Levels").Count();
     }
 
+    public void OpenTutorial()
+    {
+        _gameState = GameState.Tutorial;
+    }
+
+    public void CloseTutorial()
+    {
+        _gameState = GameState.None;
+    }
+
     public void Play()
     {
         if (!TutorialManager.Instance.IsPassedLevelTutorial)
         {
+            OpenTutorial();
             TutorialManager.Instance.OpenLevelTutorial();
             return;
         }
@@ -136,6 +147,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 public enum GameState
 {
     None,
+    Tutorial,
     OnBattle,
 }
 
