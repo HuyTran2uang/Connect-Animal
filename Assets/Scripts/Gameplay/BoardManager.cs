@@ -304,7 +304,6 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
             {
                 LineSpawner.Instance.Concatenate(points);
                 CoupleSuccess();
-                graph.RemovePathFrom(_startNode, _endNode);
                 if (_ids.Count > 0)
                 {
                     this.SetMatrix();
@@ -399,19 +398,15 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         this.SetMatrix();
         this.SetGraphs();
         if (this.CheckExistCouple())
-        {
             return;
-        }
         Remap();
     }
 
     public Graph GetFirstGraphExistCouple()
     {
         foreach (var graph in _graphes)
-        {
             if (graph.IsExistCouple())
                 return graph;
-        }
         return null;
     }
 
@@ -445,10 +440,9 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         _ids.Remove(_board[row, col].id);
         _board[row, col] = null;
         _boardUI[row, col] = null;
+        ItemSpawner.Instance.UnHint();
         if(_ids.Count == 0)
-        {
             GameManager.Instance.Win();
-        }
     }
 
     public void ExplodeAndRemoveItem(int row, int col)

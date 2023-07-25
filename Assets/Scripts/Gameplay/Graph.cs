@@ -35,14 +35,6 @@ public class Graph
         return _pathDict.ContainsKey(key) ? _pathDict[key] : null;
     }
 
-    public void RemovePathFrom(Node nodeA, Node nodeB)
-    {
-        Couple key = new Couple(new Vector2Int(nodeA.x, nodeA.y), new Vector2Int(nodeB.x, nodeB.y));
-        _pathDict.Remove(key);
-        Couple keyReverse = new Couple(new Vector2Int(nodeB.x, nodeB.y), new Vector2Int(nodeA.x, nodeA.y));
-        _pathDict.Remove(keyReverse);
-    }
-
     public bool IsExistCouple() => _pathDict.Keys.Count > 0;
 
     public Couple GetGraphKeyFirst()

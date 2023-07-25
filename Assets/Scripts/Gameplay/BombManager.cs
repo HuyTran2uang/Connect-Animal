@@ -25,6 +25,7 @@ public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrep
 
     public void Throw()
     {
+        GameManager.Instance.Wait();
         if (_isThrowingBomb) return;
         if (_totalThrowBombTimes == 0)
         {
@@ -60,6 +61,7 @@ public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrep
     {
         BoardManager.Instance.ResetDataMap();
         _isThrowingBomb = false;
+        GameManager.Instance.ResumeGame();
     }
 
     public void OnBombExplode(Bomb bomb)

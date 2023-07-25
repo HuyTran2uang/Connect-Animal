@@ -6,7 +6,7 @@ public class SpinWheelManager : MonoBehaviourSingleton<SpinWheelManager>, IPrepa
 {
     SpinWheelPopup _spinWheel;
     bool _isFirstSpined;
-    float _15m = 15 * 60;
+    float _15m = 15;
 
     public void LoadData()
     {
@@ -29,14 +29,15 @@ public class SpinWheelManager : MonoBehaviourSingleton<SpinWheelManager>, IPrepa
     {
         if (!_isFirstSpined)
         {
-            if (_15m > 0)
-                _15m -= Time.deltaTime;
+            if (_15m > 0) _15m -= Time.deltaTime;
             else
             {
-                Debug.Log("First show spin wheel");
-                _isFirstSpined = true;
-                Data.WriteData.Save(GlobalKey.SPINED_LUCKY_WHEEL, _isFirstSpined);
-                ActiveSpinWheel();
+                if (GameManager.Instance.GameState == GameState.None)
+                {
+                    _isFirstSpined = true;
+                    Data.WriteData.Save(GlobalKey.SPINED_LUCKY_WHEEL, _isFirstSpined);
+                    ActiveSpinWheel();
+                }
             }
         }
     }
