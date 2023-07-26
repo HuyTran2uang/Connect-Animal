@@ -232,14 +232,14 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
         ExplodeAndRemoveItem(nodeCoupled.x, nodeCoupled.y);
     }
 
-    private void ExecuteSpecial(SpecialType specialType)
+    private void ExecuteSpecial(SpecialType specialType, Action onCompleted)
     {
         switch (specialType)
         {
             case SpecialType.Rocket:
                 if (_ids.Count == 0) return;
                 GameManager.Instance.Wait();
-                RocketSpawner.Instance.ShootRocket(_posGrid[_startNode.x, _startNode.y], _posGrid[_endNode.x, _endNode.y]);
+                RocketSpawner.Instance.ShootRocket(_posGrid[_startNode.x, _startNode.y], _posGrid[_endNode.x, _endNode.y], onCompleted);
                 break;
             case SpecialType.Bomb:
                 RemoveAndFindToRemove(_startNode.x + 1, _startNode.y);
@@ -251,30 +251,54 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
                 RemoveAndFindToRemove(_endNode.x - 1, _endNode.y);
                 RemoveAndFindToRemove(_endNode.x, _endNode.y + 1);
                 RemoveAndFindToRemove(_endNode.x, _endNode.y - 1);
+                onCompleted.Invoke();
                 break;
             case SpecialType.Lightning:
                 AudioManager.Instance.PlaySoundExplosion();
                 FXSpawner.Instance.LightningStrikeFX(_posGrid[_startNode.x, _startNode.y]);
                 FXSpawner.Instance.LightningStrikeFX(_posGrid[_endNode.x, _endNode.y]);
-                if (_ids.Count == 0) return;
+                if (_ids.Count == 0)
+                {
+                    onCompleted.Invoke();
+                    return;
+                }
                 RemoveRandomCouple();
-                if (_ids.Count == 0) return;
+                if (_ids.Count == 0)
+                {
+                    onCompleted.Invoke();
+                    return;
+                }
                 RemoveRandomCouple();
-                if (_ids.Count == 0) return;
+                if (_ids.Count == 0)
+                {
+                    onCompleted.Invoke();
+                    return;
+                }
                 RemoveRandomCouple();
-                if (_ids.Count == 0) return;
+                if (_ids.Count == 0)
+                {
+                    onCompleted.Invoke();
+                    return;
+                }
                 RemoveRandomCouple();
+                if (_ids.Count == 0)
+                {
+                    onCompleted.Invoke();
+                    return;
+                }
                 break;
         }
     }
 
-    private void CoupleSuccess()
+    private void CoupleSuccess(Action onCompleted)
     {
         AudioManager.Instance.PlaySoundConnectButton();
         RemoveItem(_startNode.x, _startNode.y);
         RemoveItem(_endNode.x, _endNode.y);
         if (_startNode?.id == 0)
-            ExecuteSpecial(_specialType);
+            ExecuteSpecial(_specialType, onCompleted);
+        else
+            onCompleted.Invoke();
     }
 
     private void CoupleFail()
@@ -296,14 +320,13 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
 
     private void EndNodeDifStartNode()
     {
-        Graph graph = GetGraphById(_startNode.id);
-        var points = GetPathFrom(_startNode, _endNode);
+        var points = this.GetPathFrom(_startNode, _endNode);
         if (_startNode.id == _endNode.id)
         {
             if (points != null)
             {
                 LineSpawner.Instance.Concatenate(points);
-                CoupleSuccess();
+                CoupleSuccess(this.CompletedConnection);
                 if (_ids.Count > 0)
                 {
                     this.SetMatrix();
@@ -317,13 +340,14 @@ public class BoardManager : MonoBehaviourSingleton<BoardManager>
                 if (LevelManager.Instance.Level < 6)
                     MergeNodeFall.Instance.ShowPathFall(_startNode.x, _startNode.y, _endNode.x, _endNode.y, _matrix.GetMatrix);
                 this.CoupleFail();
+                this.CompletedConnection();
             }
         }
         else
         {
             this.CoupleFail();
+            this.CompletedConnection();
         }
-        this.CompletedConnection();
     }
 
     public void SelectNode(int row, int col)

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviourSingleton<GameManager>, IPrepareGame
 {
-    private GameState _gameState;
-    private BattleState _battleState;
+    [SerializeField] GameState _gameState;
+    [SerializeField] BattleState _battleState;
 
     public GameState GameState => _gameState;
     public BattleState BattleState => _battleState;

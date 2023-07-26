@@ -30,15 +30,13 @@ public class BombManager : MonoBehaviourSingleton<BombManager>, IReadData, IPrep
         if (_totalThrowBombTimes == 0)
         {
             if(CurrencyManager.Instance.SubtractCoint(150))
-            {
                 _totalThrowBombTimes++;
-            }
             else
-            {
                 return;       
-            }
         }
+
         HintManager.Instance.UnHint();
+        ItemSpawner.Instance.UnSelectAll();
         _isThrowingBomb = true;
         _totalThrowBombTimes--;
         Data.WriteData.Save(GlobalKey.TOTAL_BOMB_TIMES, _totalThrowBombTimes);
