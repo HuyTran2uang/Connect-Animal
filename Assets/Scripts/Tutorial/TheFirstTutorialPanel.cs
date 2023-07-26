@@ -103,4 +103,9 @@ public class TheFirstTutorialPanel : MonoBehaviour
         _tweens?.ForEach(i => i.Kill());
         gameObject.SetActive(false);
     }
+
+    private void OnDisable()
+    {
+        Done();
+    }
 }

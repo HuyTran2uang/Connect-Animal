@@ -81,4 +81,9 @@ public class TheSecondTutorialPanel : MonoBehaviour
         _tweeners?.ForEach(i => i.Kill());
         gameObject.SetActive(false);
     }
+
+    private void OnDisable()
+    {
+        Done();
+    }
 }

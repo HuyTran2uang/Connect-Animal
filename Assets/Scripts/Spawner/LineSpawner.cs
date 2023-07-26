@@ -102,7 +102,7 @@ public class LineSpawner : MonoBehaviourSingleton<LineSpawner>
                     curPos += Vector3.up;
                     break;
             }
-            StarSpawner.Instance.StarSpawned(curPos);
         }
+        StarSpawner.Instance.StarSpawned(curPos);
     }
 }
